@@ -4,14 +4,18 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+      },
+      VideoContainer:{
+        flex:1,
+        marginTop:15,
+        width:300,
+        height:100,
       },
       video: {
-        width: 500, // Largura do vídeo
-        height: 100, // Altura do vídeo
-        margin: 100,
+        width: 100, // Largura do vídeo
+        height: 50, // Altura do vídeo
+        margin: 10,
       },
       list: {
         flexDirection: 'row',
