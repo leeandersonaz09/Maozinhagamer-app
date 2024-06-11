@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import styles from './styles';
@@ -24,7 +24,18 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <View >
-        <FlatList
+        <Text>
+          HOME
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+export default Home;
+
+/*
+<FlatList
           horizontal
           data={videos}
           renderItem={({ item }) => (
@@ -36,9 +47,5 @@ const Home = () => {
           )}
           keyExtractor={item => item}
         />
-      </View>
-    </View>
-  );
-};
 
-export default Home;
+        */

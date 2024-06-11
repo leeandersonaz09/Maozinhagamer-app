@@ -28,7 +28,15 @@ const styles = StyleSheet.create({
     text:{
         fontSize:10,
         textAlign:"center",
-        color: COLORS.white
+        color: COLORS.white,
+        marginTop:6
+    },
+    circle: {
+       ...StyleSheet.absoluteFillObject,
+       alignItems:"center",
+       justifyContent:"center",
+       backgroundColor:COLORS.primary,
+       borderRadius:25
     }
 
 })

@@ -4,9 +4,9 @@ import styles from './styles';
 
 const About = () =>{
     return (
-        <View>
+        <View style={styles.container}>
             <Text>
-             pAAGINA ABOUT
+             ABOUT
             </Text>
         </View>
     );
