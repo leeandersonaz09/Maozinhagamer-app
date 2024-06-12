@@ -1,4 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { COLORS } from '../../components/theme';
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -7,15 +9,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       VideoContainer:{
-        flex:1,
-        marginTop:15,
-        width:300,
-        height:100,
+        width:350, // Largura do card do vídeo
+        height: 200, // Altura do card do vídeo
+        marginTop: 60,
+        justifyContent: 'center', // Centraliza o vídeo no card
+        alignItems: 'center', // Centraliza o vídeo no card
+        backgroundColor: COLORS.white, // Cor de fundo do card
+        borderRadius: 10, // Bordas arredondadas do card
       },
       video: {
-        width: 100, // Largura do vídeo
-        height: 50, // Altura do vídeo
-        margin: 10,
+        width: 350, // O vídeo preenche a largura do card
+        height: '100%', // O vídeo preenche a altura do card
+        //resizeMode:"contain"
+        marginRight: 20, // Adiciona espaço à direita de cada card
       },
       list: {
         flexDirection: 'row',

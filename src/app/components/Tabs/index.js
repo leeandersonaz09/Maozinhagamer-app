@@ -10,7 +10,7 @@ import { COLORS, animate1, animate2, circle1, circle2 } from '../theme';
 const Tab = createBottomTabNavigator();
 
 const TabArr = [
-    { route: "Home", label: "Inicio", icon: <AntDesign name="home" size={24} color="white" />, component: Home },
+    { route: "Home", label: "Inicio", icon: <AntDesign name="home" size={26} color="white" />, component: Home },
     { route: "About", label: "Sobre", icon: <MaterialIcons name="contact-support" size={26} color="white" />, component: About },
 ];
 
@@ -42,21 +42,21 @@ const TabButton = (props) => {
         >
             <Animatable.View
                 ref={viewRef}
-                duration={1000}
+                duration={500}
                 style={styles.container}>
                 <View style={[styles.btn, {
                     borderColor: focused ? COLORS.white : COLORS.primary
                 }]}>
                     <Animatable.View
                         ref={circleRef}
-                        duration={1000}
+                        duration={500}
                         style={styles.circle} />
                     {item.icon}
 
                 </View>
                 <Animatable.Text
                     ref={textRef}
-                    duration={1000}
+                    duration={500}
                     style={styles.text}>
                     {item.label}
                 </Animatable.Text>
