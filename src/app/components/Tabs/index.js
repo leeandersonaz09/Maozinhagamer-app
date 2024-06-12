@@ -5,7 +5,7 @@ import { Home, About } from '../../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
-import { COLORS, animate1, animate2, circle1, circle2 } from '../theme';
+import { COLORS, animate1, animate2, circle1, circle2 } from '../Theme/index.js';
 
 const Tab = createBottomTabNavigator();
 

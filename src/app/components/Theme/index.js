@@ -45,6 +45,7 @@ export const animate2 = { 0: { scale: 1.2, translateY: -24 }, 1: { scale: 1, tra
 export const circle1 = { 0: { scale: 0 }, 0.3: { scale: .9 }, 0.5: { scale: .2 }, 0.8: { scale: .7 }, 1: { scale: 1 } };
 export const circle2 = { 0: { scale: 1 }, 1: { scale: 0 } };
 
+
 const appTheme = { COLORS, SIZES, FONTS, animate1, animate2, circle1, circle2};
   
 export default appTheme;
