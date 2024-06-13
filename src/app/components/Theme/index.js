@@ -4,6 +4,7 @@ export const COLORS = {
   transparent:"rgba(255, 255, 255, 0.1);",
   white: "#FFFFFF",
   black: "#111111",
+  statusbar:"#2E0000"
 };
 
 export const SIZES = {

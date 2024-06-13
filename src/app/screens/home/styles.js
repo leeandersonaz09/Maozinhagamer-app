@@ -6,9 +6,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //alignItems: "center",
+    backgroundColor:COLORS.white
   },
   contentContainer: {
-    position: 'relative',
+   position: 'relative',
     left: 0, top: -50,
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
@@ -85,7 +86,7 @@ Text: {
     marginTop: 15,
     justifyContent: "center", // Centraliza o vídeo no card
     alignItems: "center", // Centraliza o vídeo no card
-    backgroundColor: COLORS.white, // Cor de fundo do card
+    backgroundColor: COLORS.black, // Cor de fundo do card
     borderRadius: 10, // Bordas arredondadas do card
   },
   video: {
@@ -100,7 +101,7 @@ Text: {
     marginTop: 20,
     justifyContent: "center", // Centraliza o vídeo no card
     alignItems: "center", // Centraliza o vídeo no card
-    backgroundColor: COLORS.white, // Cor de fundo do card
+    backgroundColor: COLORS.black, // Cor de fundo do card
     borderRadius: 10, // Bordas arredondadas do card
   },
   short: {

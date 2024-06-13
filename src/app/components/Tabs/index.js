@@ -4,7 +4,6 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { Home, About } from '../../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Animatable from 'react-native-animatable';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 import { COLORS, animate1, animate2, circle1, circle2 } from '../Theme/index.js';
 

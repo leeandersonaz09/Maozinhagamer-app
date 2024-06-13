@@ -1,33 +1,22 @@
 // App.js
 import React from 'react';
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { View, StatusBar, Text, StyleSheet } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import Tabs from './components/Tabs';
-import Header from './components/Header'
 import { COLORS } from './components/Theme';
 
 const App = () => {
 
   return (
-    <SafeAreaProvider>
-      <StatusBar backgroundColor={COLORS.primary} barStyle="light-content" />
-      <Header>
-        <View style={styles.container}>
-          <View style={styles.textView}>
-            <Text style={styles.tittle}>Mãozinha Gamer</Text>
-          </View>
-        </View>
-      </Header>
-      <Tabs />
-    </SafeAreaProvider>
+    <SafeAreaView style={{flex:1}}>
+       <Tabs />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
 
   container: {
-    flexDirection: 'row',
-    marginTop: 5
+    marginTop: 5,
   },
   textView: {
     alignContent: 'center',
