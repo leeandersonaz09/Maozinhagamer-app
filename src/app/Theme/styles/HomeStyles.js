@@ -1,44 +1,44 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { COLORS } from "../../components/Theme/index.js";
+import { COLORS } from "../theme.js";
 const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     //alignItems: "center",
-    backgroundColor:COLORS.white
+    backgroundColor: COLORS.white,
   },
   contentContainer: {
-   position: 'relative',
-    left: 0, top: -50,
+    position: "relative",
+    left: 0,
+    top: -50,
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#333',
+    shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 3,
     paddingTop: 40,
-},
+  },
 
-Tittle: {
+  Tittle: {
     fontWeight: "bold",
     marginBottom: 5,
     alignSelf: "center",
     //fontSize: fonts.headerTittle
-},
+  },
 
-subTittle: {
-    fontWeight: 'bold',
+  subTittle: {
+    fontWeight: "bold",
     fontStyle: "italic",
     textAlign: "justify",
-    marginTop: 10
+    marginTop: 10,
+  },
 
-},
-
-Text: {
+  Text: {
     marginTop: 5,
-    textAlign: 'justify'
-},
+    textAlign: "justify",
+  },
   subscriberContainer: {
     flexDirection: "row",
     marginTop: 20,

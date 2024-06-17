@@ -8,10 +8,10 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 import { WebView } from "react-native-webview";
-import styles from "./styles";
-import { COLORS } from "../../components/Theme";
+import styles from "../Theme/styles//HomeStyles";
+import { COLORS } from "../Theme/theme";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
@@ -89,11 +89,11 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar backgroundColor={COLORS.statusbar} barStyle="light-content" />
+      <StatusBar backgroundColor={COLORS.statusbar} style="light" />
       <ScrollView style={styles.container}>
         <Image
           style={styles.headerImage}
-          source={require("../../assets/maozinha-home.jpg")}
+          source={require("../assets/maozinha-home.jpg")}
         />
         <View
           style={[styles.contentContainer, { backgroundColor: COLORS.white }]}

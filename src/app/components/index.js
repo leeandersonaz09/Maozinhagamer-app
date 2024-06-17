@@ -1,11 +1,5 @@
 import Header from "./Header";
-import Tabs from "./Tabs";
-import appTheme from "./Theme";
-import metrics from "./Theme/metrics";
+import WaveSVG from "./WaveSvg";
+import Card from "./Card";
 
-export default {
-    Tabs,
-    Header,
-    appTheme,
-    metrics
-}
+export { Header, Card, WaveSVG };
