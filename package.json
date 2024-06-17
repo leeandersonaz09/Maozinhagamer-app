@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
-    "@gluestack-style/react": "^1.0.56",
-    "@gluestack-ui/themed": "^1.1.30",
     "@react-native-vector-icons/ionicons": "^7.4.0-alpha.15",
     "@react-navigation/native": "^6.1.17",
     "expo": "~51.0.11",
