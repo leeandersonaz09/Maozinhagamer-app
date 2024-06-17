@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { COLORS } from "../theme.js";
+import { COLORS, SIZES } from "../theme.js";
 const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
@@ -111,6 +111,31 @@ const styles = StyleSheet.create({
   },
   list: {
     flexDirection: "row",
+  },
+  ProductContainer: {
+    padding: 15,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  headerTitle: {
+    fontSize: SIZES.header,
+    color: COLORS.white,
+    fontWeight: "bold",
+    marginLeft: "10%",
+    marginTop: 25,
+  },
+  addButton: {
+    position: "absolute",
+    backgroundColor: "#ff5b77",
+    elevation: 4,
+    borderRadius: 100,
+    height: 57,
+    width: 58,
+    right: 15,
+    bottom: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

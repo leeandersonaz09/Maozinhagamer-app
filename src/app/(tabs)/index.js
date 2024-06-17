@@ -1,62 +1,23 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  FlatList,
   Text,
   SafeAreaView,
   RefreshControl,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
+import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { WebView } from "react-native-webview";
 import styles from "../Theme/styles//HomeStyles";
+import { HomeCard } from "../components";
 import { COLORS } from "../Theme/theme";
 
 const Home = () => {
-  const [videos, setVideos] = useState([]);
-  const [shorts, setShorts] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [subscriberCount, setSubscriberCount] = useState(0);
-
-  const fetchVideos = () => {
-    fetch(
-      "https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UCB8jsTfkY-7YP8ULi8mfuOw&maxResults=3&key=AIzaSyCXKMARPazopeEURqx_itTOeIAT-uNwjNw"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.items) {
-          const videoUrls = data.items.map(
-            (item) => `https://www.youtube.com/embed/${item.id.videoId}`
-          );
-          setVideos(videoUrls);
-        } else {
-          console.log("Não foi possível encontrar os IDs dos vídeos");
-        }
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setRefreshing(false));
-  };
-
-  const fetchShorts = () => {
-    fetch(
-      "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=4&playlistId=UUSHB8jsTfkY-7YP8ULi8mfuOw&key=AIzaSyCXKMARPazopeEURqx_itTOeIAT-uNwjNw"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.items) {
-          const shortsUrls = data.items.map(
-            (item) =>
-              `https://www.youtube.com/embed/${item.snippet.resourceId.videoId}`
-          );
-          setShorts(shortsUrls);
-        } else {
-          console.log("Não foi possível encontrar os vídeos");
-        }
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setRefreshing(false));
-  };
+  const [data, setData] = useState([]);
 
   const fetchSubscriberCount = () => {
     fetch(
@@ -75,17 +36,55 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchVideos();
-    fetchShorts();
     fetchSubscriberCount();
+    setData([
+      {
+        key: 1,
+        img: require("../assets/map-image.webp"),
+        href: "/Maps",
+        tittle: "Mapas Interativos",
+      },
+      {
+        key: 2,
+        img: require("../assets/meta-loadout.jpeg"),
+        href: "/",
+        tittle: "Meta Loadouts",
+      },
+      {
+        key: 3,
+        img: require("../assets/maozinha-home.jpg"),
+        href: "/",
+        tittle: "Sapatos",
+      },
+      {
+        key: 4,
+        img: require("../assets/maozinha-home.jpg"),
+        href: "/",
+        tittle: "Sapatos",
+      },
+    ]);
   }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    fetchVideos();
-    fetchShorts();
     fetchSubscriberCount();
   }, []);
+
+  const renderItens = () => {
+    return (
+      <>
+        <View style={styles.ProductContainer}>
+          {data.map((data, index) => (
+            <Link href={data.href} asChild>
+              <TouchableOpacity key={index}>
+                <HomeCard data={data} />
+              </TouchableOpacity>
+            </Link>
+          ))}
+        </View>
+      </>
+    );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -122,46 +121,7 @@ const Home = () => {
                 </Text>
               </View>
             </View>
-
-            <View style={styles.VideoContainer}>
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false} // Para lista horizontal
-                showsVerticalScrollIndicator={false} // Para lista vertical
-                data={videos}
-                renderItem={({ item }) => (
-                  <WebView
-                    style={styles.video}
-                    javaScriptEnabled={true}
-                    source={{ uri: item }}
-                  />
-                )}
-                keyExtractor={(item) => item}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                  />
-                }
-              />
-            </View>
-
-            <View style={styles.shortsContainer}>
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false} // Para lista horizontal
-                showsVerticalScrollIndicator={false} // Para lista vertical
-                data={shorts}
-                renderItem={({ item }) => (
-                  <WebView
-                    style={styles.short}
-                    javaScriptEnabled={true}
-                    source={{ uri: item }}
-                  />
-                )}
-                keyExtractor={(item) => item}
-              />
-            </View>
+            {renderItens()}
           </View>
         </View>
       </ScrollView>
