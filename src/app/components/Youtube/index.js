@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { WebView } from "react-native-webview";
-import { Header } from "../components/index.js";
-import styles from "../Theme/styles/AboutStyles.js";
+import { Header } from "../index.js";
+import styles from "../../Theme/styles/AboutStyles.js";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
-const Maps = () => (
+const Youtube = () => (
   <>
     <Header>
       <View
@@ -31,12 +31,15 @@ const Maps = () => (
             paddingRight: 40,
           }}
         >
-          <Text style={styles.headerTitle}>Mapa Interativo</Text>
+          <Text style={styles.headerTitle}>Loadout Meta</Text>
         </View>
       </View>
     </Header>
-    <WebView source={{ uri: "https://wzhub.gg/pt/map" }} style={{ flex: 1 }} />
+    <WebView
+      source={{ uri: "https://www.youtube.com/@maozinhagamer_diih/streams" }}
+      style={{ flex: 1 }}
+    />
   </>
 );
 
-export default Maps;
+export default Youtube;

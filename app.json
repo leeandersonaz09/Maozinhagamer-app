@@ -25,6 +25,10 @@
       "barStyle": "light-content",
       "backgroundColor": "#2E0000"
     },
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     },

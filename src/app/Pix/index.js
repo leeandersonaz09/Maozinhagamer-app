@@ -6,7 +6,7 @@ import styles from "../Theme/styles/AboutStyles.js";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
-const Maps = () => (
+const Pix = () => (
   <>
     <Header>
       <View
@@ -31,12 +31,15 @@ const Maps = () => (
             paddingRight: 40,
           }}
         >
-          <Text style={styles.headerTitle}>Mapa Interativo</Text>
+          <Text style={styles.headerTitle}>Nos ajude a crescer!</Text>
         </View>
       </View>
     </Header>
-    <WebView source={{ uri: "https://wzhub.gg/pt/map" }} style={{ flex: 1 }} />
+    <WebView
+      source={{ uri: "https://livepix.gg/diih145807" }}
+      style={{ flex: 1 }}
+    />
   </>
 );
 
-export default Maps;
+export default Pix;

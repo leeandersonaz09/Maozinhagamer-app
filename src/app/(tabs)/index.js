@@ -47,20 +47,20 @@ const Home = () => {
       {
         key: 2,
         img: require("../assets/meta-loadout.jpeg"),
-        href: "/",
+        href: "/Loadouts",
         tittle: "Meta Loadouts",
       },
       {
         key: 3,
-        img: require("../assets/maozinha-home.jpg"),
-        href: "/",
-        tittle: "Sapatos",
+        img: require("../assets/youtube-card.png"),
+        href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
+        tittle: "Lives Youtube",
       },
       {
         key: 4,
-        img: require("../assets/maozinha-home.jpg"),
-        href: "/",
-        tittle: "Sapatos",
+        img: require("../assets/nos-ajude.jpg"),
+        href: "/Pix",
+        tittle: "Ajude com Pix",
       },
     ]);
   }, []);
