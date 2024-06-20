@@ -14,7 +14,7 @@ import { SIZES, COLORS } from "../Theme/theme.js";
 import { Link, useLocalSearchParams } from "expo-router";
 
 const Patrocinadores = () => {
-  const { id, tittle, img, text } = useLocalSearchParams();
+  const { id, tittle, img, text, category } = useLocalSearchParams();
 
   return (
     <>
@@ -42,7 +42,7 @@ const Patrocinadores = () => {
               paddingRight: 40,
             }}
           >
-            <Text style={styles.headerTitle}>{id}</Text>
+            <Text style={styles.headerTitle}>{category}</Text>
           </View>
         </View>
       </Header>

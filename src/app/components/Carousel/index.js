@@ -14,21 +14,24 @@ import Swiper from "react-native-swiper";
 export default function Banner() {
   const dataBanner = [
     {
-      key: "Patrocinadores",
+      id: 1,
+      category: "Patrocinadores",
       img: "https://www.saboravida.com.br/wp-content/uploads/2019/11/kopenhagen-apresenta-o-delicioso-espetaculo-do-natal-com-novidades-1.jpg",
       href: "/Maps",
       tittle: "Kopenhagem",
       text: "🔥 Descubra o sabor irresistível do Churrasquinho do Márcio! 🔥\n\nSituado estrategicamente na movimentada Avenida Itapemirim, nas proximidades da imponente Ponte de Itaoca, no número 2491, o Churrasquinho do Márcio é o destino certo para os amantes de um bom churrasco.\n\nEm nosso estabelecimento, você encontrará uma variedade de espetos suculentos, jantinhas caprichadas e acompanhamentos de dar água na boca. E não para por aí! Às quartas-feiras, deliciamos nossos clientes com o tradicional feijão tropeiro, enquanto às sextas-feiras, é a vez do refrescante salpicão. E o melhor de tudo: nossos preços são imbatíveis! Espetos a partir de apenas 8 reais, isso mesmo, você não leu errado!\n\nE para tornar sua experiência ainda mais prática, oferecemos o serviço de delivery sem cobrança de taxa adicional. Basta chamar no WhatsApp e fazer seu pedido! (Inserir número do WhatsApp aqui). Estamos prontos para atendê-lo a partir das 17h30, e as entregas começam pontualmente às 18h30.\n\nNão perca a oportunidade de conhecer o Churrasquinho do Márcio, o verdadeiro paraíso dos sabores na Avenida Itapemirim, próximo à Ponte de Itaoca, número 2491.\n\nLembre-se de personalizar os detalhes, como o nome do estabelecimento e os horários de funcionamento, para que o texto se ajuste perfeitamente à sua divulgação. Boa sorte com sua propaganda! 🍖🔥👍",
     },
     {
-      key: "Patrocinadores",
+      id: 2,
+      category: "Patrocinadores",
       img: "https://www.lojassantaifigenia.com.br/_uploads/798/save-games-lojas-santa-efigenia-capa.jpg",
       href: "/Loadouts",
       tittle: "GameFix: Sua Solução em Manutenção de Consoles!",
       text: "Na GameFix, entendemos o valor dos seus videogames. Quando seu console favorito apresenta problemas, nós entramos em ação! Nossos técnicos especializados oferecem:\n\n1. Diagnóstico Rápido: Identificamos a causa raiz do problema em tempo recorde.\n2. Reparos Precisos: Troca de peças, limpeza interna, ressoldagem – fazemos tudo com maestria.\n3. Garantia de Qualidade: Seu console voltará como novo, com garantia de funcionamento.\n4. Atendimento Personalizado: Aqui, você não é apenas um cliente; é parte da nossa comunidade gamer.\n\nVenha nos visitar na Rua dos Joysticks, número 42. Seu videogame merece o melhor! 🕹️🔧",
     },
     {
-      key: "Patrocinadores",
+      id: 3,
+      category: "Patrocinadores",
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ncsK9QxAm3y2_d3lKx52RZnz7R906zHRT2h1HPiYmIEDMBTsKLI9E8AWL-SDG4eSnjU&usqp=CAU",
       href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
       tittle: "Magazine Luiza: Onde Seus Sonhos se Tornam Realidade!",
@@ -55,7 +58,8 @@ export default function Banner() {
                   href={{
                     pathname: "/Patrocinadores/[id]",
                     params: {
-                      id: data.key,
+                      id: data.id,
+                      category: data.category,
                       tittle: data.tittle,
                       img: data.img,
                       text: data.text,
