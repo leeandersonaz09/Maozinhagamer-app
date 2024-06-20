@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 5,
     alignSelf: "center",
-    //fontSize: fonts.headerTittle
+    fontSize: SIZES.headerTittle,
   },
 
   subTittle: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   subscriberContainer: {
     flexDirection: "row",
-    marginTop: 20,
+    marginTop: 10,
   },
   container1: {
     backgroundColor: "red",
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     position: "relative",
     left: 0,
-    top: -50,
+    top: -40,
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
     shadowOffset: { width: 1, height: 1 },
@@ -113,10 +113,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   ProductContainer: {
+    flex: 1,
     padding: 15,
+    marginTop: -20,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    marginBottom: 65,
   },
   headerTitle: {
     fontSize: SIZES.header,

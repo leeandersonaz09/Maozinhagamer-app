@@ -7,11 +7,12 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  safe,
 } from "react-native";
 import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import styles from "../Theme/styles//HomeStyles";
-import { HomeCard } from "../components";
+import { HomeCard, Carousel } from "../components";
 import { COLORS } from "../Theme/theme";
 
 const Home = () => {
@@ -87,45 +88,50 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar backgroundColor={COLORS.statusbar} style="light" />
-      <ScrollView style={styles.container}>
-        <Image
-          style={styles.headerImage}
-          source={require("../assets/maozinha-home.jpg")}
-        />
-        <View
-          style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
-        >
-          <Text
-            style={[
-              styles.Tittle,
-              {
-                color: COLORS.black,
-                textAlign: "center",
-                marginHorizontal: 5,
-                marginTop: -20,
-              },
-            ]}
+    <>
+      <StatusBar backgroundColor={COLORS.primary} style="light" />
+      <SafeAreaView style={{ backgroundColor: COLORS.white }}>
+        <ScrollView>
+          <Image
+            style={styles.headerImage}
+            source={require("../assets/maozinha-home.jpg")}
+          />
+          <View
+            style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
           >
-            Bem-vindo a comunidade Maozinha Gamer!
-          </Text>
-          <View style={{ alignItems: "center" }}>
-            <View style={styles.subscriberContainer}>
-              <View style={styles.container1}>
-                <Text style={styles.subscriberCount}> YouTube Inscritos</Text>
+            <Text
+              style={[
+                styles.Tittle,
+                {
+                  color: COLORS.black,
+                  textAlign: "center",
+                  marginHorizontal: 5,
+                  //marginTop: -10,
+                },
+              ]}
+            >
+              Bem-vindo a comunidade Maozinha Gamer!
+            </Text>
+            <View style={{ alignItems: "center", flex: 1 }}>
+              <View style={styles.subscriberContainer}>
+                <View style={styles.container1}>
+                  <Text style={styles.subscriberCount}> YouTube Inscritos</Text>
+                </View>
+                <View style={styles.container2}>
+                  <Text style={[styles.subscriberCount, { color: "black" }]}>
+                    {subscriberCount}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.container2}>
-                <Text style={[styles.subscriberCount, { color: "black" }]}>
-                  {subscriberCount}
-                </Text>
+              <View style={{ marginTop: 20 }}>
+                <Carousel />
+                {renderItens()}
               </View>
             </View>
-            {renderItens()}
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
