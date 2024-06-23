@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import * as Animatable from "react-native-animatable";
 import styles from "../Theme/styles/TabsStyles.js";
+import { StatusBar } from "expo-status-bar";
 
 import {
   COLORS,
@@ -20,7 +21,12 @@ const TabArr = [
     icon: <AntDesign name="home" size={26} color="white" />,
   },
   {
-    route: "About",
+    route: "patrocinador",
+    label: "Patrocinador",
+    icon: <MaterialIcons name="videogame-asset" size={26} color="white" />,
+  },
+  {
+    route: "about",
     label: "Sobre",
     icon: <MaterialIcons name="support-agent" size={26} color="white" />,
   },
@@ -78,24 +84,29 @@ const TabButton = (props) => {
 
 export default function TabRoutesLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: styles.tabBar,
-      }}
-    >
-      {TabArr.map((item, index) => {
-        return (
-          <Tabs.Screen
-            key={index}
-            name={item.route}
-            options={{
-              tabBarShowLabel: false,
-              tabBarButton: (props) => <TabButton {...props} item={item} />,
-            }}
-          ></Tabs.Screen>
-        );
-      })}
-    </Tabs>
+    <>
+      <StatusBar backgroundColor={COLORS.primary} style="light" />
+      <SafeAreaView style={{ flex: 1 }}>
+        <Tabs
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: styles.tabBar,
+          }}
+        >
+          {TabArr.map((item, index) => {
+            return (
+              <Tabs.Screen
+                key={index}
+                name={item.route}
+                options={{
+                  tabBarShowLabel: false,
+                  tabBarButton: (props) => <TabButton {...props} item={item} />,
+                }}
+              ></Tabs.Screen>
+            );
+          })}
+        </Tabs>
+      </SafeAreaView>
+    </>
   );
 }

@@ -15,6 +15,7 @@
     "ios": {
       "supportsTablet": true
     },
+    "platforms": ["ios", "android"],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -24,7 +25,7 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#2E0000"
+      "backgroundColor": "#8F0000"
     },
     "experiments": {
       "typedRoutes": true,

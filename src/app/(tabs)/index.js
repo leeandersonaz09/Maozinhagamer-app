@@ -1,137 +1,135 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  RefreshControl,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  safe,
-} from "react-native";
+import React, { useEffect, useState, useMemo } from "react";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import styles from "../Theme/styles//HomeStyles";
+import styles from "../Theme/styles/HomeStyles";
 import { HomeCard, Carousel } from "../components";
 import { COLORS } from "../Theme/theme";
 
 const Home = () => {
-  const [refreshing, setRefreshing] = useState(false);
   const [subscriberCount, setSubscriberCount] = useState(0);
   const [data, setData] = useState([]);
 
-  const fetchSubscriberCount = () => {
-    fetch(
-      "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCB8jsTfkY-7YP8ULi8mfuOw&key=AIzaSyCXKMARPazopeEURqx_itTOeIAT-uNwjNw"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.items) {
-          setSubscriberCount(data.items[0].statistics.subscriberCount);
-        } else {
-          console.log("Não foi possível encontrar o canal");
-        }
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setRefreshing(false));
+  const fetchSubscriberCount = async () => {
+    try {
+      const response = await fetch(
+        "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCB8jsTfkY-7YP8ULi8mfuOw&key=YOUR_API_KEY"
+      );
+      const data = await response.json();
+      if (data.items) {
+        setSubscriberCount(data.items[0].statistics.subscriberCount);
+      } else {
+        console.log("Não foi possível encontrar o canal");
+      }
+    } catch (error) {
+      console.error("Erro ao obter dados da API:", error);
+      setSubscriberCount(0); // Defina um valor padrão em caso de erro
+    }
   };
 
   useEffect(() => {
     fetchSubscriberCount();
     setData([
       {
-        key: 1,
+        id: 1,
         img: require("../assets/map-image.webp"),
-        href: "/Maps",
+        uri: "https://wzhub.gg/pt/map",
         tittle: "Mapas Interativos",
+        openInWeb: true,
       },
       {
-        key: 2,
+        id: 2,
         img: require("../assets/meta-loadout.jpeg"),
-        href: "/Loadouts",
+        uri: "https://wzhub.gg/pt/loadouts",
         tittle: "Meta Loadouts",
+        openInWeb: true,
       },
       {
-        key: 3,
+        id: 3,
         img: require("../assets/youtube-card.png"),
-        href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
+        uri: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
         tittle: "Lives Youtube",
+        openInWeb: false,
       },
       {
-        key: 4,
+        id: 4,
         img: require("../assets/nos-ajude.jpg"),
-        href: "/Pix",
+        uri: "https://livepix.gg/diih145807",
         tittle: "Ajude com Pix",
+        openInWeb: true,
       },
     ]);
   }, []);
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    fetchSubscriberCount();
-  }, []);
+  // Use useMemo para armazenar os dados em cache
+  const memoizedData = useMemo(() => data, [data]);
 
-  const renderItens = () => {
+  const renderItems = () => {
     return (
-      <>
-        <View style={styles.ProductContainer}>
-          {data.map((data, index) => (
-            <Link href={data.href} asChild>
-              <TouchableOpacity key={index}>
-                <HomeCard data={data} />
-              </TouchableOpacity>
-            </Link>
-          ))}
-        </View>
-      </>
+      <View style={styles.ProductContainer}>
+        {memoizedData.map((item, index) => (
+          <Link
+            key={index}
+            href={{
+              pathname: "/HomeCard/[id]",
+              params: {
+                id: item.id,
+                tittle: item.tittle,
+                uri: item.uri,
+              },
+            }}
+            asChild
+          >
+            <TouchableOpacity>
+              <HomeCard data={item} />
+            </TouchableOpacity>
+          </Link>
+        ))}
+      </View>
     );
   };
 
   return (
-    <>
-      <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <SafeAreaView style={{ backgroundColor: COLORS.white }}>
-        <ScrollView>
-          <Image
-            style={styles.headerImage}
-            source={require("../assets/maozinha-home.jpg")}
-          />
-          <View
-            style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
+    <View style={{ flex: 1, backgroundColor: COLORS.white }}>
+      <ScrollView>
+        <Image
+          style={styles.headerImage}
+          source={require("../assets/maozinha-home.jpg")}
+        />
+        <View
+          style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
+        >
+          <Text
+            style={[
+              styles.Tittle,
+              {
+                color: COLORS.black,
+                textAlign: "center",
+                marginHorizontal: 5,
+                marginTop: -10,
+              },
+            ]}
           >
-            <Text
-              style={[
-                styles.Tittle,
-                {
-                  color: COLORS.black,
-                  textAlign: "center",
-                  marginHorizontal: 5,
-                  //marginTop: -10,
-                },
-              ]}
-            >
-              Bem-vindo a comunidade Maozinha Gamer!
-            </Text>
-            <View style={{ alignItems: "center", flex: 1 }}>
-              <View style={styles.subscriberContainer}>
-                <View style={styles.container1}>
-                  <Text style={styles.subscriberCount}> YouTube Inscritos</Text>
-                </View>
-                <View style={styles.container2}>
-                  <Text style={[styles.subscriberCount, { color: "black" }]}>
-                    {subscriberCount}
-                  </Text>
-                </View>
+            Bem-vindo à comunidade Maozinha Gamer!
+          </Text>
+          <View style={{ alignItems: "center", flex: 1 }}>
+            <View style={styles.subscriberContainer}>
+              <View style={styles.container1}>
+                <Text style={styles.subscriberCount}> YouTube Inscritos</Text>
               </View>
-              <View style={{ marginTop: 20 }}>
-                <Carousel />
-                {renderItens()}
+              <View style={styles.container2}>
+                <Text style={[styles.subscriberCount, { color: "black" }]}>
+                  {subscriberCount}
+                </Text>
               </View>
             </View>
+            <View style={{ marginTop: 20 }}>
+              <Carousel />
+              {renderItems()}
+            </View>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

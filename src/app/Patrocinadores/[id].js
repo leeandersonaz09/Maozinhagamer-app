@@ -1,17 +1,9 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { Header } from "../components/index.js";
 import { StatusBar } from "expo-status-bar";
-import { FontAwesome } from "@expo/vector-icons";
 import { SIZES, COLORS } from "../Theme/theme.js";
-import { Link, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 
 const Patrocinadores = () => {
   const { id, tittle, img, text, category } = useLocalSearchParams();
@@ -19,33 +11,7 @@ const Patrocinadores = () => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <Header>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <View style={{}}>
-            <Link href={"/"} asChild>
-              <TouchableOpacity style={{ paddingLeft: 14 }}>
-                <FontAwesome name="arrow-circle-left" size={38} color="white" />
-              </TouchableOpacity>
-            </Link>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              textAlign: "center",
-              alignItems: "center",
-              paddingRight: 40,
-            }}
-          >
-            <Text style={styles.headerTitle}>{category}</Text>
-          </View>
-        </View>
-      </Header>
+      <Header HeaderTittle={category} href={"/"} />
       <ScrollView>
         <View style={styles.patrocinadorContainer}>
           {/* Dados do patrocinador */}

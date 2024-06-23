@@ -1,6 +1,6 @@
 import { Dimensions, Platform } from "react-native";
 export const COLORS = {
-  primary: "rgba(220,20,60,1)",
+  primary: "#2E0000",
   transparent: "rgba(255, 255, 255, 0.1);",
   white: "#FFFFFF",
   black: "#111111",

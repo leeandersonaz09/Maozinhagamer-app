@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     width: "110%",
-    height: 180,
+    height: 200,
   },
   contentContainer: {
     position: "relative",

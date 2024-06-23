@@ -2,29 +2,16 @@ import React from "react";
 import { View, TouchableOpacity, ScrollView, Text, Image } from "react-native";
 import { Ionicons, FontAwesome, FontAwesome6 } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
-import { Header, Card } from "../components/index.js";
+import { Card } from "../components/index.js";
 import styles from "../Theme/styles/AboutStyles.js";
 import { COLORS } from "../Theme/theme.js";
 import { StatusBar } from "expo-status-bar";
 
-const About = () => {
+const about = () => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
       <View style={styles.Container}>
-        <Header>
-          <View style={{ flexDirection: "row" }}>
-            <View
-              style={{
-                alignContent: "center",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={styles.headerTitle}>Fale Conosco</Text>
-            </View>
-          </View>
-        </Header>
         <ScrollView>
           <View style={styles.HeaderBackGround} />
 
@@ -140,4 +127,4 @@ const About = () => {
     </>
   );
 };
-export default About;
+export default about;
