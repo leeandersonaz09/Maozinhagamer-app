@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     position: "relative",
     left: 0,
-    top: -50,
+    top: -60,
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
     shadowOffset: { width: 1, height: 1 },
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     position: "relative",
     left: 0,
-    top: -40,
+    top: -55,
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
     shadowOffset: { width: 1, height: 1 },

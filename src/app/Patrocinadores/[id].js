@@ -11,7 +11,7 @@ const Patrocinadores = () => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <Header HeaderTittle={category} href={"/"} />
+      <Header HeaderTittle={category} href={"/(tabs)"} />
       <ScrollView>
         <View style={styles.patrocinadorContainer}>
           {/* Dados do patrocinador */}

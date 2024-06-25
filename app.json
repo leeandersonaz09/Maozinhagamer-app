@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#8F0000"
+      "backgroundColor": "#2E0000"
     },
     "ios": {
       "supportsTablet": true
@@ -25,7 +25,7 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#8F0000"
+      "backgroundColor": "#2E0000"
     },
     "experiments": {
       "typedRoutes": true,

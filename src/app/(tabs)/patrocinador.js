@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { WebView } from "react-native-webview";
+import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 
 async function getData() {
@@ -43,13 +44,18 @@ const Patrocinador = () => {
   const memoizedApiData = useMemo(() => apiData, [apiData]);
 
   return (
-    <View style={{ flex: 1, marginBottom: 60, backgroundColor: COLORS.white }}>
-      {isLoading ? (
-        <ActivityIndicator color="red" size="large" style={{ flex: 1 }} />
-      ) : (
-        <WebView source={{ uri: memoizedApiData[0].uri }} />
-      )}
-    </View>
+    <>
+      <StatusBar backgroundColor={COLORS.primary} style="light" />
+      <View
+        style={{ flex: 1, marginBottom: 60, backgroundColor: COLORS.white }}
+      >
+        {isLoading ? (
+          <ActivityIndicator color="red" size="large" style={{ flex: 1 }} />
+        ) : (
+          <WebView source={{ uri: memoizedApiData[0].uri }} />
+        )}
+      </View>
+    </>
   );
 };
 

@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import * as Animatable from "react-native-animatable";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styles from "../Theme/styles/TabsStyles.js";
-import { StatusBar } from "expo-status-bar";
 
 import {
   COLORS,
@@ -23,7 +27,7 @@ const TabArr = [
   {
     route: "patrocinador",
     label: "Patrocinador",
-    icon: <MaterialIcons name="videogame-asset" size={26} color="white" />,
+    icon: <MaterialCommunityIcons name="offer" size={26} color="white" />,
   },
   {
     route: "about",
@@ -85,8 +89,7 @@ const TabButton = (props) => {
 export default function TabRoutesLayout() {
   return (
     <>
-      <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <SafeAreaView style={{ flex: 1 }}>
+      <GestureHandlerRootView>
         <Tabs
           screenOptions={{
             headerShown: false,
@@ -106,7 +109,7 @@ export default function TabRoutesLayout() {
             );
           })}
         </Tabs>
-      </SafeAreaView>
+      </GestureHandlerRootView>
     </>
   );
 }

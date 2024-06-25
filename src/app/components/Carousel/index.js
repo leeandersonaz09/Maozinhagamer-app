@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link } from "expo-router";
 import Swiper from "react-native-swiper";
 
@@ -15,33 +16,26 @@ var { height, width } = Dimensions.get("window");
 
 async function getBannerData() {
   try {
-    const response = await fetch(
-      "https://restapimaozinhagamer.onrender.com/banner"
-    );
-    const data = response.json();
+    const savedData = await AsyncStorage.getItem("bannerData");
+    const data = JSON.parse(savedData);
     return data;
   } catch (error) {
-    console.error("Erro ao obter dados da API:", error);
-    return [
-      {
-        id: 1,
-        img: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
-        category: "Patrocinadores",
-        tittle: "Maozinha Gamer",
-        text: "Maozinhag Gamer",
-      },
-    ];
+    console.error("Erro ao obter dados do AsyncStorage:", error);
   }
 }
 
 export default function Banner() {
   const [dataBanner, setDataBanner] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://restapimaozinhagamer.onrender.com/banner")
-      .then((response) => response.json)
-      .then((data) => setDataBanner(data));
+    const fetchData = async () => {
+      const cachedData = await getBannerData(); // Tente obter dados em cache primeiro
+      setDataBanner(cachedData);
+      setisLoading(false);
+    };
+
+    fetchData();
   }, []);
 
   // Use useMemo para armazenar os dados em cache
