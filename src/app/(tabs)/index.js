@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
-  ActivityIndicator,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link } from "expo-router";
@@ -15,7 +14,7 @@ import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
-import { getData, getBannerData } from "../utils/apiRequests"; // Importe as funções
+import { getBannerData } from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -26,37 +25,14 @@ const Home = () => {
   //Get Data for the Banner from Async Storage on refrash page
   const fetchBannerPulltoRefresh = async () => {
     setisLoading(true);
-    await fetch("https://restapimaozinhagamer.onrender.com/banner")
-      .then((response) => response.json())
-      .then(async (json) => {
-        //console.log(json);
-        const tempVar = JSON.stringify(json);
-        //console.log("TEMVAR >>>>>>>>", tempVar);
-        await AsyncStorage.setItem("bannerData", tempVar); // Aguarde a conclusão da operação
-        //console.log("CARREGOU");
-        const getItem = await AsyncStorage.getItem("bannerData"); // Aguarde a conclusão da operação
-        const parsedItem = await JSON.parse(getItem);
-        setdataBanner(parsedItem);
-
-        setTimeout(() => {
-          setisLoading(false);
-        }, 3000);
-      })
-      .catch((error) => {
-        console.error("Erro ao obter dados da API:", error);
-        AsyncStorage.setItem(
-          "bannerData",
-          JSON.stringify([
-            {
-              id: 1,
-              img: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
-              category: "Patrocinadores",
-              tittle: "Maozinha Gamer",
-              text: "Mãozinha Gamer é um canal no YouTube dedicado a conteúdo relacionado a jogos. Apresentamos gameplays variadas, dicas, truques e momentos épicos em jogos populares como Call of Duty: Warzone e Fortnite. Nossa comunidade, com mais de 4.820 inscritos, é apaixonada por videogames e interage ativamente nos comentários e nas transmissões ao vivo. Se você gosta de jogos, inscreva-se no canal para acompanhar as últimas novidades e se divertir com o conteúdo! 🎮🚀",
-            },
-          ])
-        ).then(setisLoading(false));
-      });
+    const cachedData = await getBannerData();
+    await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
+    const getItem = await AsyncStorage.getItem("bannerData"); // Aguarde a conclusão da operação
+    const parsedItem = await JSON.parse(getItem);
+    setdataBanner(parsedItem);
+    setTimeout(() => {
+      setisLoading(false);
+    }, 3000);
   };
 
   //Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
@@ -91,7 +67,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    //console.log("EFFETC >>>>>>>>>>>>>>>>>>> ", dataBanner);
     retrieveSubscriberCount();
     retrieveBannerData();
     setData([
@@ -245,7 +220,7 @@ const Home = () => {
                     </View>
                   </>
                 ) : (
-                  <Carousel data={dataBanner0} />
+                  <Carousel data={dataBanner} />
                 )}
 
                 {renderItems()}
