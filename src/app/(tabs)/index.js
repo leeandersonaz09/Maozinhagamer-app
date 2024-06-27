@@ -15,29 +15,35 @@ import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
+import { getData, getBannerData } from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
-  const [subscriberCount, setSubscriberCount] = useState(0);
   const [data, setData] = useState([]);
+  const [dataBanner, setdataBanner] = useState([]);
+  const [subscriberCount, setSubscriberCount] = useState(0);
   const [isLoading, setisLoading] = useState(false);
-  // Use useMemo para armazenar os dados em cache
-  const memoizedData = useMemo(() => data, [data]);
 
+  //Get Data for the Banner from Async Storage on refrash page
   const fetchBannerPulltoRefresh = async () => {
     setisLoading(true);
     await fetch("https://restapimaozinhagamer.onrender.com/banner")
       .then((response) => response.json())
-      .then((json) => {
+      .then(async (json) => {
         //console.log(json);
-        AsyncStorage.setItem("bannerData", JSON.stringify(json)).then(
-          setTimeout(() => {
-            setisLoading(false);
-          }, 3000)
-        );
+        const tempVar = JSON.stringify(json);
+        //console.log("TEMVAR >>>>>>>>", tempVar);
+        await AsyncStorage.setItem("bannerData", tempVar); // Aguarde a conclusão da operação
+        //console.log("CARREGOU");
+        const getItem = await AsyncStorage.getItem("bannerData"); // Aguarde a conclusão da operação
+        const parsedItem = await JSON.parse(getItem);
+        setdataBanner(parsedItem);
+
+        setTimeout(() => {
+          setisLoading(false);
+        }, 3000);
       })
       .catch((error) => {
-        console.log(error);
-
+        console.error("Erro ao obter dados da API:", error);
         AsyncStorage.setItem(
           "bannerData",
           JSON.stringify([
@@ -53,6 +59,20 @@ const Home = () => {
       });
   };
 
+  //Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
+  const retrieveBannerData = async () => {
+    setisLoading(true);
+    try {
+      const getItem = await AsyncStorage.getItem("bannerData"); // Aguarde a conclusão da operação
+      const parsedItem = await JSON.parse(getItem);
+      setdataBanner(parsedItem);
+      setisLoading(false);
+    } catch (error) {
+      console.error("Erro ao obter dados do AsyncStorage:", error);
+    }
+  };
+
+  //Get from async storage Subscriber youtube counter
   const retrieveSubscriberCount = async () => {
     try {
       // Recupere o valor salvo no AsyncStorage
@@ -71,7 +91,9 @@ const Home = () => {
   };
 
   useEffect(() => {
+    //console.log("EFFETC >>>>>>>>>>>>>>>>>>> ", dataBanner);
     retrieveSubscriberCount();
+    retrieveBannerData();
     setData([
       {
         id: 1,
@@ -107,6 +129,9 @@ const Home = () => {
       },
     ]);
   }, []);
+
+  // Use useMemo para armazenar os dados em cache
+  const memoizedData = useMemo(() => data, [data]);
 
   const renderItems = () => {
     return (
@@ -220,7 +245,7 @@ const Home = () => {
                     </View>
                   </>
                 ) : (
-                  <Carousel />
+                  <Carousel data={dataBanner0} />
                 )}
 
                 {renderItems()}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import {
   Image,
   StyleSheet,
@@ -6,83 +6,68 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { Link } from "expo-router";
 import Swiper from "react-native-swiper";
 
 var { height, width } = Dimensions.get("window");
 
-async function getBannerData() {
-  try {
-    const savedData = await AsyncStorage.getItem("bannerData");
-    const data = JSON.parse(savedData);
-    return data;
-  } catch (error) {
-    console.error("Erro ao obter dados do AsyncStorage:", error);
-  }
-}
-
-export default function Banner() {
-  const [dataBanner, setDataBanner] = useState([]);
-  const [isLoading, setisLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const cachedData = await getBannerData(); // Tente obter dados em cache primeiro
-      setDataBanner(cachedData);
-      setisLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  // Use useMemo para armazenar os dados em cache
-  const memoizedDataBanner = useMemo(() => dataBanner, [dataBanner]);
+export default function Banner({ data }) {
+  const dataBanner = data;
 
   return (
     <ScrollView>
       <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-        <View style={{ width: width, alignItems: "center" }}>
-          {isLoading ? (
-            <ActivityIndicator color="red" size="large" />
-          ) : (
-            <Swiper
-              activeDotColor={"#FFFB00"}
-              style={{ height: width / 2 }}
-              showsPagination={true}
-              showsButtons={false}
-              autoplayTimeout={2.3}
-              autoplay={true}
-              autoplayDirection={true}
-            >
-              {memoizedDataBanner.map((data, index) => (
-                <Link
-                  key={index}
-                  href={{
-                    pathname: "/Patrocinadores/[id]",
-                    params: {
-                      id: data.id,
-                      category: data.category,
-                      tittle: data.tittle,
-                      img: data.img,
-                      text: data.text,
-                    },
-                  }}
-                  asChild
-                >
-                  <TouchableOpacity>
-                    <Image
-                      style={styles.imageBanner}
-                      resizeMode="stretch"
-                      source={{ uri: data.img }}
-                    />
-                  </TouchableOpacity>
-                </Link>
-              ))}
-            </Swiper>
-          )}
+        <View
+          style={{
+            width: width,
+            alignItems: "center",
+            shadowColor: "#000", // Cor da sombra
+            shadowOffset: { width: 0, height: 2 }, // Deslocamento da sombra (largura e altura)
+            shadowOpacity: 0.8, // Opacidade da sombra (multiplicada pelo componente de cor)
+            shadowRadius: 2, // Raio de desfoque da sombra
+            elevation: 5, // Elevação (apenas para Android)
+          }}
+        >
+          <Swiper
+            activeDotColor={"#FFFB00"}
+            style={{ height: width / 2 }}
+            showsPagination={true}
+            showsButtons={false}
+            autoplayTimeout={2.3}
+            autoplay={true}
+            autoplayDirection={true}
+          >
+            {dataBanner.map((data, index) => (
+              <Link
+                key={index}
+                href={{
+                  pathname: "/Patrocinadores/[id]",
+                  params: {
+                    id: data.id,
+                    href: data.href,
+                    button: data.buttonTittle,
+                    category: data.category,
+                    tittle: data.tittle,
+                    img: data.img,
+                    text: data.text,
+                  },
+                }}
+                asChild
+              >
+                <TouchableOpacity>
+                  <Image
+                    style={styles.imageBanner}
+                    resizeMode="stretch"
+                    source={{
+                      uri: data.img,
+                    }}
+                  />
+                </TouchableOpacity>
+              </Link>
+            ))}
+          </Swiper>
           <View style={{ height: 20 }} />
         </View>
       </View>
@@ -92,9 +77,9 @@ export default function Banner() {
 
 const styles = StyleSheet.create({
   imageBanner: {
-    height: "100%",
+    height: width / 2,
     width: width - 40,
-    borderRadius: 20,
+    borderRadius: 10,
     marginHorizontal: 20,
   },
 });

@@ -81,12 +81,15 @@ export default function Splash() {
     if (!fontsLoaded) {
       loadFonts();
     }
+
     fetchSubscriberCount();
+
     const fetchData = async () => {
       const cachedData = await getBannerData(); // Tente obter dados em cache primeiro
       // Salve os dados no AsyncStorage
       await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData));
     };
+
     fetchData();
 
     setTimeout(() => {
