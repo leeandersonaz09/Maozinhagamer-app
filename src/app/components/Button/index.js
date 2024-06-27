@@ -1,9 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import {
-  RectButton,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import styles from "./styles";
 
 const Button = ({ variant = "default", label, onPress }) => {

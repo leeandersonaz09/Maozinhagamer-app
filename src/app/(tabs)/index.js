@@ -14,7 +14,7 @@ import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
-import { getBannerData } from "../utils/apiRequests"; // Importe as funções
+import { getBannerData, fetchWidgetsData } from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -55,54 +55,24 @@ const Home = () => {
       const savedSubscriberCount = await AsyncStorage.getItem(
         "subscriberCount"
       );
-      // Atribua o valor diretamente à variável subscriberCount
       const subscriberCount = parseInt(savedSubscriberCount, 10) || 0;
       setSubscriberCount(subscriberCount);
     } catch (error) {
       console.error("Erro ao obter dados do AsyncStorage:", error);
-      // Defina um valor padrão em caso de erro
       const subscriberCount = 0;
       setSubscriberCount(subscriberCount);
     }
   };
 
+  const getWidgets = async () => {
+    const widgets = await fetchWidgetsData();
+    setData(widgets);
+  };
+
   useEffect(() => {
     retrieveSubscriberCount();
     retrieveBannerData();
-    setData([
-      {
-        id: 1,
-        img: require("../assets/map-image.webp"),
-        href: "/Maps",
-        tittle: "Mapas Interativos",
-        uri: "https://wzhub.gg/pt/map",
-        openInApp: true,
-      },
-      {
-        id: 2,
-        img: require("../assets/meta-loadout.jpeg"),
-        href: "/Loadouts",
-        tittle: "Meta Loadouts",
-        uri: "https://wzhub.gg/pt/loadouts",
-        openInApp: true,
-      },
-      {
-        id: 3,
-        img: require("../assets/youtube-card.png"),
-        href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
-        tittle: "Lives Youtube",
-        uri: "",
-        openInApp: false,
-      },
-      {
-        id: 4,
-        img: require("../assets/nos-ajude.jpg"),
-        href: "/Pix",
-        tittle: "Ajude com Pix",
-        uri: "https://livepix.gg/diih145807",
-        openInApp: true,
-      },
-    ]);
+    getWidgets();
   }, []);
 
   // Use useMemo para armazenar os dados em cache
