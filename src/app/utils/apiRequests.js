@@ -21,6 +21,19 @@ export async function getSponsor() {
   }
 }
 
+export async function getMembers() {
+  try {
+    const response = await fetch(
+      "https://restapimaozinhagamer.onrender.com/members"
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao obter dados da API:", error);
+    return null;
+  }
+}
+
 export async function getBannerData() {
   try {
     const response = await fetch(

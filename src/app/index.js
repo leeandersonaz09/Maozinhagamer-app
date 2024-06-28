@@ -3,7 +3,11 @@ import { LottieLoading } from "./components";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
-import { fetchSubscriberCount, getBannerData } from "./utils/apiRequests";
+import {
+  fetchSubscriberCount,
+  getBannerData,
+  getMembers,
+} from "./utils/apiRequests";
 
 export default function Splash() {
   const [isNew, setIsNew] = useState(true);
@@ -23,6 +27,11 @@ export default function Splash() {
   async function bannerData() {
     const cachedData = await getBannerData();
     await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
+  }
+
+  async function membersData() {
+    const cachedData = await getMembers();
+    await AsyncStorage.setItem("membersData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
   }
 
   const loadFonts = async () => {
@@ -57,6 +66,7 @@ export default function Splash() {
     }
     SubscriberCount();
     bannerData();
+    membersData();
 
     setTimeout(() => {
       checkisNew();
