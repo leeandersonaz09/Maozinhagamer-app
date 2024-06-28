@@ -6,6 +6,7 @@ import Carousel from "./Carousel";
 import LottieLoading from "./Lottie";
 import Dot from "./Dot";
 import Button from "./Button";
+import PopupMenu from "./PopupMenu";
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   LottieLoading,
   Dot,
   Button,
+  PopupMenu,
 };

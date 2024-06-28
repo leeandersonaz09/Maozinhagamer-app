@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Header, Card } from "../components";
+import { Header, Card, PopupMenu } from "../components";
 import styles from "../Theme/styles/MembersStyles";
 
 const members = () => {

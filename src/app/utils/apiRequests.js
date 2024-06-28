@@ -7,7 +7,7 @@ export async function getSponsor() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Erro ao obter dados da API:", error);
+    console.error("Erro ao obter dados da API SPONSOR:", error);
     return [
       {
         id: 1,
@@ -29,8 +29,36 @@ export async function getMembers() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Erro ao obter dados da API:", error);
-    return null;
+    console.error("Erro ao obter dados da API MEMBERS:", error);
+    const data = [
+      {
+        id: 1,
+        name: "Lee Brasil",
+        followers: "@LeeBrasil",
+        image:
+          "https://drive.google.com/uc?export=download&id=1oc3Ac_QKUe-TWfCw70c_R8a8lM1ZNtB8",
+        playstationTag: "",
+        xboxTag: "",
+        pcTag: "https://steamcommunity.com/profiles/76561198346396599",
+        xbox: true,
+        pc: true,
+        ps: false,
+      },
+      {
+        id: 2,
+        name: "LoneWolf",
+        followers: "@SamLoneWolf7",
+        image:
+          "https://drive.google.com/uc?export=download&id=111bfKjGuHO4wJ8gXdE4EB6XO9kESh9CA",
+        playstationTag: "",
+        xboxTag: "",
+        pcTag: "",
+        xbox: false,
+        pc: true,
+        ps: false,
+      },
+    ];
+    return data;
   }
 }
 
@@ -42,7 +70,7 @@ export async function getBannerData() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Erro ao obter dados da API:", error);
+    console.error("Erro ao obter dados da API BANNER:", error);
     return [
       {
         id: 1,
@@ -68,7 +96,7 @@ export async function fetchSubscriberCount() {
       return subscriberCount;
     }
   } catch (error) {
-    console.error("Erro ao obter dados da API:", error);
+    console.error("Erro ao obter dados da API YOUTUBE:", error);
     const subscriberCount = 0;
     return subscriberCount;
   }
