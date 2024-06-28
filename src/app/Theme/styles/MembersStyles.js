@@ -12,13 +12,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10, // Adiciona um padding vertical de 10px
     paddingBottom: 80, //Adiciona um padding no fim do conteiner
   },
-  memberContainer: {
-    flex: 1,
-    margin: 10, // Adiciona um margin de 10px em todos os lados
-    padding: 10, // Adiciona um padding de 10px em todos os lados
-    backgroundColor: COLORS.white,
-    borderRadius: 10,
-  },
+
   memberImage: {
     width: 80,
     height: 80,
@@ -30,7 +24,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   memberName: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
   },
   memberTitle: {

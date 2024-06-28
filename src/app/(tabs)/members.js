@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Header } from "../components";
+import { Header, Card } from "../components";
 import styles from "../Theme/styles/MembersStyles";
 
 const members = () => {
@@ -29,11 +29,13 @@ const members = () => {
   useEffect(() => {
     retrieveMembersData();
   }, []);
+  // Use useMemo para armazenar os dados em cache
+  const memoizedData = useMemo(() => data, [data]);
 
   const MemberItem = ({ item }) => {
     return (
       <View style={{ flex: 1, paddingBottom: 20 }}>
-        <View style={styles.memberContainer}>
+        <Card>
           <Image source={{ uri: item.image }} style={styles.memberImage} />
           <View style={styles.memberInfo}>
             <Text style={styles.memberName}>{item.name}</Text>
@@ -57,7 +59,7 @@ const members = () => {
               ) : null}
             </View>
           </View>
-        </View>
+        </Card>
       </View>
     );
   };
@@ -65,12 +67,12 @@ const members = () => {
   return (
     <View style={styles.container}>
       <Header HeaderTittle={"Membros"} />
-      {data ? (
+      {memoizedData ? (
         <View style={styles.containerList}>
           <FlatList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            data={data}
+            data={memoizedData}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => <MemberItem item={item} />}
             numColumns={2} // Exibe dois itens por linha
