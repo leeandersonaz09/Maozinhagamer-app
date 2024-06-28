@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10, // Adiciona um margin de 10px em todos os lados
     padding: 10, // Adiciona um padding de 10px em todos os lados
-    backgroundColor: "white",
+    backgroundColor: COLORS.white,
     borderRadius: 10,
   },
   memberImage: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   followButtonText: {
-    color: "white",
+    color: COLORS.white,
     fontWeight: "bold",
   },
 });

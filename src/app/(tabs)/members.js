@@ -42,17 +42,17 @@ const members = () => {
             <View style={styles.memberTagsContainer}>
               {item.xbox ? (
                 <TouchableOpacity style={styles.followButton}>
-                  <FontAwesome5 name="xbox" size={24} color="black" />
+                  <FontAwesome5 name="xbox" size={24} color="#2ca243" />
                 </TouchableOpacity>
               ) : null}
               {item.ps ? (
                 <TouchableOpacity style={styles.followButton}>
-                  <FontAwesome5 name="playstation" size={24} color="black" />
+                  <FontAwesome5 name="playstation" size={24} color="#00246E" />
                 </TouchableOpacity>
               ) : null}
               {item.pc ? (
                 <TouchableOpacity style={styles.followButton}>
-                  <FontAwesome5 name="steam" size={24} color="black" />
+                  <FontAwesome5 name="steam" size={24} color="#2a475e" />
                 </TouchableOpacity>
               ) : null}
             </View>
