@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     bottom: 10,
     right: 16,
     left: 16,
-    borderRadius: 16,
+    borderRadius: 40,
     backgroundColor: COLORS.primary,
     borderTopWidth: 1,
   },

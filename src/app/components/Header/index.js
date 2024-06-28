@@ -19,13 +19,21 @@ export default function Header(props) {
             alignItems: "center",
           }}
         >
-          <View style={{}}>
-            <Link href={route} asChild>
-              <TouchableOpacity style={{ paddingLeft: 14 }}>
-                <FontAwesome name="arrow-circle-left" size={38} color="white" />
-              </TouchableOpacity>
-            </Link>
-          </View>
+          {route ? (
+            <View style={{}}>
+              <Link href={route} asChild>
+                <TouchableOpacity style={{ paddingLeft: 14 }}>
+                  <FontAwesome
+                    name="arrow-circle-left"
+                    size={38}
+                    color="white"
+                  />
+                </TouchableOpacity>
+              </Link>
+            </View>
+          ) : (
+            <></>
+          )}
           <View
             style={{
               flex: 1,

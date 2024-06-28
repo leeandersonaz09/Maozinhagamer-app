@@ -4,6 +4,7 @@ import {
   AntDesign,
   MaterialIcons,
   MaterialCommunityIcons,
+  Octicons,
 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import * as Animatable from "react-native-animatable";
@@ -22,17 +23,22 @@ const TabArr = [
   {
     route: "index",
     label: "Inicio",
-    icon: <AntDesign name="home" size={26} color="white" />,
+    icon: <AntDesign name="home" size={24} color="white" />,
   },
   {
     route: "patrocinador",
     label: "Patrocinador",
-    icon: <MaterialCommunityIcons name="offer" size={26} color="white" />,
+    icon: <MaterialCommunityIcons name="offer" size={24} color="white" />,
+  },
+  {
+    route: "members",
+    label: "Membros",
+    icon: <Octicons name="people" size={24} color="white" />,
   },
   {
     route: "about",
     label: "Sobre",
-    icon: <MaterialIcons name="support-agent" size={26} color="white" />,
+    icon: <MaterialIcons name="support-agent" size={24} color="white" />,
   },
 ];
 
