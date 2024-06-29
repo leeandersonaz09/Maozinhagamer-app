@@ -21,6 +21,9 @@ export const COLORS = {
   youtube: "#CD201F",
   instagram: "#c13584",
   pix: "#48beae",
+  xbox: "#2ca243",
+  playstation: "#00246E",
+  steam: "#2a475e",
 };
 
 export const SIZES = {

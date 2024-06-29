@@ -1,3 +1,4 @@
+// members.js
 import React, { useState, useEffect, useMemo } from "react";
 import {
   View,
@@ -11,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Header, Card, PopupMenu } from "../components";
 import styles from "../Theme/styles/MembersStyles";
+import { COLORS } from "../Theme/theme";
 
 const members = () => {
   const [data, setData] = useState([]);
@@ -33,6 +35,8 @@ const members = () => {
   const memoizedData = useMemo(() => data, [data]);
 
   const MemberItem = ({ item }) => {
+    const [buttonRect, setButtonRect] = useState({});
+
     return (
       <View style={{ flex: 1, paddingBottom: 20 }}>
         <Card>
@@ -43,19 +47,34 @@ const members = () => {
             <Text style={styles.memberFollowers}>{item.followers}</Text>
             <View style={styles.memberTagsContainer}>
               {item.xbox ? (
-                <TouchableOpacity style={styles.followButton}>
-                  <FontAwesome5 name="xbox" size={24} color="#2ca243" />
-                </TouchableOpacity>
+                <PopupMenu
+                  name={item.name}
+                  gamertag={item.xboxTag}
+                  icon={"xbox"}
+                  color={COLORS.xbox}
+                  onGetButtonRect={(rect) => setButtonRect(rect)}
+                  buttonRect={buttonRect}
+                />
               ) : null}
               {item.ps ? (
-                <TouchableOpacity style={styles.followButton}>
-                  <FontAwesome5 name="playstation" size={24} color="#00246E" />
-                </TouchableOpacity>
+                <PopupMenu
+                  name={item.name}
+                  gamertag={item.playstationTag}
+                  icon={"playstation"}
+                  color={COLORS.playstation}
+                  onGetButtonRect={(rect) => setButtonRect(rect)}
+                  buttonRect={buttonRect}
+                />
               ) : null}
               {item.pc ? (
-                <TouchableOpacity style={styles.followButton}>
-                  <FontAwesome5 name="steam" size={24} color="#2a475e" />
-                </TouchableOpacity>
+                <PopupMenu
+                  name={item.name}
+                  gamertag={item.pcTag}
+                  icon={"steam"}
+                  color={COLORS.steam}
+                  onGetButtonRect={(rect) => setButtonRect(rect)}
+                  buttonRect={buttonRect}
+                />
               ) : null}
             </View>
           </View>
