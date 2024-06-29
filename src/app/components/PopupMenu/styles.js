@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../Theme/theme";
+import { COLORS, SIZES } from "../../Theme/theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 30,
     right: 20,
-    width: 200, // ajuste o valor de acordo com a largura do seu ícone
     alignItems: "center",
   },
   gamertagView: {
@@ -28,14 +27,16 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 10,
   },
-  gamertagView: {
-    flexDirection: "row",
+  gamertagName: {
     paddingTop: 10,
     paddingBottom: 10,
-    paddingHorizontal: 10,
+    fontSize: SIZES.title,
+    fontWeight: "bold",
   },
   gamertagText: {
     paddingLeft: 8,
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 

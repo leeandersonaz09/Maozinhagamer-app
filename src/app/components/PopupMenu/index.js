@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
-import { SIZES } from "../../Theme/theme";
+import { COLORS, SIZES } from "../../Theme/theme";
 //import styles from "./styles";
 
 const PopupMenu = (props) => {
@@ -69,7 +69,11 @@ const PopupMenu = (props) => {
             >
               {alertMessage && (
                 <Text
-                  style={{ fontSize: 16, color: "green", textAlign: "center" }}
+                  style={{
+                    fontSize: 16,
+                    color: COLORS.primary,
+                    textAlign: "center",
+                  }}
                 >
                   {alertMessage}
                 </Text>
