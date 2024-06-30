@@ -112,7 +112,24 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: "row",
   },
-  ProductContainer: {
+
+  //Banner
+
+  BannerTittle: {
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  //renderItems
+
+  WidgetsTittle: {
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  WigtesContainer: {
     flex: 1,
     padding: 15,
     marginTop: -20,
@@ -121,24 +138,47 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 65,
   },
-  headerTitle: {
-    fontSize: SIZES.header,
-    color: COLORS.white,
-    fontWeight: "bold",
-    marginLeft: "10%",
-    marginTop: 25,
+
+  // SmallList
+  SmallListContainer: {
+    flex: 1,
   },
-  addButton: {
+  SmallListTittle: {
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  Sitem: {
+    //margin: 10,
+    paddingTop: -15,
+    alignSelf: "center",
+    width: 345,
+    height: 128,
+    marginBottom: 15,
+    borderRadius: 15,
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+  },
+  SitemPhoto: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+  StextContainer: {
     position: "absolute",
-    backgroundColor: "#ff5b77",
-    elevation: 4,
-    borderRadius: 100,
-    height: 57,
-    width: 58,
-    right: 15,
-    bottom: 30,
-    alignItems: "center",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(52, 52, 52, 0.5)",
+  },
+  SitemText: {
+    color: "rgba(255, 255, 255, 0.8)",
+    marginHorizontal: 15,
+    textAlign: "center",
   },
 });
 

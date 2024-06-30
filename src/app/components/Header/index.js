@@ -39,7 +39,7 @@ export default function Header(props) {
               flex: 1,
               textAlign: "center",
               alignItems: "center",
-              paddingRight: 40,
+              //paddingRight: 40,
             }}
           >
             <Text style={styles.HeaderTittle}>{tittle}</Text>
@@ -66,5 +66,6 @@ const styles = StyleSheet.create({
   HeaderTittle: {
     fontSize: SIZES.headerTittle,
     color: COLORS.white,
+    fontWeight: "bold",
   },
 });

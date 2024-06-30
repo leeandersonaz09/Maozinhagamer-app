@@ -47,7 +47,7 @@ export default function Splash() {
     //AsyncStorage.clear();
     try {
       let value = await AsyncStorage.getItem("isnewinApp");
-      console.log(isNew);
+      //console.log(isNew);
       if (value !== null) {
         setIsNew(false);
         router.replace("/(tabs)");

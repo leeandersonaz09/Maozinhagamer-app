@@ -6,6 +6,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  input: {
+    height: 40,
+    width: "90%",
+    backgroundColor: COLORS.white,
+    borderRadius: 20,
+    padding: 5,
+    paddingLeft: 10,
+  },
+  SectionStyle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.white,
+    height: 40,
+    borderRadius: 20,
+    margin: 10,
+  },
   containerList: {
     flex: 1,
     paddingHorizontal: 15, // Adiciona um padding horizontal de 20px

@@ -15,6 +15,7 @@ import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
 import { getBannerData, fetchWidgetsData } from "../utils/apiRequests"; // Importe as funções
+import Banner from "../components/Carousel";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -80,7 +81,7 @@ const Home = () => {
 
   const renderItems = () => {
     return (
-      <View style={styles.ProductContainer}>
+      <View style={styles.WigtesContainer}>
         {memoizedData.map((item, index) =>
           item.openInApp ? (
             <Link
@@ -114,6 +115,27 @@ const Home = () => {
             </Link>
           )
         )}
+      </View>
+    );
+  };
+
+  const SmallList = ({ item }) => {
+    return (
+      <View style={styles.SmallListContainer}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
+          <View style={styles.Sitem}>
+            <Image
+              source={{
+                uri: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
+              }}
+              style={styles.SitemPhoto}
+              resizeMode="cover"
+            />
+            <View style={styles.StextContainer}>
+              <Text style={styles.SitemText}>Novidades e campeonatos</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -190,9 +212,16 @@ const Home = () => {
                     </View>
                   </>
                 ) : (
-                  <Carousel data={dataBanner} />
+                  <>
+                    <Text style={styles.BannerTittle}>
+                      Ofertas Patrocinadas
+                    </Text>
+                    <Carousel data={dataBanner} />
+                  </>
                 )}
-
+                <Text style={styles.SmallListTittle}>Novidades</Text>
+                {SmallList(dataBanner)}
+                <Text style={styles.WidgetsTittle}>Utilidades</Text>
                 {renderItems()}
               </View>
             </View>

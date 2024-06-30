@@ -96,25 +96,30 @@ export default function TabRoutesLayout() {
   return (
     <>
       <GestureHandlerRootView>
-        <Tabs
-          screenOptions={{
-            headerShown: false,
-            tabBarStyle: styles.tabBar,
-          }}
-        >
-          {TabArr.map((item, index) => {
-            return (
-              <Tabs.Screen
-                key={index}
-                name={item.route}
-                options={{
-                  tabBarShowLabel: false,
-                  tabBarButton: (props) => <TabButton {...props} item={item} />,
-                }}
-              ></Tabs.Screen>
-            );
-          })}
-        </Tabs>
+        <SafeAreaView style={{ flex: 1 }}>
+          <Tabs
+            screenOptions={{
+              headerShown: false,
+              tabBarStyle: styles.tabBar,
+              keyboardHidesTabBar: true,
+            }}
+          >
+            {TabArr.map((item, index) => {
+              return (
+                <Tabs.Screen
+                  key={index}
+                  name={item.route}
+                  options={{
+                    tabBarShowLabel: false,
+                    tabBarButton: (props) => (
+                      <TabButton {...props} item={item} />
+                    ),
+                  }}
+                ></Tabs.Screen>
+              );
+            })}
+          </Tabs>
+        </SafeAreaView>
       </GestureHandlerRootView>
     </>
   );
