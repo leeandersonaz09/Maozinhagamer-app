@@ -7,6 +7,7 @@ import LottieLoading from "./Lottie";
 import Dot from "./Dot";
 import Button from "./Button";
 import PopupMenu from "./PopupMenu";
+import Separator from "./Separador";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Dot,
   Button,
   PopupMenu,
+  Separator,
 };

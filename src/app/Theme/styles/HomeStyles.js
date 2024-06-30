@@ -8,62 +8,8 @@ const styles = StyleSheet.create({
     //alignItems: "center",
     backgroundColor: COLORS.white,
   },
-  contentContainer: {
-    position: "relative",
-    left: 0,
-    top: -60,
-    borderTopStartRadius: 30,
-    borderTopEndRadius: 30,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: "#333",
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    paddingTop: 40,
-  },
 
-  Tittle: {
-    fontWeight: "bold",
-    marginBottom: 5,
-    alignSelf: "center",
-    fontSize: SIZES.headerTittle,
-  },
-
-  subTittle: {
-    fontWeight: "bold",
-    fontStyle: "italic",
-    textAlign: "justify",
-    marginTop: 10,
-  },
-
-  Text: {
-    marginTop: 5,
-    textAlign: "justify",
-  },
-  subscriberContainer: {
-    flexDirection: "row",
-    marginTop: 10,
-  },
-  container1: {
-    backgroundColor: "red",
-    padding: 10,
-    borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderColor: "black",
-    borderWidth: 1,
-  },
-  container2: {
-    backgroundColor: COLORS.white,
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-    borderTopRightRadius: 5,
-    borderBottomRightRadius: 5,
-  },
-  subscriberCount: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.white,
-  },
+  //Header Image
   headerImage: {
     width: "110%",
     height: 200,
@@ -71,44 +17,63 @@ const styles = StyleSheet.create({
   contentContainer: {
     position: "relative",
     left: 0,
-    top: -55,
+    top: -45,
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    paddingTop: 40,
-  },
-  VideoContainer: {
-    width: 350, // Largura do card do vídeo
-    height: 200, // Altura do card do vídeo
-    marginTop: 15,
-    justifyContent: "center", // Centraliza o vídeo no card
-    alignItems: "center", // Centraliza o vídeo no card
-    backgroundColor: COLORS.black, // Cor de fundo do card
-    borderRadius: 10, // Bordas arredondadas do card
-  },
-  video: {
-    width: 350, // O vídeo preenche a largura do card
-    height: "100%", // O vídeo preenche a altura do card
-    marginRight: 20, // Adiciona espaço à direita de cada card
+    paddingTop: 10,
   },
 
-  shortsContainer: {
-    width: 350, // Largura do card do vídeo
-    height: 200, // Altura do card do vídeo
+  //Conteudo de inscritos
+  subscribeView: {
+    alignItems: "center",
+    flex: 1,
+  },
+  subscriberContainer: {
+    flexDirection: "row",
+    marginTop: -20,
+    //marginBottom: 10,
+  },
+  container1: {
+    backgroundColor: "red",
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderColor: "black",
+    borderWidth: 1,
+    marginRight: 0,
+  },
+  container2: {
+    backgroundColor: COLORS.white,
+    borderColor: "black",
+    borderWidth: 1,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    marginLeft: 0,
+  },
+  subscriberText: {
+    color: COLORS.white,
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  subscriberCountText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: COLORS.black,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+
+  //Loading
+
+  loadingView: {
     marginTop: 20,
-    justifyContent: "center", // Centraliza o vídeo no card
-    alignItems: "center", // Centraliza o vídeo no card
-    backgroundColor: COLORS.black, // Cor de fundo do card
-    borderRadius: 10, // Bordas arredondadas do card
   },
-  short: {
-    width: 350, // O vídeo preenche a largura do card
-    height: "100%", // O vídeo preenche a altura do card
-    marginRight: 20, // Adiciona espaço à direita de cada card
-  },
+
   list: {
     flexDirection: "row",
   },
@@ -121,6 +86,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
+
   //renderItems
 
   WidgetsTittle: {
@@ -142,6 +108,7 @@ const styles = StyleSheet.create({
   // SmallList
   SmallListContainer: {
     flex: 1,
+    paddingHorizontal: 10,
   },
   SmallListTittle: {
     paddingHorizontal: 20,
@@ -176,9 +143,16 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(52, 52, 52, 0.5)",
   },
   SitemText: {
-    color: "rgba(255, 255, 255, 0.8)",
+    color: "white",
     marginHorizontal: 15,
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 18,
+    textShadowColor: "rgba(0, 0, 0, 0.5)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    textOutlineColor: "black", // Cor da borda
+    textOutlineWidth: 2, // Largura da borda
   },
 });
 

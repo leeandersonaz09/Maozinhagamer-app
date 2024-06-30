@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
+  FlatList,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link } from "expo-router";
@@ -15,11 +16,11 @@ import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
 import { getBannerData, fetchWidgetsData } from "../utils/apiRequests"; // Importe as funções
-import Banner from "../components/Carousel";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [dataBanner, setdataBanner] = useState([]);
+  const [dataNotes, setdataNotes] = useState([]);
   const [subscriberCount, setSubscriberCount] = useState(0);
   const [isLoading, setisLoading] = useState(false);
 
@@ -49,6 +50,18 @@ const Home = () => {
     }
   };
 
+  //Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
+  const retrieveUpdateNotes = async () => {
+    try {
+      const getItem = await AsyncStorage.getItem("notesData"); // Aguarde a conclusão da operação
+
+      const parsedItem = await JSON.parse(getItem);
+      setdataNotes(parsedItem);
+    } catch (error) {
+      console.error("Erro ao obter dados do AsyncStorage:", error);
+    }
+  };
+
   //Get from async storage Subscriber youtube counter
   const retrieveSubscriberCount = async () => {
     try {
@@ -65,15 +78,21 @@ const Home = () => {
     }
   };
 
-  const getWidgets = async () => {
-    const widgets = await fetchWidgetsData();
-    setData(widgets);
+  const retrieveWidgets = async () => {
+    try {
+      const getItem = await AsyncStorage.getItem("widgetsData"); // Aguarde a conclusão da operação
+      const parsedItem = await JSON.parse(getItem);
+      setData(parsedItem);
+    } catch (error) {
+      console.error("Erro ao obter dados do AsyncStorage:", error);
+    }
   };
 
   useEffect(() => {
     retrieveSubscriberCount();
     retrieveBannerData();
-    getWidgets();
+    retrieveUpdateNotes();
+    retrieveWidgets();
   }, []);
 
   // Use useMemo para armazenar os dados em cache
@@ -126,13 +145,13 @@ const Home = () => {
           <View style={styles.Sitem}>
             <Image
               source={{
-                uri: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
+                uri: item.img,
               }}
               style={styles.SitemPhoto}
               resizeMode="cover"
             />
             <View style={styles.StextContainer}>
-              <Text style={styles.SitemText}>Novidades e campeonatos</Text>
+              <Text style={styles.SitemText}>{item.tittle}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -143,16 +162,16 @@ const Home = () => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <View style={{ flex: 1, backgroundColor: COLORS.white, marginTop: 0 }}>
-        <ScrollView
-          showsVerticalScrollIndicator={false} // Esconde a barra de rolagem vertical
-          refreshControl={
-            <RefreshControl
-              refreshing={isLoading} // Defina isso conforme sua lógica de carregamento
-              onRefresh={fetchBannerPulltoRefresh} // Chame a função de atualização
-            />
-          }
-        >
+      <ScrollView
+        showsVerticalScrollIndicator={false} // Esconde a barra de rolagem vertical
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading} // Defina isso conforme sua lógica de carregamento
+            onRefresh={fetchBannerPulltoRefresh} // Chame a função de atualização
+          />
+        }
+      >
+        <View style={styles.container}>
           <Image
             style={styles.headerImage}
             source={require("../assets/maozinha-home.jpg")}
@@ -160,31 +179,19 @@ const Home = () => {
           <View
             style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
           >
-            <Text
-              style={[
-                styles.Tittle,
-                {
-                  color: COLORS.black,
-                  textAlign: "center",
-                  marginHorizontal: 5,
-                  marginTop: -10,
-                },
-              ]}
-            >
-              Bem-vindo à comunidade Maozinha Gamer!
-            </Text>
-            <View style={{ alignItems: "center", flex: 1 }}>
+            <View style={styles.subscribeView}>
               <View style={styles.subscriberContainer}>
                 <View style={styles.container1}>
-                  <Text style={styles.subscriberCount}> YouTube Inscritos</Text>
+                  <Text style={styles.subscriberText}> YouTube Inscritos</Text>
                 </View>
                 <View style={styles.container2}>
-                  <Text style={[styles.subscriberCount, { color: "black" }]}>
+                  <Text style={[styles.subscriberCountText]}>
                     {subscriberCount}
                   </Text>
                 </View>
               </View>
-              <View style={{ marginTop: 20 }}>
+
+              <View style={styles.loadingView}>
                 {isLoading ? (
                   <>
                     <View
@@ -219,15 +226,30 @@ const Home = () => {
                     <Carousel data={dataBanner} />
                   </>
                 )}
-                <Text style={styles.SmallListTittle}>Novidades</Text>
-                {SmallList(dataBanner)}
+                {dataNotes ? (
+                  <>
+                    <Text style={styles.SmallListTittle}>Novidades</Text>
+
+                    <FlatList
+                      showsHorizontalScrollIndicator={false}
+                      showsVerticalScrollIndicator={false}
+                      horizontal
+                      data={dataNotes}
+                      keyExtractor={(item) => item.id.toString()}
+                      renderItem={(item) => SmallList(item)}
+                    />
+                  </>
+                ) : (
+                  <></>
+                )}
+
                 <Text style={styles.WidgetsTittle}>Utilidades</Text>
                 {renderItems()}
               </View>
             </View>
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </>
   );
 };

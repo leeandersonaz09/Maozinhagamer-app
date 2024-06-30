@@ -5,15 +5,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
 import {
   fetchSubscriberCount,
+  fetchWidgetsData,
   getBannerData,
   getMembers,
+  getUpdateNotes,
 } from "./utils/apiRequests";
 
 export default function Splash() {
   const [isNew, setIsNew] = useState(true);
   const [fontsLoaded, setfontsLoaded] = useState(false);
 
-  const SubscriberCount = async () => {
+  async function SubscriberCount() {
     try {
       const subscriberCount = await fetchSubscriberCount();
       //console.log("subscriberCount", subscriberCount);
@@ -22,11 +24,21 @@ export default function Splash() {
     } catch (error) {
       console.error("Erro ao obter dados da API:", error);
     }
-  };
+  }
+
+  async function getWidgets() {
+    const cachedData = await fetchWidgetsData();
+    await AsyncStorage.setItem("widgetsData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
+  }
 
   async function bannerData() {
     const cachedData = await getBannerData();
     await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
+  }
+
+  async function notesData() {
+    const cachedData = await getUpdateNotes();
+    await AsyncStorage.setItem("notesData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
   }
 
   async function membersData() {
@@ -67,6 +79,8 @@ export default function Splash() {
     SubscriberCount();
     bannerData();
     membersData();
+    notesData();
+    getWidgets();
 
     setTimeout(() => {
       checkisNew();

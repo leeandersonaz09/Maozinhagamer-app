@@ -11,7 +11,7 @@ const HomeCard = ({ data: { img, tittle } }) => (
     <StatusBar backgroundColor={COLORS.primary} style="light" />
     <View style={styles.container}>
       <ImageBackground
-        source={img}
+        source={{ uri: img }}
         style={styles.image}
         imageStyle={{ borderRadius: 10 }}
       >

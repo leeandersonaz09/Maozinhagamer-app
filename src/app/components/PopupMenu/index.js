@@ -8,10 +8,10 @@ import {
   StyleSheet,
   Animated,
   Easing,
-  Alert,
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
+import Separator from "../Separador";
 import { COLORS, SIZES } from "../../Theme/theme";
 //import styles from "./styles";
 
@@ -78,7 +78,10 @@ const PopupMenu = (props) => {
                   {alertMessage}
                 </Text>
               )}
+
               <Text style={styles.gamertagName}>{name}</Text>
+              <Separator />
+              <Text style={styles.gamertagaTextLogo}>Minha Gamer Tag</Text>
               <View style={styles.gamertagView}>
                 <FontAwesome5 name={icon} size={24} color={color} />
                 <Text style={styles.gamertagText}>{gamertag}</Text>
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     borderColor: "#333",
     borderWidth: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     position: "absolute",
     top: 30,
     right: 20,
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 10,
     paddingBottom: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
   },
   gamertagName: {
     paddingTop: 10,
@@ -127,7 +130,12 @@ const styles = StyleSheet.create({
   },
   gamertagText: {
     paddingLeft: 8,
+    paddingRight: 10,
     fontSize: 16,
+    fontWeight: "bold",
+  },
+  gamertagaTextLogo: {
+    paddingLeft: 8,
     fontWeight: "bold",
   },
 });

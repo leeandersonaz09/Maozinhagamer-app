@@ -85,16 +85,34 @@ export async function getBannerData() {
   }
 }
 
-export async function fetchSubscriberCount() {
+export async function getUpdateNotes() {
   try {
     const response = await fetch(
-      "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCB8jsTfkY-7YP8ULi8mfuOw&key=AIzaSyCXKMARPazopeEURqx_itTOeIAT-uNwjNw"
+      "https://restapimaozinhagamer.onrender.com/updatenotes"
     );
     const data = await response.json();
-    if (data.items) {
+    return data;
+  } catch (error) {
+    console.error("Erro ao obter dados da API updateNotes:", error);
+    return null;
+  }
+}
+
+export async function fetchSubscriberCount() {
+  try {
+    /*const response = await fetch(
+      "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCB8jsTfkY-7YP8ULi8mfuOw&key=AIzaSyCXKMARPazopeEURqx_itTOeIAT-uNwjNw"
+    );*/
+    const response = await fetch(
+      "https://restapimaozinhagamer.onrender.com/subscribersNumber"
+    );
+    const data = await response.json();
+
+    /*if (data.items) {
       const subscriberCount = data.items[0].statistics.subscriberCount;
       return subscriberCount;
-    }
+    }*/
+    return data[0].subscriber;
   } catch (error) {
     console.error("Erro ao obter dados da API YOUTUBE:", error);
     const subscriberCount = 0;
@@ -103,40 +121,52 @@ export async function fetchSubscriberCount() {
 }
 
 export async function fetchWidgetsData() {
-  const data = [
-    {
-      id: 1,
-      img: require("../assets/map-image.webp"),
-      href: "/Maps",
-      tittle: "Mapas Interativos",
-      uri: "https://wzhub.gg/pt/map",
-      openInApp: true,
-    },
-    {
-      id: 2,
-      img: require("../assets/meta-loadout.jpeg"),
-      href: "/Loadouts",
-      tittle: "Meta Loadouts",
-      uri: "https://wzhub.gg/pt/loadouts",
-      openInApp: true,
-    },
-    {
-      id: 3,
-      img: require("../assets/youtube-card.png"),
-      href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
-      tittle: "Lives Youtube",
-      uri: "",
-      openInApp: false,
-    },
-    {
-      id: 4,
-      img: require("../assets/nos-ajude.jpg"),
-      href: "/Pix",
-      tittle: "Ajude com Pix",
-      uri: "https://livepix.gg/diih145807",
-      openInApp: true,
-    },
-  ];
+  try {
+    const response = await fetch(
+      "https://restapimaozinhagamer.onrender.com/widgets"
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao obter dados da API updateNotes:", error);
+
+    const data = [
+      {
+        id: 1,
+        img: "https://drive.google.com/uc?export=download&id=1ynpL_S9eqco03eenPn_0GDWJozOA9LFm",
+        href: "/Maps",
+        tittle: "Mapas Interativos",
+        uri: "https://wzhub.gg/pt/map",
+        openInApp: true,
+      },
+      {
+        id: 2,
+        img: "https://drive.google.com/uc?export=download&id=1OpKmEyfcav0whFKtJXFqBbU0g3o_jBSe",
+        href: "/Loadouts",
+        tittle: "Meta Loadouts",
+        uri: "https://wzhub.gg/pt/loadouts",
+        openInApp: true,
+      },
+      {
+        id: 3,
+        img: "https://drive.google.com/uc?export=download&id=1W5KkxklATX8dQUIidDeFs-7cM5I-zA0K",
+        href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
+        tittle: "Lives Youtube",
+        uri: "",
+        openInApp: false,
+      },
+      {
+        id: 4,
+        img: "https://drive.google.com/uc?export=download&id=1fCMkr4Pbt6CWSbz1HTLz2wvmV61MJJUI",
+        href: "/Pix",
+        tittle: "Ajude com Pix",
+        uri: "https://livepix.gg/diih145807",
+        openInApp: true,
+      },
+    ];
+
+    return data;
+  }
 
   return data;
 }
