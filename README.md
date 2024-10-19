@@ -82,7 +82,6 @@ Certifique-se de ter instalado as seguintes ferramentas:
 <p align="center">
     <img alt="" title="#delicinha" src="screenshots/01.jpeg" width="250px" />
     <img alt="" title="#delicinha" src="screenshots/02.jpeg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/06.jpeg" width="250px" />
     <img alt="" title="#delicinha" src="screenshots/07.jpeg" width="250px" />
     <img alt="" title="#delicinha" src="screenshots/08.jpeg" width="250px" />
 
