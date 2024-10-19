@@ -3,126 +3,87 @@
 </h1>
 
 <h1 align="center">
-  Maozinha Gamer
+  # 🎮 Mãozinha Gamer
 </h1>
 
 <h4 align="center">
   ☕ Code and coffee
 </h4>
 
-## Fiscalização e Transparência agora na palma da sua mão.
+Bem-vindo ao **Mãozinha Gamer**, o aplicativo oficial do canal [Mãozinha Gamer no YouTube](https://www.youtube.com/channel/UCqB3_WL9vGS751N6UudXHuw)! Este app é uma extensão do canal, com dicas, truques e mapas para diversos jogos.
 
-Nosso projeto se chama JUAZEIRO LIVRE e ele foi criado para defender e fiscalizar a nossa cidade. 
+## 🛠 Tecnologias e Ferramentas
 
-Um aplicativo idealizado pelo Juazeirense, músico, cristão de nascimento, decisão e paixão e professor Cléber Souza de Jesus, para dar acesso a informação com transparência e praticidade sobre a prefeitura do município de Juazeiro. Gastos, quantidades de sessões na câmara municipal e muito mais.
+- **Node.js** - Backend robusto.
+- **React Native** - Desenvolvimento mobile multiplataforma.
+- **Expo** - Gerenciamento do ciclo de vida do app.
+- **Visual Studio Code** - Ambiente de desenvolvimento.
+- **Firebase** - Autenticação e banco de dados em tempo real.
 
-## Visite nosso site!!!
-[https://www.juazeirolivre.com](https://juazeirolivre.com)
+### Bibliotecas Principais
 
-<p align="center">
-    <img alt="" src="https://i.imgur.com/5hkfksa.gif" width="250">
-    <img alt="" title="#delicinha" src="Screenshot_1594935494.png" width="250px" />
-    <img alt="" title="#delicinha" src="Screenshot_1594935498.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/Screenshot_1594728907.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/Screenshot_1595623461.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/Screenshot_1595623470.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/IMG-20221003-WA0003.jpg" width="250px" />
+- `react-navigation` - Navegação entre telas.
+- `axios` - Requisições HTTP.
+- `redux` - Gerenciamento de estado.
+- `styled-components` - Estilização de componentes.
+- `firebase` - Integração com o Firebase.
 
-</p>
+## 📲 Funcionalidades
 
-## Functionality Implementention Sprints
+- Dicas e truques de jogos.
+- Mapas interativos.
+- Tutoriais e estratégias para gamers de todos os níveis.
+- Novidades e atualizações frequentes.
 
-- [x] Screens
-- [x] SearchBar
-- [x] Firebase Integration
-- [x] Generate apk signed
-- [x] Upload PlayStore
-- [x] Tests
-- [x] Dark Theme
+## 🚀 Instalação
 
-You'll need to have [Expo](https://expo.io/learn) installed on your machine in order to follow along.
+### Pré-requisitos
 
-## Configuration
-Add a `config/firebase.js` file with the following content (make sure to fill in the values from your own firebase account):
+Certifique-se de ter instalado as seguintes ferramentas:
 
-```js
-export default {
-  API_KEY: <API_KEY>,
-  AUTH_DOMAIN: <AUTH_DOMAIN>,
-  DATABASE_URL: <DATABASE_URL>,
-  PROJECT_ID: <PROJECT_ID>,
-  STORAGE_BUCKET: <STORAGE_BUCKET>,
-  MESSAGING_SENDER_ID: <MESSAGING_SENDER_ID>,
-};
-```
+- [Node.js](https://nodejs.org)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-## Installation
+### Passos para instalar
 
-- `git clone https://github.com/msfcampos05/DescontoFacilApp.git`
-- `yarn install` / `npm install`
+1. Clone o repositório:
 
-NPM:
+   ```bash
+   git clone https://github.com/leeandersonaz09/Maozinhagamer-app.git
+   cd Maozinhagamer-app
+   ```
 
-```sh
-npm install
-```
+2. Instale as dependências:
 
-YARN:
+   ```bash
+   npm install
+   ```
 
-```sh
-yarn install
-```
+3. Configure o Firebase adicionando um arquivo `firebase.js`:
 
+   ```javascript
+   export default {
+     API_KEY: "<sua_api_key>",
+     AUTH_DOMAIN: "<seu_auth_domain>",
+     PROJECT_ID: "<seu_project_id>",
+   };
+   ```
 
-## Running
+4. Inicie o app:
 
-### Use the `yarn/expo/npm start`, `yarn/npm ios`, or `yarn/npm android` tasks as detailed below.
-NPM && EXPO:
+   ```bash
+   expo start
+   ```
 
-```sh
-npm start or expo start
-```
+## 📷 Screenshots
 
-YARN:
+### Tela Inicial
+![Tela Inicial](https://via.placeholder.com/800x400.png?text=Tela+Inicial)
 
-```sh
-yarn start
-```
-  ## Available Scripts
+### Lista de Dicas
+![Lista de Dicas](https://via.placeholder.com/800x400.png?text=Lista+de+Dicas)
 
-  This app was initialized using Yarn and therefore you should use Yarn commands going forward.
+## 💡 Contribuições
 
-Below you'll find information about performing common tasks.
-
-* [Available Scripts](#available-scripts)
-  * [yarn start](#npm-start)
-  * [yarn ios](#npm-run-ios)
-  * [yarn android](#npm-run-android)
-
-  ### `yarn start`
-
-  Runs your app in development mode.
-
-  Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
-
-  Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the `--reset-cache` flag to the start script:
-
-  ```
-  yarn start --reset-cache
-  ```
-
-  #### `yarn ios`
-
-  Like `yarn start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
-
-  #### `yarn android`
-
-  Like `yarn start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
-
-
-### Demo 
-If you're interested about Juazeiro Livre App be sure to visit:
-
-<a href="https://play.google.com/store/apps/details?id=com.juazeirolivre.juazeirolivreapp"><img width="250px" src="https://play.google.com/intl/pt-BR/badges/static/images/badges/pt-br_badge_web_generic.png"></img></a>
-
-# JuazeiroLivreApp
+Contribuições são bem-vindas! Abra uma issue ou um pull request com sugestões e melhorias.
