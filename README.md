@@ -80,13 +80,13 @@ Certifique-se de ter instalado as seguintes ferramentas:
 
 ### Tela Inicial
 <p align="center">
-    <img alt="" title="#delicinha" src="screenshots/01.jpg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/02.jpg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/03.jpg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/04.jpg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/05.jpg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/06.jpg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/07.jpg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/01.jpeg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/02.jpeg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/03.jpeg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/04.jpeg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/05.jpeg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/06.jpeg" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/07.jpeg" width="250px" />
 
 </p>
 
