@@ -79,7 +79,15 @@ Certifique-se de ter instalado as seguintes ferramentas:
 ## 📷 Screenshots
 
 ### Tela Inicial
-![Tela Inicial](https://via.placeholder.com/800x400.png?text=Tela+Inicial)
+<p align="center">
+    <img alt="" title="#delicinha" src="Screenshot_1594935494.png" width="250px" />
+    <img alt="" title="#delicinha" src="Screenshot_1594935498.png" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/Screenshot_1594728907.png" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/Screenshot_1595623461.png" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/Screenshot_1595623470.png" width="250px" />
+    <img alt="" title="#delicinha" src="screenshots/IMG-20221003-WA0003.jpg" width="250px" />
+
+</p>
 
 ### Lista de Dicas
 ![Lista de Dicas](https://via.placeholder.com/800x400.png?text=Lista+de+Dicas)
