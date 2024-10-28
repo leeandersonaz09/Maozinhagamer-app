@@ -180,17 +180,6 @@ const Home = () => {
             style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
           >
             <View style={styles.subscribeView}>
-              <View style={styles.subscriberContainer}>
-                <View style={styles.container1}>
-                  <Text style={styles.subscriberText}> YouTube Inscritos</Text>
-                </View>
-                <View style={styles.container2}>
-                  <Text style={[styles.subscriberCountText]}>
-                    {subscriberCount}
-                  </Text>
-                </View>
-              </View>
-
               <View style={styles.loadingView}>
                 {isLoading ? (
                   <>
@@ -228,7 +217,7 @@ const Home = () => {
                 )}
                 {dataNotes ? (
                   <>
-                    <Text style={styles.SmallListTittle}>Novidades</Text>
+                    <Text style={styles.SmallListTittle}>Canais Parceiros</Text>
 
                     <FlatList
                       showsHorizontalScrollIndicator={false}
@@ -243,7 +232,7 @@ const Home = () => {
                   <></>
                 )}
 
-                <Text style={styles.WidgetsTittle}>Utilidades</Text>
+                <Text style={styles.WidgetsTittle}>Jogos</Text>
                 {renderItems()}
               </View>
             </View>

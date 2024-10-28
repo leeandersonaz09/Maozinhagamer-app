@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: COLORS.white,
+    textAlign: "center",
   },
 
   separatorContainer: {

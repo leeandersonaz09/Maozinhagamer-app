@@ -37,41 +37,11 @@ const styles = StyleSheet.create({
     marginTop: -20,
     //marginBottom: 10,
   },
-  container1: {
-    backgroundColor: "red",
-    borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderColor: "black",
-    borderWidth: 1,
-    marginRight: 0,
-  },
-  container2: {
-    backgroundColor: COLORS.white,
-    borderColor: "black",
-    borderWidth: 1,
-    borderTopRightRadius: 5,
-    borderBottomRightRadius: 5,
-    marginLeft: 0,
-  },
-  subscriberText: {
-    color: COLORS.white,
-    fontSize: 16,
-    fontWeight: "bold",
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-  },
-  subscriberCountText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.black,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-  },
 
   //Loading
 
   loadingView: {
-    marginTop: 20,
+    marginTop: 10,
   },
 
   list: {
@@ -88,7 +58,6 @@ const styles = StyleSheet.create({
   },
 
   //renderItems
-
   WidgetsTittle: {
     paddingHorizontal: 20,
     paddingBottom: 10,
@@ -108,19 +77,20 @@ const styles = StyleSheet.create({
   // SmallList
   SmallListContainer: {
     flex: 1,
-    paddingHorizontal: 10,
+    //backgroundColor: "#5486",
+    paddingLeft: 10,
   },
   SmallListTittle: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     paddingBottom: 10,
     fontWeight: "bold",
     fontSize: 18,
   },
   Sitem: {
-    //margin: 10,
+    margin: 10,
     paddingTop: -15,
     alignSelf: "center",
-    width: 345,
+    width: 200,
     height: 128,
     marginBottom: 15,
     borderRadius: 15,
