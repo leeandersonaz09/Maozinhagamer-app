@@ -32,7 +32,7 @@ Bem-vindo ao **Mãozinha Gamer**, o aplicativo oficial do canal [Mãozinha Gamer
 
 ### Tarefas a serem realizadas
 
-- [*] Criação banco de dados Firestore Firebase
+- [x] Criação banco de dados Firestore Firebase
 - [ ] Autenticação Firebase e tela de autenticação
 - [ ] Rotas autenticadas com Expo Navigation
 - [ ] Profile Page
