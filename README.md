@@ -28,6 +28,31 @@ Bem-vindo ao **Mãozinha Gamer**, o aplicativo oficial do canal [Mãozinha Gamer
 - `styled-components` - Estilização de componentes.
 - `firebase` - Integração com o Firebase.
 
+## ✅ Workflow - Product Backlog
+
+### Tarefas a serem realizadas
+
+- [ ] Criação banco de dados Firestore Firebase
+- [ ] Autenticação Firebase e tela de autenticação
+- [ ] Rotas autenticadas com Expo Navigation
+- [ ] Profile Page
+- [ ] Real-time chat com amigos
+- [ ] Cloud Messaging
+
+### Telas a serem criadas no aplicativo (baseado nas anotações)
+
+- [ ] Tela "Call of Duty"
+  - [ ] Easter egg: Liberty Falls
+  - [ ] Easter egg: Terminus
+- [ ] Tela "Fortnite"
+  - [ ] Mapa localização personagens
+  - [ ] Personagens no mapa
+- [ ] Tela "The First Descendent"
+  - [ ] Armas blids
+  - [ ] Personagens blids
+- [ ] Tela "Throne And Liberty"
+  - [ ] Direciona direto para uma página de Throne
+
 ## 📲 Funcionalidades
 
 - Dicas e truques de jogos.
@@ -79,6 +104,7 @@ Certifique-se de ter instalado as seguintes ferramentas:
 ## 📷 Screenshots
 
 ### Tela Inicial
+
 <p align="center">
     <img alt="" title="#delicinha" src="screenshots/01.jpeg" width="250px" />
     <img alt="" title="#delicinha" src="screenshots/02.jpeg" width="250px" />
@@ -88,6 +114,7 @@ Certifique-se de ter instalado as seguintes ferramentas:
 </p>
 
 ### Lista de Dicas
+
 ![Lista de Dicas](https://via.placeholder.com/800x400.png?text=Lista+de+Dicas)
 
 ## 💡 Contribuições
