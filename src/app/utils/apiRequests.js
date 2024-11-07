@@ -1,4 +1,6 @@
 // api.js
+import firestore from "@react-native-firebase/firestore";
+
 export async function getSponsor() {
   try {
     const response = await fetch(
@@ -122,6 +124,9 @@ export async function fetchSubscriberCount() {
 
 export async function fetchWidgetsData() {
   try {
+    const test = await firestore().collection("widgets").get();
+    console.log(test);
+
     const response = await fetch(
       "https://restapimaozinhagamer.onrender.com/widgets"
     );
