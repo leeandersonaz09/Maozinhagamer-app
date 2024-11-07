@@ -14,7 +14,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.maozinhagamer.maozinhagamerapp"
+      "bundleIdentifier": "com.maozinhagamer.maozinhagamerapp",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "platforms": ["ios", "android"],
     "android": {
@@ -23,7 +24,8 @@
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.maozinhagamer.maozinhagamerapp"
+      "package": "com.maozinhagamer.maozinhagamerapp",
+      "googleServicesFile": "./google-services.json"
     },
     "androidStatusBar": {
       "barStyle": "light-content",

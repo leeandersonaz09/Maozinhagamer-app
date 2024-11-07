@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "SEU_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_STORAGE_BUCKET",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-  appId: "SEU_APP_ID",
-  measurementId: "SEU_MEASUREMENT_ID",
+  apiKey: "AIzaSyAIjI7Ta7PO_5MEoFhPbS52GuW79Lydct8",
+  authDomain: "maozinhagamerapp-2f0c7.firebaseapp.com",
+  projectId: "maozinhagamerapp-2f0c7",
+  storageBucket: "maozinhagamerapp-2f0c7.firebasestorage.app",
+  messagingSenderId: "198860100597",
+  appId: "1:198860100597:web:4c6618043b2cd1199106bc",
+  measurementId: "G-2WNXH62PSG",
 };
 
 const app = initializeApp(firebaseConfig);
