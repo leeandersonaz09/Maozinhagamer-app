@@ -1,5 +1,6 @@
 // api.js
-import firestore from "@react-native-firebase/firestore";
+import { collection, getDocs } from 'firebase/firestore';
+import { FIREBASE_DB  } from './firebaseConfig'; // relative path to firebaseConfig.js
 
 export async function getSponsor() {
   try {
@@ -124,18 +125,29 @@ export async function fetchSubscriberCount() {
 
 export async function fetchWidgetsData() {
   try {
-    const test = await firestore().collection("widgets").get();
-    console.log(test);
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(collection(FIREBASE_DB, 'widgets'));
 
-    const response = await fetch(
-      "https://restapimaozinhagamer.onrender.com/widgets"
-    );
-    const data = await response.json();
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map(doc => {
+      const docData = doc.data();
+      return {
+        id: doc.id, // Use Firestore document ID
+        img: docData.img,
+        href: docData.href,
+        tittle: docData.tittle,
+        uri: docData.uri,
+        openInApp: docData.openInApp,
+      };
+    });
+
     return data;
-  } catch (error) {
-    console.error("Erro ao obter dados da API updateNotes:", error);
 
-    const data = [
+  } catch (error) {
+    console.error("Erro ao obter dados do Firestore:", error);
+
+    // Fallback data in case of error
+    const fallbackData = [
       {
         id: 1,
         img: "https://drive.google.com/uc?export=download&id=1ynpL_S9eqco03eenPn_0GDWJozOA9LFm",
@@ -170,7 +182,7 @@ export async function fetchWidgetsData() {
       },
     ];
 
-    return data;
+    return fallbackData;
   }
 
   return data;

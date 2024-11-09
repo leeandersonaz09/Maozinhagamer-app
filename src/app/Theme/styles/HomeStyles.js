@@ -5,11 +5,10 @@ const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //alignItems: "center",
     backgroundColor: COLORS.white,
   },
 
-  //Header Image
+  // Header Image
   headerImage: {
     width: "110%",
     height: 200,
@@ -27,29 +26,18 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 
-  //Conteudo de inscritos
+  // Conteudo de inscritos
   subscribeView: {
     alignItems: "center",
     flex: 1,
   },
-  subscriberContainer: {
-    flexDirection: "row",
-    marginTop: -20,
-    //marginBottom: 10,
-  },
 
-  //Loading
-
+  // Loading
   loadingView: {
     marginTop: 10,
   },
 
-  list: {
-    flexDirection: "row",
-  },
-
-  //Banner
-
+  // Banner
   BannerTittle: {
     paddingHorizontal: 20,
     paddingBottom: 10,
@@ -57,27 +45,33 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 
-  //renderItems
+  // Título da seção de widgets
   WidgetsTittle: {
     paddingHorizontal: 20,
     paddingBottom: 10,
     fontWeight: "bold",
     fontSize: 18,
   },
+  
+  // Container para os widgets
   WigtesContainer: {
     flex: 1,
-    padding: 15,
+    paddingHorizontal: 10, // Altere o valor se necessário
     marginTop: -20,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "space-around",
     marginBottom: 65,
+  },
+
+  // Estilo para TouchableOpacity ao redor de cada card
+  cardTouchable: {
+    margin: 8, // Define o espaçamento entre os cards
+    flex: 1,
   },
 
   // SmallList
   SmallListContainer: {
     flex: 1,
-    //backgroundColor: "#5486",
     paddingLeft: 10,
   },
   SmallListTittle: {
@@ -88,7 +82,6 @@ const styles = StyleSheet.create({
   },
   Sitem: {
     margin: 10,
-    paddingTop: -15,
     alignSelf: "center",
     width: 200,
     height: 128,
@@ -121,8 +114,6 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0, 0, 0, 0.5)",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-    textOutlineColor: "black", // Cor da borda
-    textOutlineWidth: 2, // Largura da borda
   },
 });
 

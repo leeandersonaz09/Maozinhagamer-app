@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
   TouchableOpacity,
   RefreshControl,
   FlatList,
@@ -15,16 +14,15 @@ import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
-import { getBannerData, fetchWidgetsData } from "../utils/apiRequests"; // Importe as funções
+import { getBannerData } from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [dataBanner, setdataBanner] = useState([]);
   const [dataNotes, setdataNotes] = useState([]);
-  const [subscriberCount, setSubscriberCount] = useState(0);
   const [isLoading, setisLoading] = useState(false);
 
-  //Get Data for the Banner from Async Storage on refrash page
+  // Get Data for the Banner from Async Storage on refresh page
   const fetchBannerPulltoRefresh = async () => {
     setisLoading(true);
     const cachedData = await getBannerData();
@@ -37,7 +35,7 @@ const Home = () => {
     }, 3000);
   };
 
-  //Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
+  // Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
   const retrieveBannerData = async () => {
     setisLoading(true);
     try {
@@ -50,31 +48,14 @@ const Home = () => {
     }
   };
 
-  //Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
+  // Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
   const retrieveUpdateNotes = async () => {
     try {
       const getItem = await AsyncStorage.getItem("notesData"); // Aguarde a conclusão da operação
-
       const parsedItem = await JSON.parse(getItem);
       setdataNotes(parsedItem);
     } catch (error) {
       console.error("Erro ao obter dados do AsyncStorage:", error);
-    }
-  };
-
-  //Get from async storage Subscriber youtube counter
-  const retrieveSubscriberCount = async () => {
-    try {
-      // Recupere o valor salvo no AsyncStorage
-      const savedSubscriberCount = await AsyncStorage.getItem(
-        "subscriberCount"
-      );
-      const subscriberCount = parseInt(savedSubscriberCount, 10) || 0;
-      setSubscriberCount(subscriberCount);
-    } catch (error) {
-      console.error("Erro ao obter dados do AsyncStorage:", error);
-      const subscriberCount = 0;
-      setSubscriberCount(subscriberCount);
     }
   };
 
@@ -89,7 +70,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    retrieveSubscriberCount();
     retrieveBannerData();
     retrieveUpdateNotes();
     retrieveWidgets();
@@ -101,39 +81,37 @@ const Home = () => {
   const renderItems = () => {
     return (
       <View style={styles.WigtesContainer}>
-        {memoizedData.map((item, index) =>
-          item.openInApp ? (
-            <Link
-              key={index}
-              push
-              href={{
-                pathname: "/HomeCard/[id]",
-                params: {
-                  id: item.id,
-                  tittle: item.tittle,
-                  uri: item.uri,
-                },
-              }}
-              asChild
-            >
-              <TouchableOpacity>
-                <HomeCard data={item} />
-              </TouchableOpacity>
-            </Link>
-          ) : (
-            <Link
-              key={index}
-              href={{
-                pathname: item.href,
-              }}
-              asChild
-            >
-              <TouchableOpacity>
-                <HomeCard data={item} />
-              </TouchableOpacity>
-            </Link>
-          )
-        )}
+        <FlatList
+          data={memoizedData}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => `${item.id}-${index}`}
+          renderItem={({ item }) =>
+            item.openInApp ? (
+              <Link
+                key={item.id}
+                push
+                href={{
+                  pathname: "/HomeCard/[id]",
+                  params: { id: item.id, tittle: item.tittle, uri: item.uri },
+                }}
+                asChild
+              >
+                <TouchableOpacity style={styles.cardTouchable}>
+                  <HomeCard data={item} />
+                </TouchableOpacity>
+              </Link>
+            ) : (
+              <Link key={item.id} href={{ pathname: item.href }} asChild>
+                <TouchableOpacity style={styles.cardTouchable}>
+                  <HomeCard data={item} />
+                </TouchableOpacity>
+              </Link>
+            )
+          }
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+        />
       </View>
     );
   };
@@ -162,27 +140,18 @@ const Home = () => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <ScrollView
-        showsVerticalScrollIndicator={false} // Esconde a barra de rolagem vertical
-        refreshControl={
-          <RefreshControl
-            refreshing={isLoading} // Defina isso conforme sua lógica de carregamento
-            onRefresh={fetchBannerPulltoRefresh} // Chame a função de atualização
-          />
-        }
-      >
-        <View style={styles.container}>
-          <Image
-            style={styles.headerImage}
-            source={require("../assets/maozinha-home.jpg")}
-          />
-          <View
-            style={[styles.contentContainer, { backgroundColor: COLORS.white }]}
-          >
-            <View style={styles.subscribeView}>
-              <View style={styles.loadingView}>
-                {isLoading ? (
-                  <>
+      <FlatList
+        data={dataBanner}
+        ListHeaderComponent={
+          <View style={styles.container}>
+            <Image
+              style={styles.headerImage}
+              source={require("../assets/maozinha-home.jpg")}
+            />
+            <View style={[styles.contentContainer, { backgroundColor: COLORS.white }]}>
+              <View style={styles.subscribeView}>
+                <View style={styles.loadingView}>
+                  {isLoading ? (
                     <View
                       style={{
                         flex: 1,
@@ -202,43 +171,39 @@ const Home = () => {
                           width: 150,
                           height: 150,
                         }}
-                        // Find more Lottie files at https://lottiefiles.com/featured
                         source={require("../assets/Lotties/hand 2.json")}
                       />
                     </View>
-                  </>
-                ) : (
-                  <>
-                    <Text style={styles.BannerTittle}>
-                      Ofertas Patrocinadas
-                    </Text>
-                    <Carousel data={dataBanner} />
-                  </>
-                )}
-                {dataNotes ? (
-                  <>
-                    <Text style={styles.SmallListTittle}>Canais Parceiros</Text>
+                  ) : (
+                    <>
+                      <Text style={styles.BannerTittle}>Ofertas Patrocinadas</Text>
+                      <Carousel data={dataBanner} />
+                    </>
+                  )}
+                  {dataNotes ? (
+                    <>
+                      <Text style={styles.SmallListTittle}>Canais Parceiros</Text>
+                      <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal
+                        data={dataNotes}
+                        keyExtractor={(item) => item.id.toString()} // Usando id único como chave
+                        renderItem={({ item }) => <SmallList item={item} />}
+                      />
+                    </>
+                  ) : null}
 
-                    <FlatList
-                      showsHorizontalScrollIndicator={false}
-                      showsVerticalScrollIndicator={false}
-                      horizontal
-                      data={dataNotes}
-                      keyExtractor={(item) => item.id.toString()}
-                      renderItem={(item) => SmallList(item)}
-                    />
-                  </>
-                ) : (
-                  <></>
-                )}
-
-                <Text style={styles.WidgetsTittle}>Jogos</Text>
-                {renderItems()}
+                  <Text style={styles.WidgetsTittle}>Jogos</Text>
+                  {renderItems()}
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        }
+        refreshing={isLoading}
+        onRefresh={fetchBannerPulltoRefresh}
+        showsVerticalScrollIndicator={false} // Remove o indicador de rolagem vertical da FlatList principal
+      />
     </>
   );
 };
