@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { LottieLoading } from "./components";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
 import {
-  fetchSubscriberCount,
   fetchWidgetsData,
   getBannerData,
   getMembers,
@@ -13,53 +12,33 @@ import {
 
 export default function Splash() {
   const [isNew, setIsNew] = useState(true);
-  const [fontsLoaded, setfontsLoaded] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  async function SubscriberCount() {
-    try {
-      const subscriberCount = await fetchSubscriberCount();
-      //console.log("subscriberCount", subscriberCount);
-      // Salve o valor no AsyncStorage
-      await AsyncStorage.setItem("subscriberCount", subscriberCount.toString());
-    } catch (error) {
-      console.error("Erro ao obter dados da API:", error);
+  // Função para verificar se já temos dados em cache ou precisamos fazer uma nova requisição
+  const loadDataIfNeeded = async (key, fetchFunction) => {
+    const cachedData = await AsyncStorage.getItem(key);
+
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    } else {
+      const data = await fetchFunction();
+      await AsyncStorage.setItem(key, JSON.stringify(data)); // Armazenar em cache
+      return data;
     }
-  }
-
-  async function getWidgets() {
-    const cachedData = await fetchWidgetsData();
-    await AsyncStorage.setItem("widgetsData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
-  }
-
-  async function bannerData() {
-    const cachedData = await getBannerData();
-    await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
-  }
-
-  async function notesData() {
-    const cachedData = await getUpdateNotes();
-    await AsyncStorage.setItem("notesData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
-  }
-
-  async function membersData() {
-    const cachedData = await getMembers();
-    await AsyncStorage.setItem("membersData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
-  }
+  };
 
   const loadFonts = async () => {
     await Font.loadAsync({
       SFProDisplay_bold: require("./Theme/fonts/SFProDisplay_Bold.ttf"),
       SFProDisplay_regular: require("./Theme/fonts/SFProDisplay_Regular.ttf"),
     }).then(() => {
-      setfontsLoaded(true);
+      setFontsLoaded(true);
     });
   };
 
-  const checkisNew = async () => {
-    //AsyncStorage.clear();
+  const checkIsNew = async () => {
     try {
-      let value = await AsyncStorage.getItem("isnewinApp");
-      //console.log(isNew);
+      const value = await AsyncStorage.getItem("isnewinApp");
       if (value !== null) {
         setIsNew(false);
         router.replace("/(tabs)");
@@ -76,16 +55,23 @@ export default function Splash() {
     if (!fontsLoaded) {
       loadFonts();
     }
-    SubscriberCount();
-    bannerData();
-    membersData();
-    notesData();
-    getWidgets();
 
-    setTimeout(() => {
-      checkisNew();
-    }, 5000);
-  }, []);
+    // Carregar todos os dados necessários, verificando o cache
+    Promise.all([
+      loadDataIfNeeded("bannerData", getBannerData),
+      loadDataIfNeeded("membersData", getMembers),
+      loadDataIfNeeded("notesData", getUpdateNotes),
+      loadDataIfNeeded("widgetsData", fetchWidgetsData),
+    ])
+      .then(() => {
+        setTimeout(() => {
+          checkIsNew();
+        }, 5000);
+      })
+      .catch((error) => {
+        console.log("Erro ao carregar dados:", error);
+      });
+  }, [fontsLoaded]);
 
   return <LottieLoading />;
 }

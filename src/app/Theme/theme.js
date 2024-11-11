@@ -71,35 +71,23 @@ export const FONTS = {
   body4: { fontFamily: "regular", fontSize: SIZES.body4, lineHeight: 20 },
 };
 
-// Animação de entrada do botão
 export const animate1 = {
-  0: { scale: 0.6, translateY: 5 },
-  0.5: { scale: 1, translateY: -10 },
-  0.8: { scale: 1.1, translateY: -20 },
-  1: { scale: 1, translateY: -15 },
+  0: { scale: 0.5, translateY: 7 },
+  0.92: { translateY: -34 },
+  1: { scale: 1.2, translateY: -24 },
 };
-
-// Animação de saída do botão
 export const animate2 = {
-  0: { scale: 1, translateY: -15 },
-  0.5: { scale: 0.9, translateY: -5 },
-  1: { scale: 1, translateY: 5 },
+  0: { scale: 1.2, translateY: -24 },
+  1: { scale: 1, translateY: 7 },
 };
-
-// Animação de entrada do círculo
 export const circle1 = {
   0: { scale: 0 },
-  0.3: { scale: 0.6 },
-  0.6: { scale: 1 },
-  1: { scale: 1.1 },
+  0.3: { scale: 0.9 },
+  0.5: { scale: 0.2 },
+  0.8: { scale: 0.7 },
+  1: { scale: 1 },
 };
-
-// Animação de saída do círculo
-export const circle2 = {
-  0: { scale: 1 },
-  0.4: { scale: 0.8 },
-  1: { scale: 0 },
-};
+export const circle2 = { 0: { scale: 1 }, 1: { scale: 0 } };
 
 const appTheme = {
   COLORS,

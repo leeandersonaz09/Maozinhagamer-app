@@ -14,56 +14,71 @@ import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
-import { getBannerData } from "../utils/apiRequests"; // Importe as funções
+import { getBannerData, fetchWidgetsData, getUpdateNotes } from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const [dataBanner, setdataBanner] = useState([]);
-  const [dataNotes, setdataNotes] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
+  const [dataBanner, setDataBanner] = useState([]);
+  const [dataNotes, setDataNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Get Data for the Banner from Async Storage on refresh page
+  // Função para buscar dados do banner com tratamento de erros
   const fetchBannerPulltoRefresh = async () => {
-    setisLoading(true);
-    const cachedData = await getBannerData();
-    await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData)); // Aguarde a conclusão da operação
-    const getItem = await AsyncStorage.getItem("bannerData"); // Aguarde a conclusão da operação
-    const parsedItem = await JSON.parse(getItem);
-    setdataBanner(parsedItem);
-    setTimeout(() => {
-      setisLoading(false);
-    }, 3000);
-  };
-
-  // Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
-  const retrieveBannerData = async () => {
-    setisLoading(true);
     try {
-      const getItem = await AsyncStorage.getItem("bannerData"); // Aguarde a conclusão da operação
-      const parsedItem = await JSON.parse(getItem);
-      setdataBanner(parsedItem);
-      setisLoading(false);
+      setIsLoading(true);
+      const cachedData = await getBannerData();
+      await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData));
+      const getItem = await AsyncStorage.getItem("bannerData");
+      if (getItem) {
+        const parsedItem = JSON.parse(getItem);
+        setDataBanner(parsedItem);
+      }
     } catch (error) {
-      console.error("Erro ao obter dados do AsyncStorage:", error);
+      console.error("Erro ao obter dados do banner:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
     }
   };
 
-  // Get Data for the Banner from Async Storage for pass dataBanner to component Carousel
+  // Função para recuperar dados do banner do AsyncStorage com tratamento de erros
+  const retrieveBannerData = async () => {
+    try {
+      setIsLoading(true);
+      const getItem = await AsyncStorage.getItem("bannerData");
+      if (getItem) {
+        const parsedItem = JSON.parse(getItem);
+        setDataBanner(parsedItem);
+      }
+    } catch (error) {
+      console.error("Erro ao obter dados do AsyncStorage:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Função para recuperar notas de atualização do AsyncStorage com tratamento de erros
   const retrieveUpdateNotes = async () => {
     try {
-      const getItem = await AsyncStorage.getItem("notesData"); // Aguarde a conclusão da operação
-      const parsedItem = await JSON.parse(getItem);
-      setdataNotes(parsedItem);
+      const getItem = await AsyncStorage.getItem("notesData");
+      if (getItem) {
+        const parsedItem = JSON.parse(getItem);
+        setDataNotes(parsedItem);
+      }
     } catch (error) {
       console.error("Erro ao obter dados do AsyncStorage:", error);
     }
   };
 
+  // Função para recuperar widgets do AsyncStorage com tratamento de erros
   const retrieveWidgets = async () => {
     try {
-      const getItem = await AsyncStorage.getItem("widgetsData"); // Aguarde a conclusão da operação
-      const parsedItem = await JSON.parse(getItem);
-      setData(parsedItem);
+      const getItem = await AsyncStorage.getItem("widgetsData");
+      if (getItem) {
+        const parsedItem = JSON.parse(getItem);
+        setData(parsedItem);
+      }
     } catch (error) {
       console.error("Erro ao obter dados do AsyncStorage:", error);
     }
@@ -75,40 +90,33 @@ const Home = () => {
     retrieveWidgets();
   }, []);
 
-  // Use useMemo para armazenar os dados em cache
+  // Memoizar dados para melhorar a performance
   const memoizedData = useMemo(() => data, [data]);
 
+  // Função para renderizar os itens do FlatList
   const renderItems = () => {
     return (
       <View style={styles.WigtesContainer}>
         <FlatList
           data={memoizedData}
+          keyExtractor={(item) => `widget-${item.id}`} // Adicione um prefixo para garantir unicidade
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => `${item.id}-${index}`}
-          renderItem={({ item }) =>
-            item.openInApp ? (
-              <Link
-                key={item.id}
-                push
-                href={{
-                  pathname: "/HomeCard/[id]",
-                  params: { id: item.id, tittle: item.tittle, uri: item.uri },
-                }}
-                asChild
-              >
-                <TouchableOpacity style={styles.cardTouchable}>
-                  <HomeCard data={item} />
-                </TouchableOpacity>
-              </Link>
-            ) : (
-              <Link key={item.id} href={{ pathname: item.href }} asChild>
-                <TouchableOpacity style={styles.cardTouchable}>
-                  <HomeCard data={item} />
-                </TouchableOpacity>
-              </Link>
-            )
-          }
+          renderItem={({ item }) => (
+            <Link
+              //key={item.id}
+              push
+              href={{
+                pathname: "/HomeCard/[id]",
+                params: { id: item.id, tittle: item.tittle, uri: item.uri },
+              }}
+              asChild
+            >
+              <TouchableOpacity style={styles.cardTouchable}>
+                <HomeCard data={item} />
+              </TouchableOpacity>
+            </Link>
+          )}
           numColumns={2}
           columnWrapperStyle={{ justifyContent: "space-between" }}
         />
@@ -116,15 +124,14 @@ const Home = () => {
     );
   };
 
+  // Componente para renderizar a lista pequena
   const SmallList = ({ item }) => {
     return (
       <View style={styles.SmallListContainer}>
         <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
           <View style={styles.Sitem}>
             <Image
-              source={{
-                uri: item.img,
-              }}
+              source={{ uri: item.img }}
               style={styles.SitemPhoto}
               resizeMode="cover"
             />
@@ -142,6 +149,7 @@ const Home = () => {
       <StatusBar backgroundColor={COLORS.primary} style="light" />
       <FlatList
         data={dataBanner}
+        keyExtractor={(item) => `banner-${item.id}`} // Adicione um prefixo para garantir unicidade
         ListHeaderComponent={
           <View style={styles.container}>
             <Image
@@ -152,25 +160,12 @@ const Home = () => {
               <View style={styles.subscribeView}>
                 <View style={styles.loadingView}>
                   {isLoading ? (
-                    <View
-                      style={{
-                        flex: 1,
-                        alignSelf: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Text style={{ fontWeight: "bold" }}>
-                        Aguenta ai que estamos no meio da ranked MW3!
-                      </Text>
-                      <Text style={{ fontWeight: "bold" }}>
-                        Já iremos atualizar!
-                      </Text>
+                    <View style={{ flex: 1, alignSelf: "center", alignItems: "center" }}>
+                      <Text style={{ fontWeight: "bold" }}>Aguenta ai que estamos no meio da ranked MW3!</Text>
+                      <Text style={{ fontWeight: "bold" }}>Já iremos atualizar!</Text>
                       <LottieView
                         autoPlay
-                        style={{
-                          width: 150,
-                          height: 150,
-                        }}
+                        style={{ width: 150, height: 150 }}
                         source={require("../assets/Lotties/hand 2.json")}
                       />
                     </View>
@@ -187,12 +182,11 @@ const Home = () => {
                         showsHorizontalScrollIndicator={false}
                         horizontal
                         data={dataNotes}
-                        keyExtractor={(item) => item.id.toString()} // Usando id único como chave
+                        keyExtractor={(item) => `note-${item.id}`} // Adicione um prefixo para garantir unicidade
                         renderItem={({ item }) => <SmallList item={item} />}
                       />
                     </>
                   ) : null}
-
                   <Text style={styles.WidgetsTittle}>Jogos</Text>
                   {renderItems()}
                 </View>
@@ -202,7 +196,7 @@ const Home = () => {
         }
         refreshing={isLoading}
         onRefresh={fetchBannerPulltoRefresh}
-        showsVerticalScrollIndicator={false} // Remove o indicador de rolagem vertical da FlatList principal
+        showsVerticalScrollIndicator={false}
       />
     </>
   );
