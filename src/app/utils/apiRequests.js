@@ -38,13 +38,30 @@ export async function getSponsor() {
 
 export async function getMembers() {
   try {
-    const response = await fetch(
-      "https://restapimaozinhagamer.onrender.com/members"
-    );
-    const data = await response.json();
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(collection(FIREBASE_DB, 'members'));
+
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map((doc, index) => {
+      const docData = doc.data();
+      return {
+        id: doc.id || `temp-member-id-${index}`, // Gera ID temporário se estiver ausente
+        name: docData.name,
+        followers: docData.followers,
+        image: docData.image,
+        playstationTag: docData.playstationTag,
+        xboxTag: docData.xboxTag,
+        pcTag: docData.pcTag,
+        xbox: docData.xbox,
+        pc: docData.pc,
+        ps: docData.ps,
+      };
+    });
+
     return processUniqueData(data);
   } catch (error) {
-    console.error("Erro ao obter dados da API MEMBERS:", error);
+    console.error("Erro ao obter dados do Firestore MEMBERS:", error);
+    // Em caso de erro, retornando os dados de fallback
     return processUniqueData([
       {
         id: 16580564,
@@ -75,6 +92,7 @@ export async function getMembers() {
     ]);
   }
 }
+
 
 export async function getBannerData() {
   try {
