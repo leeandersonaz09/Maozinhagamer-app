@@ -14,7 +14,11 @@ import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
-import { getBannerData, fetchWidgetsData, getUpdateNotes } from "../utils/apiRequests"; // Importe as funções
+import {
+  getBannerData,
+  fetchWidgetsData,
+  getUpdateNotes,
+} from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -156,13 +160,28 @@ const Home = () => {
               style={styles.headerImage}
               source={require("../assets/maozinha-home.jpg")}
             />
-            <View style={[styles.contentContainer, { backgroundColor: COLORS.white }]}>
+            <View
+              style={[
+                styles.contentContainer,
+                { backgroundColor: COLORS.white },
+              ]}
+            >
               <View style={styles.subscribeView}>
                 <View style={styles.loadingView}>
                   {isLoading ? (
-                    <View style={{ flex: 1, alignSelf: "center", alignItems: "center" }}>
-                      <Text style={{ fontWeight: "bold" }}>Aguenta ai que estamos no meio da ranked MW3!</Text>
-                      <Text style={{ fontWeight: "bold" }}>Já iremos atualizar!</Text>
+                    <View
+                      style={{
+                        flex: 1,
+                        alignSelf: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text style={{ fontWeight: "bold" }}>
+                        Aguenta ai que estamos no meio da ranked MW3!
+                      </Text>
+                      <Text style={{ fontWeight: "bold" }}>
+                        Já iremos atualizar!
+                      </Text>
                       <LottieView
                         autoPlay
                         style={{ width: 150, height: 150 }}
@@ -171,13 +190,17 @@ const Home = () => {
                     </View>
                   ) : (
                     <>
-                      <Text style={styles.BannerTittle}>Ofertas Patrocinadas</Text>
+                      <Text style={styles.BannerTittle}>
+                        Ofertas Patrocinadas
+                      </Text>
                       <Carousel data={dataBanner} />
                     </>
                   )}
                   {dataNotes ? (
                     <>
-                      <Text style={styles.SmallListTittle}>Canais Parceiros</Text>
+                      <Text style={styles.SmallListTittle}>
+                        Canais Parceiros
+                      </Text>
                       <FlatList
                         showsHorizontalScrollIndicator={false}
                         horizontal

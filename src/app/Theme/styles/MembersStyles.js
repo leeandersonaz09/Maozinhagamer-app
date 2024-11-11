@@ -3,37 +3,41 @@ import { COLORS, SIZES } from "../theme";
 import metrics from "../metrics";
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: COLORS.primary, // Defina uma cor de fundo caso haja contraste com o header
+  },
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   input: {
     height: 40,
-    width: "90%",
+    width: "85%",
     backgroundColor: COLORS.white,
     borderRadius: 20,
-    padding: 5,
-    paddingLeft: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
   },
   SectionStyle: {
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.white,
     height: 40,
     borderRadius: 20,
-    margin: 10,
+    marginVertical: 10,
+    paddingHorizontal: 10,
   },
   containerList: {
     flex: 1,
-    paddingHorizontal: 15, // Adiciona um padding horizontal de 20px
-    paddingVertical: 10, // Adiciona um padding vertical de 10px
-    paddingBottom: 80, //Adiciona um padding no fim do conteiner
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingBottom: 80,
   },
-
   memberImage: {
     width: 80,
     height: 80,
-    borderRadius: 50,
+    borderRadius: 40, // Ajustado para manter o círculo proporcional
     alignSelf: "center",
   },
   memberInfo: {
@@ -41,26 +45,53 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   memberName: {
-    fontSize: 14,
+    fontSize: SIZES.medium, // Usando SIZES para maior flexibilidade
     fontWeight: "bold",
+    color: COLORS.textPrimary,
   },
   memberTitle: {
-    fontSize: 14,
-    color: "gray",
+    fontSize: SIZES.small,
+    color: COLORS.textSecondary,
   },
   memberFollowers: {
-    fontSize: 12,
+    fontSize: SIZES.small,
+    color: COLORS.textSecondary,
   },
   memberTagsContainer: {
     flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 5,
   },
   followButton: {
-    padding: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     marginTop: 10,
+    borderRadius: 5,
+    backgroundColor: COLORS.primary,
   },
   followButtonText: {
     color: COLORS.white,
     fontWeight: "bold",
+    fontSize: SIZES.medium,
+  },
+  emptyState: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyStateText: {
+    fontSize: SIZES.large,
+    fontWeight: "bold",
+    color: COLORS.textSecondary,
+    textAlign: "center",
+  },
+  searchContainer: {
+    backgroundColor: COLORS.primary,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });
 

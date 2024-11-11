@@ -1,52 +1,27 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
-//import {colors} from '../../styles';
 import { COLORS, SIZES } from "../../Theme/theme";
 import { Link } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function Header(props) {
-  const tittle = props.HeaderTittle;
-  const route = props.href;
+  const { HeaderTittle: title, href: route } = props;
   return (
-    <>
-      <View style={styles.header}>
-        {props.children}
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          {route ? (
-            <View style={{}}>
-              <Link href={route} asChild>
-                <TouchableOpacity style={{ paddingLeft: 14 }}>
-                  <FontAwesome
-                    name="arrow-circle-left"
-                    size={38}
-                    color="white"
-                  />
-                </TouchableOpacity>
-              </Link>
-            </View>
-          ) : (
-            <></>
-          )}
-          <View
-            style={{
-              flex: 1,
-              textAlign: "center",
-              alignItems: "center",
-              //paddingRight: 40,
-            }}
-          >
-            <Text style={styles.HeaderTittle}>{tittle}</Text>
-          </View>
+    <View style={styles.header}>
+      {props.children}
+      <View style={styles.headerContent}>
+        {route && (
+          <Link href={route} asChild>
+            <TouchableOpacity style={styles.backButton}>
+              <FontAwesome name="arrow-circle-left" size={38} color="white" />
+            </TouchableOpacity>
+          </Link>
+        )}
+        <View style={styles.titleContainer}>
+          <Text style={styles.HeaderTittle}>{title}</Text>
         </View>
       </View>
-    </>
+    </View>
   );
 }
 
@@ -56,12 +31,26 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: COLORS.primary,
     justifyContent: "center",
-    alignContent: "center",
     alignItems: "center",
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 3,
+  },
+  headerContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 14,
+  },
+  backButton: {
+    position: "absolute",
+    left: 14,
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   HeaderTittle: {
     fontSize: SIZES.headerTittle,

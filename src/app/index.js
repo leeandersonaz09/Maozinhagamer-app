@@ -14,16 +14,31 @@ export default function Splash() {
   const [isNew, setIsNew] = useState(true);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  // Função para verificar se já temos dados em cache ou precisamos fazer uma nova requisição
+  // Função para verificar se os dados em cache estão atualizados
   const loadDataIfNeeded = async (key, fetchFunction) => {
-    const cachedData = await AsyncStorage.getItem(key);
+    try {
+      const cachedData = await AsyncStorage.getItem(key);
+      const fetchedData = await fetchFunction();
 
-    if (cachedData) {
-      return JSON.parse(cachedData);
-    } else {
-      const data = await fetchFunction();
-      await AsyncStorage.setItem(key, JSON.stringify(data)); // Armazenar em cache
-      return data;
+      // Se não há dados em cache, armazene os dados atuais
+      if (!cachedData) {
+        await AsyncStorage.setItem(key, JSON.stringify(fetchedData));
+        return fetchedData;
+      }
+
+      const parsedCachedData = JSON.parse(cachedData);
+
+      // Verifique se os dados da API são diferentes dos dados em cache
+      if (JSON.stringify(parsedCachedData) !== JSON.stringify(fetchedData)) {
+        await AsyncStorage.setItem(key, JSON.stringify(fetchedData)); // Atualize o cache
+        return fetchedData; // Retorne os dados atualizados
+      }
+
+      // Caso os dados sejam os mesmos, retorne o cache
+      return parsedCachedData;
+    } catch (error) {
+      console.log(`Erro ao carregar dados de ${key}:`, error);
+      return null;
     }
   };
 
@@ -31,9 +46,8 @@ export default function Splash() {
     await Font.loadAsync({
       SFProDisplay_bold: require("./Theme/fonts/SFProDisplay_Bold.ttf"),
       SFProDisplay_regular: require("./Theme/fonts/SFProDisplay_Regular.ttf"),
-    }).then(() => {
-      setFontsLoaded(true);
     });
+    setFontsLoaded(true);
   };
 
   const checkIsNew = async () => {
@@ -56,7 +70,7 @@ export default function Splash() {
       loadFonts();
     }
 
-    // Carregar todos os dados necessários, verificando o cache
+    // Carregar todos os dados necessários, verificando o cache e atualizando se necessário
     Promise.all([
       loadDataIfNeeded("bannerData", getBannerData),
       loadDataIfNeeded("membersData", getMembers),

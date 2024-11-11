@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   // Título da seção de widgets
   WidgetsTittle: {
     paddingHorizontal: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
     fontWeight: "bold",
     fontSize: 18,
   },
-  
+
   // Container para os widgets
   WigtesContainer: {
     flex: 1,
@@ -75,16 +75,16 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   SmallListTittle: {
-    paddingHorizontal: 5,
+    paddingHorizontal: 15,
     paddingBottom: 10,
     fontWeight: "bold",
     fontSize: 18,
   },
   Sitem: {
-    margin: 10,
+    margin: 5,
     alignSelf: "center",
     width: 200,
-    height: 128,
+    height: 80,
     marginBottom: 15,
     borderRadius: 15,
     backgroundColor: "#FFFFFF",
