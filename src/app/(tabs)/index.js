@@ -26,27 +26,54 @@ const Home = () => {
   const [dataNotes, setDataNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Função para buscar dados do banner com tratamento de erros
-  const fetchBannerPulltoRefresh = async () => {
+  // Função para buscar e atualizar todos os dados do app
+  const fetchAllData = async () => {
     try {
       setIsLoading(true);
-      const cachedData = await getBannerData();
-      await AsyncStorage.setItem("bannerData", JSON.stringify(cachedData));
-      const getItem = await AsyncStorage.getItem("bannerData");
-      if (getItem) {
-        const parsedItem = JSON.parse(getItem);
-        setDataBanner(parsedItem);
+
+      // Atualizar dados do banner
+      const bannerData = await getBannerData();
+      await AsyncStorage.setItem("bannerData", JSON.stringify(bannerData));
+      const cachedBannerData = await AsyncStorage.getItem("bannerData");
+      if (cachedBannerData) {
+        setDataBanner(JSON.parse(cachedBannerData));
+      }
+
+      // Atualizar dados dos widgets
+      const widgetsData = await fetchWidgetsData();
+      await AsyncStorage.setItem("widgetsData", JSON.stringify(widgetsData));
+      const cachedWidgetsData = await AsyncStorage.getItem("widgetsData");
+      if (cachedWidgetsData) {
+        setData(JSON.parse(cachedWidgetsData));
+      }
+
+      // Atualizar notas de atualização
+      const notesData = await getUpdateNotes();
+      await AsyncStorage.setItem("notesData", JSON.stringify(notesData));
+      const cachedNotesData = await AsyncStorage.getItem("notesData");
+      if (cachedNotesData) {
+        setDataNotes(JSON.parse(cachedNotesData));
       }
     } catch (error) {
-      console.error("Erro ao obter dados do banner:", error);
+      console.error("Erro ao obter dados do Firestore:", error);
     } finally {
       setTimeout(() => {
         setIsLoading(false);
-      }, 3000);
+      }, 3000); // Ajuste o tempo de espera conforme necessário
     }
   };
 
-  // Função para recuperar dados do banner do AsyncStorage com tratamento de erros
+  useEffect(() => {
+    // Recuperar dados do AsyncStorage quando o componente é montado
+    const retrieveData = async () => {
+      await retrieveBannerData();
+      await retrieveUpdateNotes();
+      await retrieveWidgets();
+    };
+    retrieveData();
+  }, []);
+
+  // Função para recuperar dados do banner do AsyncStorage
   const retrieveBannerData = async () => {
     try {
       setIsLoading(true);
@@ -62,7 +89,7 @@ const Home = () => {
     }
   };
 
-  // Função para recuperar notas de atualização do AsyncStorage com tratamento de erros
+  // Função para recuperar notas de atualização do AsyncStorage
   const retrieveUpdateNotes = async () => {
     try {
       const getItem = await AsyncStorage.getItem("notesData");
@@ -75,7 +102,7 @@ const Home = () => {
     }
   };
 
-  // Função para recuperar widgets do AsyncStorage com tratamento de erros
+  // Função para recuperar widgets do AsyncStorage
   const retrieveWidgets = async () => {
     try {
       const getItem = await AsyncStorage.getItem("widgetsData");
@@ -87,12 +114,6 @@ const Home = () => {
       console.error("Erro ao obter dados do AsyncStorage:", error);
     }
   };
-
-  useEffect(() => {
-    retrieveBannerData();
-    retrieveUpdateNotes();
-    retrieveWidgets();
-  }, []);
 
   // Memoizar dados para melhorar a performance
   const memoizedData = useMemo(() => data, [data]);
@@ -108,11 +129,13 @@ const Home = () => {
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <Link
-              //key={item.id}
               push
               href={{
-                pathname: "/HomeCard/[id]",
-                params: { id: item.id, tittle: item.tittle, uri: item.uri },
+                pathname: `/HomeCard/${item.id}`, // Define o id diretamente no caminho da rota
+                params: {
+                  tittle: item.tittle,
+                  subCollection: JSON.stringify(item.subCollection),
+                }, // Passa os dados da sub-coleção
               }}
               asChild
             >
@@ -218,7 +241,7 @@ const Home = () => {
           </View>
         }
         refreshing={isLoading}
-        onRefresh={fetchBannerPulltoRefresh}
+        onRefresh={fetchAllData}
         showsVerticalScrollIndicator={false}
       />
     </>

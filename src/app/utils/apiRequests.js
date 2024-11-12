@@ -1,5 +1,4 @@
-// api.js
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { FIREBASE_DB  } from './firebaseConfig'; // relative path to firebaseConfig.js
 
 // Remove duplicados e gera IDs temporários para itens sem ID
@@ -93,7 +92,6 @@ export async function getMembers() {
   }
 }
 
-
 export async function getBannerData() {
   try {
     const response = await fetch(
@@ -117,7 +115,6 @@ export async function getBannerData() {
   }
 }
 
-
 export async function getUpdateNotes() {
   try {
     const response = await fetch(
@@ -133,28 +130,45 @@ export async function getUpdateNotes() {
 
 export async function fetchWidgetsData() {
   try {
-    // Fetch data from Firestore
+    // Fetch data from the main 'widgets' collection
     const querySnapshot = await getDocs(collection(FIREBASE_DB, 'widgets'));
 
     // Map Firestore documents to a format similar to your existing API response
-    const data = querySnapshot.docs.map((doc, index) => {
-      const docData = doc.data();
-      return {
-        id: doc.id || `temp-widget-id-${index}`, // Gera ID temporário se estiver ausente
-        img: docData.img,
-        href: docData.href,
-        tittle: docData.tittle,
-        uri: docData.uri,
-        openInApp: docData.openInApp,
-      };
-    });
+    const data = await Promise.all(
+      querySnapshot.docs.map(async (doc, index) => {
+        const docData = doc.data();
+
+        // Inicialmente, assume que não há sub-coleção
+        let subCollectionData = [];
+
+        // Verificar e acessar a sub-coleção de 'subCollectionName' dentro do documento atual
+        const subCollectionSnapshot = await getDocs(
+          collection(FIREBASE_DB, `widgets/${doc.id}/Call_of_Duty`)
+        );
+
+        // Se a sub-coleção existir, mapeie os documentos dentro dela
+        subCollectionData = subCollectionSnapshot.docs.map((subDoc) => ({
+          id: subDoc.id,
+          ...subDoc.data(),
+        }));
+
+        return {
+          id: doc.id || `temp-widget-id-${index}`, // Gera ID temporário se estiver ausente
+          img: docData.img,
+          href: docData.href,
+          tittle: docData.tittle,
+          uri: docData.uri,
+          openInApp: docData.openInApp,
+          subCollection: subCollectionData, // Adicione os dados da sub-coleção aqui
+        };
+      })
+    );
 
     return processUniqueData(data);
-
   } catch (error) {
     console.error("Erro ao obter dados do Firestore:", error);
 
-    // Fallback data in case of error
+    // Dados de fallback em caso de erro
     const fallbackData = [
       {
         id: 456456688,
@@ -192,6 +206,4 @@ export async function fetchWidgetsData() {
 
     return processUniqueData(fallbackData);
   }
-
-  return data;
 }
