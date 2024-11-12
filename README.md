@@ -41,16 +41,16 @@ Bem-vindo ao **Mãozinha Gamer**, o aplicativo oficial do canal [Mãozinha Gamer
 
 ### Telas a serem criadas no aplicativo (baseado nas anotações)
 
-- [ ] Tela "Call of Duty"
+- [x] Tela "Call of Duty"
   - [ ] Easter egg: Liberty Falls
   - [ ] Easter egg: Terminus
-- [ ] Tela "Fortnite"
+- [x] Tela "Fortnite"
   - [ ] Mapa localização personagens
   - [ ] Personagens no mapa
-- [ ] Tela "The First Descendent"
+- [x] Tela "The First Descendent"
   - [ ] Armas blids
   - [ ] Personagens blids
-- [ ] Tela "Throne And Liberty"
+- [x] Tela "Throne And Liberty"
   - [ ] Direciona direto para uma página de Throne
 
 ## 📲 Funcionalidades
