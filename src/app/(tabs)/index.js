@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   RefreshControl,
   FlatList,
+  Linking,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import styles from "../Theme/styles/HomeStyles";
 import { HomeCard, Carousel } from "../components";
 import { StatusBar } from "expo-status-bar";
@@ -21,6 +22,7 @@ import {
 } from "../utils/apiRequests"; // Importe as funções
 
 const Home = () => {
+  const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [dataBanner, setDataBanner] = useState([]);
   const [dataNotes, setDataNotes] = useState([]);
@@ -151,11 +153,26 @@ const Home = () => {
     );
   };
 
+  const handlePress = (uri) => {
+    console.log(uri);
+
+    if (uri.startsWith("http")) {
+      Linking.openURL(uri);
+    } else {
+      navigation.navigate(uri);
+    }
+  };
+
   // Componente para renderizar a lista pequena
   const SmallList = ({ item }) => {
     return (
       <View style={styles.SmallListContainer}>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => {
+            handlePress(item.uri);
+          }}
+        >
           <View style={styles.Sitem}>
             <Image
               source={{ uri: item.img }}
@@ -163,7 +180,7 @@ const Home = () => {
               resizeMode="cover"
             />
             <View style={styles.StextContainer}>
-              <Text style={styles.SitemText}>{item.tittle}</Text>
+              <Text style={styles.SitemText}>{item.title}</Text>
             </View>
           </View>
         </TouchableOpacity>

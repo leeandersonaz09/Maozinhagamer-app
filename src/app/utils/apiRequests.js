@@ -1,11 +1,11 @@
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
-import { FIREBASE_DB  } from './firebaseConfig'; // relative path to firebaseConfig.js
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { FIREBASE_DB } from "./firebaseConfig"; // relative path to firebaseConfig.js
 
 // Remove duplicados e gera IDs temporários para itens sem ID
 const processUniqueData = (data) => {
   return data
-    .filter((item, index, self) => 
-      index === self.findIndex((t) => t.id === item.id)
+    .filter(
+      (item, index, self) => index === self.findIndex((t) => t.id === item.id)
     )
     .map((item, index) => ({
       ...item,
@@ -38,7 +38,7 @@ export async function getSponsor() {
 export async function getMembers() {
   try {
     // Fetch data from Firestore
-    const querySnapshot = await getDocs(collection(FIREBASE_DB, 'members'));
+    const querySnapshot = await getDocs(collection(FIREBASE_DB, "members"));
 
     // Map Firestore documents to a format similar to your existing API response
     const data = querySnapshot.docs.map((doc, index) => {
@@ -117,10 +117,23 @@ export async function getBannerData() {
 
 export async function getUpdateNotes() {
   try {
-    const response = await fetch(
-      "https://restapimaozinhagamer.onrender.com/updatenotes"
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, "Canais Parceiros")
     );
-    const data = await response.json();
+
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map((doc, index) => {
+      const docData = doc.data();
+      //console.log(docData);
+      return {
+        id: doc.id || `temp-notes-id-${index}`, // Gera ID temporário se estiver ausente
+        img: docData.img,
+        title: docData.title,
+        uri: docData.uri,
+      };
+    });
+
     return processUniqueData(data);
   } catch (error) {
     console.error("Erro ao obter dados da API updateNotes:", error);
@@ -131,7 +144,7 @@ export async function getUpdateNotes() {
 export async function fetchWidgetsData() {
   try {
     // Fetch data from the main 'widgets' collection
-    const querySnapshot = await getDocs(collection(FIREBASE_DB, 'widgets'));
+    const querySnapshot = await getDocs(collection(FIREBASE_DB, "widgets"));
 
     // Map Firestore documents to a format similar to your existing API response
     const data = await Promise.all(
@@ -143,7 +156,7 @@ export async function fetchWidgetsData() {
 
         // Verificar e acessar a sub-coleção de 'subCollectionName' dentro do documento atual
         const subCollectionSnapshot = await getDocs(
-          collection(FIREBASE_DB, `widgets/${doc.id}/Call_of_Duty`)
+          collection(FIREBASE_DB, `widgets/${doc.id}/sub_widgets`)
         );
 
         // Se a sub-coleção existir, mapeie os documentos dentro dela
