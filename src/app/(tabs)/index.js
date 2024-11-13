@@ -21,6 +21,14 @@ import {
   getUpdateNotes,
 } from "../utils/apiRequests"; // Importe as funções
 
+
+/*
+Pagina trone liberty 
+Mecanica de boss
+Dicas e builds dos adms
+*/
+
+
 const Home = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
