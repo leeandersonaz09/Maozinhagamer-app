@@ -7,47 +7,52 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator, // Spinner nativo do React Native
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // Importando ícone
 import { Carousel } from "../components"; // Reutilizando o Carousel da Home
 import { COLORS } from "../Theme/theme";
+import { getOffers, getSponsors, getadsBanner } from "../utils/apiRequests"; // Certifique-se de ter a função de API
 
 const Patrocinador = () => {
   const [dataBanner, setDataBanner] = useState([]);
   const [partners, setPartners] = useState([]);
   const [ads, setAds] = useState([]);
+  const [loading, setLoading] = useState(true); // Estado de carregamento
 
-  // Mock para simular os dados
+  const pushData = async () => {
+    setLoading(true); // Ativa o carregamento ao buscar os dados
+    try {
+      const offersData = await getOffers(); // Chama a função de API para pegar dados atualizados
+      const sponsorsData = await getSponsors(); // Chama a função de API para pegar dados atualizados
+      const adsbannerData = await getadsBanner(); // Chama a função de API para pegar dados atualizados
+      setDataBanner(adsbannerData || []);
+      setPartners(sponsorsData || []);
+      setAds(offersData || []);
+    } catch (error) {
+      console.error("Erro ao atualizar dados:", error);
+    } finally {
+      setLoading(false); // Desativa o carregamento após a busca dos dados
+    }
+  };
+
   useEffect(() => {
-    setDataBanner([
-      { id: "1", img: "https://via.placeholder.com/300x100?text=Banner+1" },
-      { id: "2", img: "https://via.placeholder.com/300x100?text=Banner+2" },
-    ]);
+    pushData(); // Chama a função pushData quando o componente for montado
+  }, []); // O array vazio faz com que a função seja chamada uma vez, ao montar o componente
 
-    setPartners([
-      { id: "1", name: "Parceiro A", img: "https://via.placeholder.com/100" },
-      { id: "2", name: "Parceiro B", img: "https://via.placeholder.com/100" },
-      { id: "3", name: "Parceiro C", img: "https://via.placeholder.com/100" },
-    ]);
-
-    setAds([
-      {
-        id: "1",
-        title: "Calça Farm",
-        img: "https://via.placeholder.com/300x200?text=Oferta+1",
-        price: "R$ 100",
-        oldPrice: "R$ 150",
-        badge: "Garantia da OLX",
-      },
-      {
-        id: "2",
-        title: "Calça Cargo Farm",
-        img: "https://via.placeholder.com/300x200?text=Oferta+2",
-        price: "R$ 130",
-        badge: "Garantia da OLX",
-      },
-    ]);
-  }, []);
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <MaterialCommunityIcons
+          name="account-group"
+          size={40}
+          color={COLORS.primary}
+        />
+        <Text style={styles.loadingText}>Carregando...</Text>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+      </View>
+    ); // Exibe o spinner enquanto os dados estão sendo carregados
+  }
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -61,22 +66,23 @@ const Patrocinador = () => {
           />
           <Text style={styles.headerTitle}>Parceiros e ofertas</Text>
         </View>
+
         {/* Principais Parceiros */}
         <Text style={styles.sectionTitlePartner}>Principais Parceiros</Text>
-       
-          <FlatList
-            horizontal
-            data={partners}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => ( 
+        <FlatList
+          horizontal
+          data={partners}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
             <TouchableOpacity>
               <View style={styles.partnerCard}>
                 <Image source={{ uri: item.img }} style={styles.partnerImage} />
                 <Text style={styles.partnerName}>{item.name}</Text>
-              </View></TouchableOpacity>
-            )}
-            showsHorizontalScrollIndicator={false}
-          />
+              </View>
+            </TouchableOpacity>
+          )}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
 
       {/* Banner */}
@@ -124,6 +130,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.background,
+  },
+  loadingText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: COLORS.primary,
+    marginTop: 10,
+  },
   header: {
     backgroundColor: COLORS.primary,
     flexDirection: "row",
@@ -154,9 +172,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingLeft: 15,
     color: COLORS.black,
-
   },
-
   partnerCard: {
     alignItems: "center",
     marginHorizontal: 10,

@@ -13,27 +13,54 @@ const processUniqueData = (data) => {
     }));
 };
 
-export async function getSponsor() {
+export async function getadsBanner() {
   try {
-    const response = await fetch(
-      "https://restapimaozinhagamer.onrender.com/patrocinadores"
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, "adsBanner")
     );
-    const data = await response.json();
+
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map((doc, index) => {
+      const docData = doc.data();
+      //console.log(docData);
+      return {
+        id: doc.id || `temp-adsbanner-id-${index}`, // Gera ID temporário se estiver ausente
+        ...docData, // Puxa diretamente todos os dados do documento
+      };
+    });
+
     return processUniqueData(data);
   } catch (error) {
-    console.error("Erro ao obter dados da API SPONSOR:", error);
-    return processUniqueData([
-      {
-        id: 45672321,
-        img: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
-        category: "Patrocinadores",
-        title: "Maozinha Gamer",
-        uri: "https://www.youtube.com/@maozinhagamer_diih",
-        text: "Maozinhag Gamer",
-      },
-    ]);
+    console.error("Erro ao obter dados da API getOffers:", error);
+    return null;
   }
 }
+
+export async function getSponsors() {
+  try {
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, "sponsors")
+    );
+
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map((doc, index) => {
+      const docData = doc.data();
+      //console.log(docData);
+      return {
+        id: doc.id || `temp-sponsors-id-${index}`, // Gera ID temporário se estiver ausente
+        ...docData, // Puxa diretamente todos os dados do documento
+      };
+    });
+
+    return processUniqueData(data);
+  } catch (error) {
+    console.error("Erro ao obter dados da API getOffers:", error);
+    return null;
+  }
+}
+
 
 export async function getMembers() {
   try {
@@ -45,15 +72,7 @@ export async function getMembers() {
       const docData = doc.data();
       return {
         id: doc.id || `temp-member-id-${index}`, // Gera ID temporário se estiver ausente
-        name: docData.name,
-        followers: docData.followers,
-        image: docData.image,
-        playstationTag: docData.playstationTag,
-        xboxTag: docData.xboxTag,
-        pcTag: docData.pcTag,
-        xbox: docData.xbox,
-        pc: docData.pc,
-        ps: docData.ps,
+        ...docData, // Puxa diretamente todos os dados do documento
       };
     });
 
@@ -105,12 +124,7 @@ export async function getBannerData() {
       //console.log(docData);
       return {
         id: doc.id || `temp-banner-id-${index}`, // Gera ID temporário se estiver ausente
-        img: docData.img,
-        buttonTittle: docData.buttonTittle,
-        title: docData.title,
-        href: docData.uri,
-        category: docData.category,
-        text:docData.text
+        ...docData, // Puxa diretamente todos os dados do documento
       };
     });
 
@@ -144,15 +158,37 @@ export async function getUpdateNotes() {
       //console.log(docData);
       return {
         id: doc.id || `temp-notes-id-${index}`, // Gera ID temporário se estiver ausente
-        img: docData.img,
-        title: docData.title,
-        uri: docData.uri,
+        ...docData, // Puxa diretamente todos os dados do documento
       };
     });
 
     return processUniqueData(data);
   } catch (error) {
     console.error("Erro ao obter dados da API updateNotes:", error);
+    return null;
+  }
+}
+
+export async function getOffers() {
+  try {
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, "offers")
+    );
+
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map((doc, index) => {
+      const docData = doc.data();
+      //console.log(docData);
+      return {
+        id: doc.id || `temp-offers-id-${index}`, // Gera ID temporário se estiver ausente
+        ...docData, // Puxa diretamente todos os dados do documento
+      };
+    });
+
+    return processUniqueData(data);
+  } catch (error) {
+    console.error("Erro ao obter dados da API getOffers:", error);
     return null;
   }
 }
@@ -183,12 +219,8 @@ export async function fetchWidgetsData() {
 
         return {
           id: doc.id || `temp-widget-id-${index}`, // Gera ID temporário se estiver ausente
-          img: docData.img,
-          href: docData.href,
-          title: docData.title,
-          uri: docData.uri,
-          openInApp: docData.openInApp,
           subCollection: subCollectionData, // Adicione os dados da sub-coleção aqui
+          ...docData, // Puxa diretamente todos os dados do documento
         };
       })
     );

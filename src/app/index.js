@@ -8,6 +8,9 @@ import {
   getBannerData,
   getMembers,
   getUpdateNotes,
+  getSponsors,
+  getOffers,
+  getadsBanner,
 } from "./utils/apiRequests";
 
 export default function Splash() {
@@ -76,6 +79,9 @@ export default function Splash() {
       loadDataIfNeeded("membersData", getMembers),
       loadDataIfNeeded("notesData", getUpdateNotes),
       loadDataIfNeeded("widgetsData", fetchWidgetsData),
+      loadDataIfNeeded("offersData", getOffers),
+      loadDataIfNeeded("sponsorsData", getSponsors),
+      loadDataIfNeeded("adsbannerData", getadsBanner),
     ])
       .then(() => {
         setTimeout(() => {
