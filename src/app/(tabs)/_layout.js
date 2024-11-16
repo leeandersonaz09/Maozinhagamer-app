@@ -4,6 +4,7 @@ import {
   AntDesign,
   MaterialIcons,
   MaterialCommunityIcons,
+  FontAwesome5,
   Octicons,
 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
@@ -20,8 +21,8 @@ const TabArr = [
   },
   {
     route: "patrocinador",
-    label: "Patrocinador",
-    icon: <MaterialCommunityIcons name="offer" size={24} color="white" />,
+    label: "Parceiros",
+    icon: <FontAwesome5 name="handshake" size={24} color="white" />,
   },
   {
     route: "members",

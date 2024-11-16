@@ -49,7 +49,7 @@ export default function Banner({ data }) {
                     href: data.href,
                     button: data.buttonTittle,
                     category: data.category,
-                    tittle: data.tittle,
+                    title: data.title,
                     img: data.img,
                     text: data.text,
                   },

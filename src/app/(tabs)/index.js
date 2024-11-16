@@ -143,7 +143,7 @@ const Home = () => {
               href={{
                 pathname: `/HomeCard/${item.id}`, // Define o id diretamente no caminho da rota
                 params: {
-                  tittle: item.tittle,
+                  title: item.title,
                   subCollection: JSON.stringify(item.subCollection),
                 }, // Passa os dados da sub-coleção
               }}
@@ -239,7 +239,7 @@ const Home = () => {
                   ) : (
                     <>
                       <Text style={styles.BannerTittle}>
-                        Ofertas Patrocinadas
+                        Novidades
                       </Text>
                       <Carousel data={dataBanner} />
                     </>

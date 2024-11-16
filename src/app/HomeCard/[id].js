@@ -15,7 +15,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 
 const HomeCard = () => {
   const navigation = useNavigation();
-  const { id, tittle, subCollection } = useLocalSearchParams();
+  const { id, title, subCollection } = useLocalSearchParams();
 
   // Parse subCollection de volta para objeto
   const parsedSubCollection = JSON.parse(subCollection);
@@ -49,7 +49,7 @@ const HomeCard = () => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <Header replace HeaderTittle={tittle} href={"/(tabs)"} />
+      <Header replace HeaderTittle={title} href={"/(tabs)"} />
       <FlatList
         data={parsedSubCollection}
         renderItem={renderItem}
@@ -143,7 +143,7 @@ const data = [
 
 const HomeCard = (props) => {
   const navigation = useNavigation();
-  const { id, tittle } = useLocalSearchParams();
+  const { id, title } = useLocalSearchParams();
 
   const handlePress = (uri) => {
     if (uri.startsWith("http")) {
@@ -174,7 +174,7 @@ const HomeCard = (props) => {
   return (
     <>
       <StatusBar backgroundColor={COLORS.primary} style="light" />
-      <Header replace HeaderTittle={tittle} href={"/(tabs)"} />
+      <Header replace HeaderTittle={title} href={"/(tabs)"} />
       <FlatList
         data={data}
         renderItem={renderItem}

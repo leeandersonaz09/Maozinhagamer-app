@@ -6,7 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import styles from "./styles";
 import { COLORS } from "../../Theme/theme";
 
-const HomeCard = ({ data: { img, tittle } }) => (
+const HomeCard = ({ data: { img, title } }) => (
   <>
     <StatusBar backgroundColor={COLORS.primary} style="light" />
     <View style={styles.container}>
@@ -17,7 +17,7 @@ const HomeCard = ({ data: { img, tittle } }) => (
       >
         <View style={styles.darkOverlay}></View>
         <View style={styles.TextImageContainer}>
-          <Text style={styles.TextImage}>{tittle}</Text>
+          <Text style={styles.TextImage}>{title}</Text>
         </View>
       </ImageBackground>
     </View>

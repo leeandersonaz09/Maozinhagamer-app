@@ -27,7 +27,7 @@ export async function getSponsor() {
         id: 45672321,
         img: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
         category: "Patrocinadores",
-        tittle: "Maozinha Gamer",
+        title: "Maozinha Gamer",
         uri: "https://www.youtube.com/@maozinhagamer_diih",
         text: "Maozinhag Gamer",
       },
@@ -94,21 +94,37 @@ export async function getMembers() {
 
 export async function getBannerData() {
   try {
-    const response = await fetch(
-      "https://restapimaozinhagamer.onrender.com/banner"
+    // Fetch data from Firestore
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, "banners")
     );
-    const data = await response.json();
+
+    // Map Firestore documents to a format similar to your existing API response
+    const data = querySnapshot.docs.map((doc, index) => {
+      const docData = doc.data();
+      //console.log(docData);
+      return {
+        id: doc.id || `temp-banner-id-${index}`, // Gera ID temporário se estiver ausente
+        img: docData.img,
+        buttonTittle: docData.buttonTittle,
+        title: docData.title,
+        href: docData.uri,
+        category: docData.category,
+        text:docData.text
+      };
+    });
+
     return processUniqueData(data);
   } catch (error) {
     console.error("Erro ao obter dados da API BANNER:", error);
     return processUniqueData([
       {
-        id: 1,
+        id: 65456879,
         img: "https://i.ytimg.com/vi/zoQoqNLTZtc/hq720_live.jpg",
         href: "https://www.youtube.com/@maozinhagamer_diih",
         buttonTittle: "Saiba mais",
         category: "Patrocinadores",
-        tittle: "Maozinha Gamer",
+        title: "Maozinha Gamer",
         text: "Mãozinha Gamer é um canal no YouTube dedicado a conteúdo relacionado a jogos...",
       },
     ]);
@@ -169,7 +185,7 @@ export async function fetchWidgetsData() {
           id: doc.id || `temp-widget-id-${index}`, // Gera ID temporário se estiver ausente
           img: docData.img,
           href: docData.href,
-          tittle: docData.tittle,
+          title: docData.title,
           uri: docData.uri,
           openInApp: docData.openInApp,
           subCollection: subCollectionData, // Adicione os dados da sub-coleção aqui
@@ -187,7 +203,7 @@ export async function fetchWidgetsData() {
         id: 456456688,
         img: "https://drive.google.com/uc?export=download&id=1ynpL_S9eqco03eenPn_0GDWJozOA9LFm",
         href: "/Maps",
-        tittle: "Call of Duty",
+        title: "Call of Duty",
         uri: "https://wzhub.gg/pt/map",
         openInApp: true,
       },
@@ -195,7 +211,7 @@ export async function fetchWidgetsData() {
         id: 456456745,
         img: "https://drive.google.com/uc?export=download&id=1OpKmEyfcav0whFKtJXFqBbU0g3o_jBSe",
         href: "/Loadouts",
-        tittle: "The First Descendant",
+        title: "The First Descendant",
         uri: "https://wzhub.gg/pt/loadouts",
         openInApp: true,
       },
@@ -203,7 +219,7 @@ export async function fetchWidgetsData() {
         id: 456485645,
         img: "https://drive.google.com/uc?export=download&id=1W5KkxklATX8dQUIidDeFs-7cM5I-zA0K",
         href: "vnd.youtube://www.youtube.com/@maozinhagamer_diih/streams",
-        tittle: "Fortnite",
+        title: "Fortnite",
         uri: "",
         openInApp: false,
       },
@@ -211,7 +227,7 @@ export async function fetchWidgetsData() {
         id: 4564879524,
         img: "https://drive.google.com/uc?export=download&id=1fCMkr4Pbt6CWSbz1HTLz2wvmV61MJJUI",
         href: "/Pix",
-        tittle: "Throne and Liberty",
+        title: "Throne and Liberty",
         uri: "https://livepix.gg/diih145807",
         openInApp: true,
       },

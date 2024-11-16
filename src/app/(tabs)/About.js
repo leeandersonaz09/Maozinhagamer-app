@@ -18,14 +18,14 @@ const about = () => {
   const data = [
     {
       id: 1,
-      tittle: "Discord",
+      title: "Discord",
       icon: <FontAwesome6 size={40} color={COLORS.discord} name="discord" />,
       uri: "https://discord.gg/k3cyDsyK",
       text: "discord.gg/k3cyDsyK",
     },
     {
       id: 2,
-      tittle: "Youtube",
+      title: "Youtube",
       icon: (
         <FontAwesome
           size={50}
@@ -38,7 +38,7 @@ const about = () => {
     },
     {
       id: 3,
-      tittle: "Grupo do Whatsapp",
+      title: "Grupo do Whatsapp",
       icon: (
         <FontAwesome6
           size={50}
@@ -51,7 +51,7 @@ const about = () => {
     },
     {
       id: 4,
-      tittle: "Ajude o canal com Pix",
+      title: "Ajude o canal com Pix",
       icon: <FontAwesome6 size={50} style={{ color: COLORS.pix }} name="pix" />,
       uri: "https://livepix.gg/diih145807",
       text: "livepix.gg/diih145807",
@@ -69,7 +69,7 @@ const about = () => {
           <View style={styles.CardContent}>
             {item.icon}
             <View style={styles.TextContent}>
-              <Text style={styles.tittle}>{item.tittle}</Text>
+              <Text style={styles.tittle}>{item.title}</Text>
               <Text style={styles.text}> {item.text}</Text>
             </View>
           </View>

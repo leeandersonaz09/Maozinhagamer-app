@@ -14,7 +14,7 @@ import { useLocalSearchParams, router } from "expo-router";
 import * as Linking from "expo-linking";
 
 const Patrocinadores = () => {
-  const { id, tittle, img, text, category, href, button } =
+  const { id, title, img, text, category, href, button } =
     useLocalSearchParams();
 
   const handlePress = () => {
@@ -28,7 +28,7 @@ const Patrocinadores = () => {
       <ScrollView>
         <View style={styles.patrocinadorContainer}>
           {/* Dados do patrocinador */}
-          <Text style={styles.subtitle}>{tittle}</Text>
+          <Text style={styles.subtitle}>{title}</Text>
           <Image source={{ uri: img }} style={styles.image} />
           <Text style={styles.description}>{text}</Text>
         </View>

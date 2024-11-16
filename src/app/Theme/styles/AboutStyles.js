@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  tittle: {
+  title: {
     fontWeight: "bold",
     fontSize: SIZES.header,
   },
