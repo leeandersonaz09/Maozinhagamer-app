@@ -16,9 +16,10 @@ buildscript {
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.4.1'
-        classpath('com.android.tools.build:gradle')
+        classpath 'com.android.tools.build:gradle:8.2.0'
         classpath('com.facebook.react:react-native-gradle-plugin')
         classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+       
     }
 }
 
@@ -29,6 +30,9 @@ allprojects {
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
+        }
+         maven {
+            url 'https://www.jitpack.io'
         }
         maven {
             // Android JSC is installed from npm

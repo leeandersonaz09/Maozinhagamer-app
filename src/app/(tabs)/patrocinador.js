@@ -12,7 +12,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // Importando ícone
 import { Carousel } from "../components"; // Reutilizando o Carousel da Home
 import { COLORS } from "../Theme/theme";
-import { getOffers, getSponsors, getadsBanner } from "../utils/apiRequests"; // Certifique-se de ter a função de API
+import { fetchOffers, fetchSponsors, fetchAdsBanner} from "../utils/apiRequests"; // Certifique-se de ter a função de API
 
 const Patrocinador = () => {
   const [dataBanner, setDataBanner] = useState([]);
@@ -23,9 +23,9 @@ const Patrocinador = () => {
   const pushData = async () => {
     setLoading(true); // Ativa o carregamento ao buscar os dados
     try {
-      const offersData = await getOffers(); // Chama a função de API para pegar dados atualizados
-      const sponsorsData = await getSponsors(); // Chama a função de API para pegar dados atualizados
-      const adsbannerData = await getadsBanner(); // Chama a função de API para pegar dados atualizados
+      const offersData = await fetchOffers(); // Chama a função de API para pegar dados atualizados
+      const sponsorsData = await fetchSponsors(); // Chama a função de API para pegar dados atualizados
+      const adsbannerData = await fetchAdsBanner(); // Chama a função de API para pegar dados atualizados
       setDataBanner(adsbannerData || []);
       setPartners(sponsorsData || []);
       setAds(offersData || []);
@@ -77,7 +77,7 @@ const Patrocinador = () => {
             <TouchableOpacity>
               <View style={styles.partnerCard}>
                 <Image source={{ uri: item.img }} style={styles.partnerImage} />
-                <Text style={styles.partnerName}>{item.name}</Text>
+                <Text style={styles.partnerName}>{item.title}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   partnerName: {
-    fontSize: 12,
+    fontSize: 10,
     color: COLORS.white,
   },
   adCard: {

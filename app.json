@@ -45,11 +45,13 @@
         {
           "ios": {
             "userFrameworks": "static"
+          },
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33
           }
         }
-      ],
-      "@react-native-firebase/app",
-      "@react-native-firebase/auth"
+      ]
     ],
     "extra": {
       "router": {
