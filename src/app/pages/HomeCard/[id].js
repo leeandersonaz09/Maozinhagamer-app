@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import { Header } from "../components/index.js";
+import { Header } from "../../components/index.js";
 import { StatusBar } from "expo-status-bar";
-import { COLORS } from "../Theme/theme.js";
+import { COLORS } from "../../Theme/theme.js";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 
 const HomeCard = () => {
@@ -29,10 +29,7 @@ const HomeCard = () => {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => handlePress(item.uri)}
-    >
+    <TouchableOpacity style={styles.card} onPress={() => handlePress(item.uri)}>
       <ImageBackground
         source={{ uri: item.img }}
         style={styles.backgroundImage}
@@ -99,7 +96,6 @@ const styles = StyleSheet.create({
 });
 
 export default HomeCard;
-
 
 /*
 import React from "react";

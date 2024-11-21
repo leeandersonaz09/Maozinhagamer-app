@@ -21,13 +21,11 @@ import {
   getUpdateNotes,
 } from "../utils/apiRequests"; // Importe as funções
 
-
 /*
 Pagina trone liberty 
 Mecanica de boss
 Dicas e builds dos adms
 */
-
 
 const Home = () => {
   const navigation = useNavigation();
@@ -238,9 +236,7 @@ const Home = () => {
                     </View>
                   ) : (
                     <>
-                      <Text style={styles.BannerTittle}>
-                        Novidades
-                      </Text>
+                      <Text style={styles.BannerTittle}>Novidades</Text>
                       <Carousel data={dataBanner} />
                     </>
                   )}

@@ -10,9 +10,13 @@ import {
   ActivityIndicator, // Spinner nativo do React Native
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // Importando ícone
-import { Carousel } from "../components"; // Reutilizando o Carousel da Home
+import { Carousel, Badge } from "../components"; // Reutilizando o Carousel da Home
 import { COLORS } from "../Theme/theme";
-import { fetchOffers, fetchSponsors, fetchAdsBanner} from "../utils/apiRequests"; // Certifique-se de ter a função de API
+import {
+  fetchOffers,
+  fetchSponsors,
+  fetchAdsBanner,
+} from "../utils/apiRequests"; // Certifique-se de ter a função de API
 
 const Patrocinador = () => {
   const [dataBanner, setDataBanner] = useState([]);
@@ -84,7 +88,11 @@ const Patrocinador = () => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-
+      <View style={styles.badgeContainer}>
+        <Badge label="All" active={true} />
+        <Badge label="Unread" active={false} />
+        <Badge label="Groups" active={false} />
+      </View>
       {/* Banner */}
       <View style={styles.bannerContainer}>
         <Carousel data={dataBanner} />
@@ -111,14 +119,6 @@ const Patrocinador = () => {
         )}
         showsHorizontalScrollIndicator={false}
       />
-
-      {/* Mais Parceiros e Ofertas */}
-      <TouchableOpacity style={styles.moreSponsorsCard}>
-        <Text style={styles.moreSponsorsTitle}>Mais Parceiros e Ofertas</Text>
-        <Text style={styles.moreSponsorsDate}>
-          Clique aqui para ver mais parceiros e ofertas
-        </Text>
-      </TouchableOpacity>
 
       <View style={styles.spaceBotton} />
     </ScrollView>
@@ -147,6 +147,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
+  },
+  badgeContainer: {
+    flexDirection: "row", // Coloca os badges na mesma linha
+    alignItems: "center", // Alinha os badges verticalmente ao centro
+    //justifyContent: "space-between", // Espaçamento uniforme (ou use 'flex-start' para alinhá-los à esquerda)
+    paddingHorizontal: 10, // Margem horizontal
+    marginVertical: 10, // Margem vertical para separar do restante
   },
   headerview: {
     backgroundColor: COLORS.primary,

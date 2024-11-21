@@ -8,6 +8,7 @@ import Dot from "./Dot";
 import Button from "./Button";
 import PopupMenu from "./PopupMenu";
 import Separator from "./Separador";
+import Badge from "./Badge/index";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   Button,
   PopupMenu,
   Separator,
+  Badge,
 };
