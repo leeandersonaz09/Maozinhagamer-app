@@ -139,7 +139,7 @@ const Home = () => {
             <Link
               push
               href={{
-                pathname: `/HomeCard/${item.id}`, // Define o id diretamente no caminho da rota
+                pathname: `/pages/HomeCard/${item.id}`, // Define o id diretamente no caminho da rota
                 params: {
                   title: item.title,
                   subCollection: JSON.stringify(item.subCollection),

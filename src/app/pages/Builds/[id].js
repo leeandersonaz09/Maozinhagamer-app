@@ -1,67 +1,137 @@
-import { useSearchParams } from "expo-router";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  ImageBackground,
+  Linking,
+  Image,
+  ScrollView,
+} from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { COLORS } from "../../Theme/theme.js";
+import { Header } from "../../components/index.js";
 
-export default function BuildDetails() {
-  // Obtém os parâmetros da URL
-  const { id, name, description, sets } = useSearchParams();
+const BuildDetail = () => {
+  const { id, title, subCollection } = useLocalSearchParams();
+  const router = useRouter(); // Hook para navegação no expo-router
+  //console.log(subCollection);
+  const loadouts = JSON.parse(subCollection); // Parse subCollection de volta para objeto
 
-  // Converte os dados de `sets` de volta para JSON
-  const parsedSets = JSON.parse(sets);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{name}</Text>
-      <Text style={styles.description}>{description}</Text>
-      <Text style={styles.subtitle}>Sets:</Text>
-
-      {/* Lista os sets */}
-      <FlatList
-        data={parsedSets}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.setItem}>
-            <Text style={styles.setName}>{item.name}</Text>
-            <Text style={styles.setDetails}>{item.details}</Text>
-          </View>
-        )}
+  const renderLoadout = ({ item }) => (
+    <View style={styles.card}>
+      <Image
+        source={{ uri: item.img }}
+        style={styles.image}
+        resizeMode="cover"
       />
+      <View style={styles.nameContainer}>
+        <Text style={styles.name}>{item.name}</Text>
+        <View style={styles.weaponTypeBox}>
+          <Text style={styles.weaponTypeText}>{item.weaponType}</Text>
+        </View>
+      </View>
+      <Text style={styles.stats}>
+        Dano: {item.stats.damage} | Alcance: {item.stats.range} | Precisão:{" "}
+        {item.stats.accuracy}
+      </Text>
+      <Text style={styles.accessoriesHeader}>Acessórios:</Text>
+      {item.accessories.map((accessory, index) => (
+        <Text key={index} style={styles.accessory}>
+          - {accessory}
+        </Text>
+      ))}
     </View>
   );
-}
+
+  return (
+    <>
+      <StatusBar backgroundColor={COLORS.primary} style="light" />
+      <Header replace HeaderTittle={title} href={"/(tabs)"} />
+      <View style={styles.container}>
+        <FlatList
+          data={loadouts}
+          keyExtractor={(item) => item.id}
+          renderItem={renderLoadout}
+          contentContainerStyle={styles.flatlist_container}
+          ListHeaderComponent={
+            <Text style={styles.header}>Loadouts Exclusivos</Text>
+          }
+        />
+      </View>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#121212",
   },
-  title: {
+  flatlist_container: {
+    padding: 10,
+    backgroundColor: "#121212",
+  },
+  header: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10,
-  },
-  description: {
-    fontSize: 16,
-    color: "#666",
+    color: "#FFFFFF",
     marginBottom: 20,
+    textAlign: "center",
   },
-  subtitle: {
-    fontSize: 18,
+  card: {
+    backgroundColor: "#1E1E1E",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+  },
+  image: {
+    width: "100%", // Faz a imagem ocupar toda a largura do container
+    height: 100, // Define a altura fixa
+    borderRadius: 10, // Aplica bordas arredondadas
+    marginBottom: 10, // Dá uma margem abaixo da imagem
+  },
+  nameContainer: {
+    flexDirection: "row", // Organiza os itens em linha
+    alignItems: "center", // Alinha os itens no centro verticalmente
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
+    color: "#FFD700",
+    flex: 1, // Faz o nome ocupar o espaço restante
   },
-  setItem: {
-    marginBottom: 10,
-    padding: 10,
-    backgroundColor: "#f9f9f9",
-    borderRadius: 8,
+  weaponTypeBox: {
+    backgroundColor: "#2F4F4F", // Caixa com um fundo mais claro que o fundo do card
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginLeft: 10,
   },
-  setName: {
+  weaponTypeText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  stats: {
+    fontSize: 14,
+    color: "#AAAAAA",
+    marginVertical: 5,
+  },
+  accessoriesHeader: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "#FFFFFF",
+    marginTop: 10,
   },
-  setDetails: {
+  accessory: {
     fontSize: 14,
-    color: "#666",
+    color: "#CCCCCC",
   },
 });
+
+export default BuildDetail;

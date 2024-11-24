@@ -53,7 +53,9 @@ const processUniqueData = (data) => {
 const fetchCollections = async (collectionName) => {
   try {
     // Fetch data from Firestore
-    const querySnapshot = await getDocs(collection(FIREBASE_DB, collectionName));
+    const querySnapshot = await getDocs(
+      collection(FIREBASE_DB, collectionName)
+    );
 
     // Map Firestore documents to a format similar to your existing API response
     const data = querySnapshot.docs.map((doc, index) => {
@@ -75,28 +77,58 @@ export async function fetchWidgetsData() {
   try {
     // Fetch data from the main 'widgets' collection
     const querySnapshot = await getDocs(collection(FIREBASE_DB, "widgets"));
+
     // Map Firestore documents to a format similar to your existing API response
     const data = await Promise.all(
       querySnapshot.docs.map(async (doc, index) => {
         const docData = doc.data();
+
         // Inicialmente, assume que não há sub-coleção
         let subCollectionData = [];
-        // Verificar e acessar a sub-coleção de 'subCollectionName' dentro do documento atual
+
+        // Verificar e acessar a sub-coleção 'sub_widgets' dentro do documento atual
         const subCollectionSnapshot = await getDocs(
           collection(FIREBASE_DB, `widgets/${doc.id}/sub_widgets`)
         );
+
         // Se a sub-coleção existir, mapeie os documentos dentro dela
-        subCollectionData = subCollectionSnapshot.docs.map((subDoc) => ({
-          id: subDoc.id,
-          ...subDoc.data(),
-        }));
+        subCollectionData = await Promise.all(
+          subCollectionSnapshot.docs.map(async (subDoc) => {
+            const subDocData = subDoc.data();
+
+            // Inicialmente, assume que não há sub-coleção 'loadouts'
+            let loadoutsData = [];
+
+            // Verificar e acessar a sub-coleção 'loadouts' dentro do documento de 'sub_widgets'
+            const loadoutsSnapshot = await getDocs(
+              collection(
+                FIREBASE_DB,
+                `widgets/${doc.id}/sub_widgets/${subDoc.id}/loadouts`
+              )
+            );
+
+            // Se a sub-coleção 'loadouts' existir, mapeie os documentos dentro dela
+            loadoutsData = loadoutsSnapshot.docs.map((loadoutDoc) => ({
+              id: loadoutDoc.id,
+              ...loadoutDoc.data(),
+            }));
+
+            return {
+              id: subDoc.id,
+              loadouts: loadoutsData, // Inclua os dados da sub-coleção 'loadouts'
+              ...subDocData,
+            };
+          })
+        );
+
         return {
           id: doc.id || `temp-widget-id-${index}`, // Gera ID temporário se estiver ausente
-          subCollection: subCollectionData, // Adicione os dados da sub-coleção aqui
+          subCollection: subCollectionData, // Adicione os dados da sub-coleção 'sub_widgets' aqui
           ...docData, // Puxa diretamente todos os dados do documento
         };
       })
     );
+
     return processUniqueData(data);
   } catch (error) {
     console.error("Erro ao obter dados do Firestore:", error);
@@ -111,4 +143,3 @@ export const fetchOffers = () => fetchCollections("offers");
 export const getMembers = () => fetchCollections("members");
 export const getBannerData = () => fetchCollections("banners");
 export const getUpdateNotes = () => fetchCollections("Canais Parceiros");
-
