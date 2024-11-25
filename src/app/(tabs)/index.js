@@ -11,7 +11,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link, useNavigation } from "expo-router";
 import styles from "../Theme/styles/HomeStyles";
-import { HomeCard, Carousel } from "../components";
+import { HomeCard, Carousel } from "../../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../Theme/theme";
 import LottieView from "lottie-react-native";
@@ -19,7 +19,7 @@ import {
   getBannerData,
   fetchWidgetsData,
   getUpdateNotes,
-} from "../utils/apiRequests"; // Importe as funções
+} from "../../utils/apiRequests"; // Importe as funções
 
 /*
 Pagina trone liberty 

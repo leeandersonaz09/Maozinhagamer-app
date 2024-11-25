@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LottieLoading } from "./components";
+import { LottieLoading } from "../components";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
@@ -10,8 +10,8 @@ import {
   fetchSponsors,
   fetchOffers,
   fetchAdsBanner,
-  getUpdateNotes
-} from "./utils/apiRequests";
+  getUpdateNotes,
+} from "../utils/apiRequests";
 
 export default function Splash() {
   const [isNew, setIsNew] = useState(true);

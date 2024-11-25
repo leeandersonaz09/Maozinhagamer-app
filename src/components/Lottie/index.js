@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StatusBar, Text, ActivityIndicator } from "react-native";
 import LottieView from "lottie-react-native";
-import dataloading from "../../assets/Lotties/13255-loader.json";
-import mario from "../../assets/Lotties/mario.json";
-import { COLORS } from "../../Theme/theme";
+import dataloading from "../../app/assets/Lotties/13255-loader.json";
+import mario from "../../app/assets/Lotties/mario.json";
+import { COLORS } from "../../app/Theme/theme";
 
 function LottieLoading() {
   return (

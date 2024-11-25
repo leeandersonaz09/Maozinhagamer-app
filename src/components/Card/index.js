@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { COLORS } from "../../Theme/theme";
-import metrics from "../../Theme/metrics";
+import { COLORS } from "../../app/Theme/theme";
+import metrics from "../../app/Theme/metrics";
 
 export default function Card(props) {
   return (

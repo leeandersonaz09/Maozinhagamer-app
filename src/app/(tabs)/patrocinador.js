@@ -10,13 +10,13 @@ import {
   ActivityIndicator, // Spinner nativo do React Native
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // Importando ícone
-import { Carousel, Badge } from "../components"; // Reutilizando o Carousel da Home
+import { Carousel, Badge } from "../../components"; // Reutilizando o Carousel da Home
 import { COLORS } from "../Theme/theme";
 import {
   fetchOffers,
   fetchSponsors,
   fetchAdsBanner,
-} from "../utils/apiRequests"; // Certifique-se de ter a função de API
+} from "../../utils/apiRequests"; // Certifique-se de ter a função de API
 
 const Patrocinador = () => {
   const [dataBanner, setDataBanner] = useState([]);

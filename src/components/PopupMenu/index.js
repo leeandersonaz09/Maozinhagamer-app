@@ -12,7 +12,7 @@ import {
 import * as Clipboard from "expo-clipboard";
 import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
 import Separator from "../Separador";
-import { COLORS, SIZES } from "../../Theme/theme";
+import { COLORS, SIZES } from "../../app/Theme/theme";
 //import styles from "./styles";
 
 const PopupMenu = (props) => {

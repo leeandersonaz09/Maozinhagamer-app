@@ -4,7 +4,7 @@ import React from "react";
 import { View, Text, ImageBackground } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import styles from "./styles";
-import { COLORS } from "../../Theme/theme";
+import { COLORS } from "../../app/Theme/theme";
 
 const HomeCard = ({ data: { img, title } }) => (
   <>

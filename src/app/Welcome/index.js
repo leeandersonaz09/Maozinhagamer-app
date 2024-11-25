@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
 import { COLORS } from "../Theme/theme";
 import Subslide from "./Subslide";
-import { Dot } from "../components";
+import { Dot } from "../../components";
 import { router } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
@@ -155,7 +155,7 @@ const Welcome = () => {
   return (
     <GestureHandlerRootView>
       <View style={styles.container}>
-        <StatusBar hidden={bar} translucent={bar} animated={true} />
+        <StatusBar animated={true} />
 
         <Animated.View style={[styles.slider, slider]}>
           {slides.map(({ picture }, index) => {

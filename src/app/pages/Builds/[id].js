@@ -13,7 +13,7 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../Theme/theme.js";
-import { Header } from "../../components/index.js";
+import { Header } from "../../../components/index.js";
 
 const BuildDetail = () => {
   const { id, title, subCollection } = useLocalSearchParams();

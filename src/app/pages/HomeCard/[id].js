@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import { Header } from "../../components/index.js";
+import { Header } from "../../../components/index.js";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../Theme/theme.js";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -45,7 +45,7 @@ const HomeCard = () => {
       <ImageBackground
         source={{ uri: item.img }}
         style={styles.backgroundImage}
-        imageStyle={{ borderRadius: 15, filter: "grayscale(100%)" }}
+        imageStyle={{ borderRadius: 15 }}
       >
         <View style={styles.overlay}>
           <Text style={styles.title}>{item.title}</Text>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)", // Fundo escuro semi-transparente
     padding: 20,
     borderRadius: 15,
     width: "100%",

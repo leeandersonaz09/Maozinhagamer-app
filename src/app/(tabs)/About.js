@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { FontAwesome, FontAwesome6 } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
-import { Card } from "../components/index.js";
+import { Card } from "../../components/index.js";
 import styles from "../Theme/styles/AboutStyles.js";
 import { COLORS } from "../Theme/theme.js";
 import { StatusBar } from "expo-status-bar";

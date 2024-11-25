@@ -12,11 +12,11 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Header, Card, PopupMenu } from "../components";
+import { Header, Card, PopupMenu } from "../../components";
 import styles from "../Theme/styles/MembersStyles";
 import { COLORS } from "../Theme/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getMembers } from "../utils/apiRequests"; // Certifique-se de ter a função de API
+import { getMembers } from "../../utils/apiRequests"; // Certifique-se de ter a função de API
 
 const MembersScreen = () => {
   const [data, setData] = useState([]);

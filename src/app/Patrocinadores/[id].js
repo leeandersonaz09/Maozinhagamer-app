@@ -7,7 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Button, Header } from "../components/index.js";
+import { Button, Header } from "../../components/index.js";
 import { StatusBar } from "expo-status-bar";
 import { SIZES, COLORS } from "../Theme/theme.js";
 import { useLocalSearchParams, router } from "expo-router";

@@ -10,8 +10,9 @@ const styles = StyleSheet.create({
 
   // Header Image
   headerImage: {
-    width: "110%",
-    height: 200,
+    width: "100%",
+    height: height * 0.25, // Proporcional à tela
+    resizeMode: "cover", // Evita distorção
   },
   contentContainer: {
     position: "relative",
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     paddingTop: 10,
+    elevation: 4, // Suporte para sombras no Android
   },
 
   // Conteudo de inscritos
@@ -56,8 +58,8 @@ const styles = StyleSheet.create({
   // Container para os widgets
   WigtesContainer: {
     flex: 1,
-    paddingHorizontal: 10, // Altere o valor se necessário
-    marginTop: -20,
+    paddingHorizontal: 10,
+    paddingTop: 10, // Substitui a margem negativa
     flexDirection: "column",
     justifyContent: "space-around",
     marginBottom: 65,

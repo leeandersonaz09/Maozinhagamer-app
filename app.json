@@ -3,14 +3,20 @@
     "name": "maozinhagamer",
     "slug": "maozinhagamer",
     "version": "1.0.0",
-     "newArchEnabled": true,
+    "newArchEnabled": true,
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "maozinhagamer",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "layout": {
+        "backgroundColor": "#2E0000",
+        "content": {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain"
+        },
+        "statusBarStyle": "light"
+      },
       "backgroundColor": "#2E0000"
     },
     "ios": {

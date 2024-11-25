@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
-import { COLORS, SIZES } from "../../Theme/theme";
+import { COLORS, SIZES } from "../../app/Theme/theme";
 import { useRouter } from "expo-router"; // Importar o useRouter
 import { FontAwesome } from "@expo/vector-icons";
 
