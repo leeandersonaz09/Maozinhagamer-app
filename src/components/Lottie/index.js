@@ -15,7 +15,7 @@ function LottieLoading() {
         backgroundColor: COLORS.primary,
       }}
     >
-      <StatusBar hidden={true} translucent={true} animated={true} />
+      <StatusBar animated={true} />
 
       <LottieView
         autoPlay
