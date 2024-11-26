@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { COLORS } from "../../app/Theme/theme";
 
 const Badge = ({ label, active }) => {
   return (
@@ -20,14 +21,14 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   activeBadge: {
-    backgroundColor: "#C20034FF",
+    backgroundColor: COLORS.primary,
   },
   badgeText: {
     color: "#777",
     fontSize: 14,
   },
   activeText: {
-    color: "#000000FF",
+    color: "#FFFFFFFF",
   },
 });
 

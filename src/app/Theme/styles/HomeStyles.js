@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   // Título da seção de widgets
   WidgetsTittle: {
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: 5,
     fontWeight: "bold",
     fontSize: 18,
   },

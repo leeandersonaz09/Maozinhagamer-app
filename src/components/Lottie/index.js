@@ -1,10 +1,10 @@
 import React from "react";
-import { View, StatusBar, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import LottieView from "lottie-react-native";
 import dataloading from "../../app/assets/Lotties/13255-loader.json";
 import mario from "../../app/assets/Lotties/mario.json";
 import { COLORS } from "../../app/Theme/theme";
-
+import { StatusBar } from "expo-status-bar";
 function LottieLoading() {
   return (
     <View
@@ -15,8 +15,6 @@ function LottieLoading() {
         backgroundColor: COLORS.primary,
       }}
     >
-      <StatusBar animated={true} />
-
       <LottieView
         autoPlay
         style={{

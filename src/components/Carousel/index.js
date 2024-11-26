@@ -46,8 +46,8 @@ export default function Banner({ data }) {
                   pathname: "/Patrocinadores/[id]",
                   params: {
                     id: data.id,
-                    href: data.href,
-                    button: data.buttonTittle,
+                    uri: data.uri,
+                    button: data.buttonTitle,
                     category: data.category,
                     title: data.title,
                     img: data.img,

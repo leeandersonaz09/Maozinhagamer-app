@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.6)", // Fundo escuro semi-transparente
+    backgroundColor: "rgba(0, 0, 0, 0.3)", // Fundo escuro semi-transparente
     padding: 20,
     borderRadius: 15,
     width: "100%",

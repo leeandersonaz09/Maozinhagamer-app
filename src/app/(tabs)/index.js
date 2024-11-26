@@ -160,8 +160,6 @@ const Home = () => {
   };
 
   const handlePress = (uri) => {
-    console.log(uri);
-
     if (uri.startsWith("http")) {
       Linking.openURL(uri);
     } else {
@@ -196,7 +194,11 @@ const Home = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={COLORS.primary} style="light" />
+      <StatusBar
+        backgroundColor={COLORS.primary}
+        style="light"
+        translucent={false}
+      />
       <FlatList
         data={dataBanner}
         keyExtractor={(item) => `banner-${item.id}`} // Adicione um prefixo para garantir unicidade

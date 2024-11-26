@@ -6,19 +6,24 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { Button, Header } from "../../components/index.js";
 import { StatusBar } from "expo-status-bar";
 import { SIZES, COLORS } from "../Theme/theme.js";
-import { useLocalSearchParams, router } from "expo-router";
-import * as Linking from "expo-linking";
+import { useLocalSearchParams } from "expo-router";
 
 const Patrocinadores = () => {
-  const { id, title, img, text, category, href, button } =
+  const { id, title, img, text, category, uri, button } =
     useLocalSearchParams();
 
-  const handlePress = () => {
-    Linking.openURL(href).then(router.replace("/"));
+  const handlePress = (uri) => {
+    console.log(uri);
+    if (uri.startsWith("http")) {
+      Linking.openURL(uri);
+    } else {
+      //navigation.navigate(uri);
+    }
   };
 
   return (
@@ -35,7 +40,7 @@ const Patrocinadores = () => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={handlePress}
+            onPress={() => handlePress(uri)}
             activeOpacity={0.7} // Opacidade ao tocar no botão
           >
             <Text style={styles.buttonText}>
@@ -96,13 +101,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 5,
+    marginBottom: 30,
   },
   button: {
     backgroundColor: "#2E0000", // Cor de fundo do botão (azul)
     paddingVertical: 15, // Espaçamento vertical
     paddingHorizontal: 30, // Espaçamento horizontal
-    borderRadius: 8, // Cantos arredondados
+    borderRadius: 25, // Cantos arredondados
     elevation: 3, // Sombra no Android
   },
   buttonText: {
