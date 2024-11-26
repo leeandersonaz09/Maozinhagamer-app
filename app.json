@@ -2,7 +2,7 @@
   "expo": {
     "name": "maozinhagamer",
     "slug": "maozinhagamer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "newArchEnabled": true,
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,7 @@
     },
     "ios": {
       "supportsTablet": true,
+      "icon": "./assets/icon.png",
       "bundleIdentifier": "com.maozinhagamer.maozinhagamerapp",
       "googleServicesFile": "./GoogleService-Info.plist"
     },
@@ -28,7 +29,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#2E0000"
       },
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.maozinhagamer.maozinhagamerapp",
