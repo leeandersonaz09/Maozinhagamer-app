@@ -1,4 +1,15 @@
 {
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "@dotlottie/react-player",
+          "@expo/metro-runtime",
+          "firebase"
+        ]
+      }
+    }
+  },
   "name": "maozinhagamerapp",
   "version": "1.2.0",
   "main": "expo-router/entry",
@@ -14,7 +25,8 @@
     "@lottiefiles/react-lottie-player": "^3.5.4",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-vector-icons/ionicons": "^7.4.0-alpha.15",
-    "@react-navigation/native": "^6.1.17",
+    "@react-native/gradle-plugin": "^0.76.3",
+    "@react-navigation/native": "7.0.0",
     "expo": "^52.0.11",
     "expo-av": "~15.0.1",
     "expo-build-properties": "~0.13.1",
@@ -25,7 +37,7 @@
     "expo-router": "~4.0.9",
     "expo-status-bar": "~2.0.0",
     "firebase": "^11.0.2",
-    "lottie-react-native": "7.1.0",
+    "lottie-react-native": "^7.1.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.3",

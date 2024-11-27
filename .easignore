@@ -1,0 +1,24 @@
+# Excluir diretórios desnecessários
+node_modules/
+build/
+android/.gradle/
+ios/Pods/
+*.log
+*.lock
+
+# Ignorar arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.swp
+.DS_Store
+
+# Evitar arquivos sensíveis
+*.keystore
+*.jks
+
+# Outros arquivos que não afetam o build
+test/
+docs/
+screenshots/
+eas-scripts/
