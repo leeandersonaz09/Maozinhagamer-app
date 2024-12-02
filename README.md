@@ -1,125 +1,50 @@
-<h1 align="center">
-    <img alt="Juazeiro Livre" title="#delicinha" src="assets/icon.png" width="250px" />
-</h1>
+# Welcome to your Expo app 👋
 
-<h1 align="center">
-  # 🎮 Mãozinha Gamer
-</h1>
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-<h4 align="center">
-  ☕ Code and coffee
-</h4>
+## Get started
 
-Bem-vindo ao **Mãozinha Gamer**, o aplicativo oficial do canal [Mãozinha Gamer no YouTube](https://www.youtube.com/channel/UCqB3_WL9vGS751N6UudXHuw)! Este app é uma extensão do canal, com dicas, truques e mapas para diversos jogos.
-
-## 🛠 Tecnologias e Ferramentas
-
-- **Node.js** - Backend robusto.
-- **React Native** - Desenvolvimento mobile multiplataforma.
-- **Expo** - Gerenciamento do ciclo de vida do app.
-- **Visual Studio Code** - Ambiente de desenvolvimento.
-- **Firebase** - Autenticação e banco de dados em tempo real.
-
-### Bibliotecas Principais
-
-- `react-navigation` - Navegação entre telas.
-- `axios` - Requisições HTTP.
-- `redux` - Gerenciamento de estado.
-- `styled-components` - Estilização de componentes.
-- `firebase` - Integração com o Firebase.
-
-## ✅ Workflow - Product Backlog
-
-### Tarefas a serem realizadas
-
-- [x] Criação banco de dados Firestore Firebase
-- [x] Firebase auth an
-- [x] Rotas autenticadas com Expo Navigation
-- [ ] Profile Page
-- [ ] Real-time chat com amigos
-- [ ] Notification
-- [ ] Offline animation info
-- [ ] Press hold icon to show badge
-
-
-### Telas a serem criadas no aplicativo (baseado nas anotações)
-
-- [x] Tela "Call of Duty"
-  - [ ] Easter egg: Liberty Falls
-  - [ ] Easter egg: Terminus
-- [x] Tela "Fortnite"
-  - [ ] Mapa localização personagens
-  - [ ] Personagens no mapa
-- [x] Tela "The First Descendent"
-  - [ ] Armas blids
-  - [ ] Personagens blids
-- [x] Tela "Throne And Liberty"
-  - [ ] Direciona direto para uma página de Throne
-
-## 📲 Funcionalidades
-
-- Dicas e truques de jogos.
-- Mapas interativos.
-- Tutoriais e estratégias para gamers de todos os níveis.
-- Novidades e atualizações frequentes.
-
-## 🚀 Instalação
-
-### Pré-requisitos
-
-Certifique-se de ter instalado as seguintes ferramentas:
-
-- [Node.js](https://nodejs.org)
-- [Expo CLI](https://docs.expo.dev/get-started/installation/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-
-### Passos para instalar
-
-1. Clone o repositório:
-
-   ```bash
-   git clone https://github.com/leeandersonaz09/Maozinhagamer-app.git
-   cd Maozinhagamer-app
-   ```
-
-2. Instale as dependências:
+1. Install dependencies
 
    ```bash
    npm install
    ```
 
-3. Configure o Firebase adicionando um arquivo `firebase.js`:
-
-   ```javascript
-   export default {
-     API_KEY: "<sua_api_key>",
-     AUTH_DOMAIN: "<seu_auth_domain>",
-     PROJECT_ID: "<seu_project_id>",
-   };
-   ```
-
-4. Inicie o app:
+2. Start the app
 
    ```bash
-   expo start
+    npx expo start
    ```
 
-## 📷 Screenshots
+In the output, you'll find options to open the app in a
 
-### Tela Inicial
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-<p align="center">
-    <img alt="" title="#delicinha" src="screenshots/01.jpeg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/02.jpeg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/07.jpeg" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/08.jpeg" width="250px" />
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-</p>
+## Get a fresh project
 
-### Lista de Dicas
+When you're ready, run:
 
-![Lista de Dicas](https://via.placeholder.com/800x400.png?text=Lista+de+Dicas)
+```bash
+npm run reset-project
+```
 
-## 💡 Contribuições
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-Contribuições são bem-vindas! Abra uma issue ou um pull request com sugestões e melhorias.
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
