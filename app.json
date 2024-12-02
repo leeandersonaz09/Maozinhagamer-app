@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "maozinhagamer",
+    "name": "Maozinha Gamer",
     "slug": "maozinhagamer",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +21,7 @@
       },
       "package": "com.maozinhagamer.maozinhagamerapp",
       "googleServicesFile": "./google-services.json",
-        "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan"
     },
     "androidStatusBar": {
       "barStyle": "light-content",

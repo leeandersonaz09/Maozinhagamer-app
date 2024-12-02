@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { LottieLoading } from "../components";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Font from "expo-font";
 import {
   fetchWidgetsData,
   getBannerData,
@@ -12,10 +11,29 @@ import {
   fetchAdsBanner,
   getUpdateNotes,
 } from "../utils/apiRequests";
+import NetInfo from "@react-native-community/netinfo";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 export default function Splash() {
   const [isNew, setIsNew] = useState(true);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [isConnected, setIsConnected] = useState(true); // Estado de conexão
+  const [loaded] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    SFProDisplay_bold: require("../assets/fonts/SFProDisplay_Bold.ttf"),
+    SFProDisplay_regular: require("../assets/fonts/SFProDisplay_Regular.ttf"),
+  });
+
+  // Verificação de conexão
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Função para verificar se os dados em cache estão atualizados
   const loadDataIfNeeded = async (key, fetchFunction) => {
@@ -45,14 +63,6 @@ export default function Splash() {
     }
   };
 
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      SFProDisplay_bold: require("./Theme/fonts/SFProDisplay_Bold.ttf"),
-      SFProDisplay_regular: require("./Theme/fonts/SFProDisplay_Regular.ttf"),
-    });
-    setFontsLoaded(true);
-  };
-
   const checkIsNew = async () => {
     try {
       const value = await AsyncStorage.getItem("isnewinApp");
@@ -69,10 +79,6 @@ export default function Splash() {
   };
 
   useEffect(() => {
-    if (!fontsLoaded) {
-      loadFonts();
-    }
-
     // Carregar todos os dados necessários, verificando o cache e atualizando se necessário
     Promise.all([
       loadDataIfNeeded("bannerData", getBannerData),
@@ -91,7 +97,19 @@ export default function Splash() {
       .catch((error) => {
         console.log("Erro ao carregar dados:", error);
       });
-  }, [fontsLoaded]);
 
-  return <LottieLoading />;
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
+  return (
+    <>
+      <LottieLoading />
+      <StatusBar style="auto" />
+    </>
+  );
 }

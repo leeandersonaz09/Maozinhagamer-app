@@ -180,7 +180,6 @@ const Welcome: React.FC = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
         <StatusBar animated={true} />
-
         <Animated.View style={[styles.slider, slider]}>
           {slides.map(({ picture }, index) => {
             const style = useAnimatedStyle(() => ({

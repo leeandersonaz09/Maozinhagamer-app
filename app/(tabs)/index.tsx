@@ -221,12 +221,12 @@ const Home = () => {
                         alignItems: "center",
                       }}
                     >
-                      <Text style={{ fontWeight: "bold" }}>
+                      <ThemedText style={{ fontWeight: "bold" }}>
                         Aguenta ai que estamos no meio da ranked MW3!
-                      </Text>
-                      <Text style={{ fontWeight: "bold" }}>
+                      </ThemedText>
+                      <ThemedText style={{ fontWeight: "bold" }}>
                         Já iremos atualizar!
-                      </Text>
+                      </ThemedText>
                       <LottieView
                         autoPlay
                         style={{ width: 150, height: 150 }}
