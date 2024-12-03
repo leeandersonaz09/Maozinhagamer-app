@@ -131,7 +131,7 @@ const MembersScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <>
       <Header HeaderTittle={"Membros"} />
       <ThemedView style={styles.container}>
         <View style={styles.searchContainer}>
@@ -185,7 +185,7 @@ const MembersScreen = () => {
           </View>
         )}
       </ThemedView>
-    </SafeAreaView>
+    </>
   );
 };
 

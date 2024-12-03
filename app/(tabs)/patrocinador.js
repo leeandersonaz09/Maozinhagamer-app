@@ -60,9 +60,9 @@ const Patrocinador = () => {
           horizontal
           data={[...Array(5)]}
           renderItem={() => (
-            <View style={{ marginHorizontal: 10 }}>
+            <View style={{ marginHorizontal: 10, gap: 10 }}>
               <Shimmer width={50} height={50} borderRadius={25} />
-              <Shimmer width={50} height={15} style={{ marginTop: 5 }} />
+              <Shimmer width={50} height={15} />
             </View>
           )}
           keyExtractor={(_, index) => `shimmer-partner-${index}`}

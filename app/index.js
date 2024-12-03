@@ -20,7 +20,7 @@ import {
   fetchAdsBanner,
   getUpdateNotes,
 } from "../utils/apiRequests";
-import { loadDataIfNeeded, clearIsNew } from "../utils/globalFunctions";
+import { loadDataIfNeeded, clearAsyncStorage } from "../utils/globalFunctions";
 import { LottieLoading } from "../components";
 import { router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -34,7 +34,14 @@ export default function RootLayout() {
   const isFontsLoaded = useLoadFonts();
   const isConnected = useNetworkStatus(); // Usar o hook de verificação de conexão
 
+  /*
   //clearIsNew().then((clean) => console.log(clean)).catch((error) => console.error("Erro:", error));
+  (async () => {
+    const result = await clearAsyncStorage();
+    console.log(result); // Mostra a mensagem de sucesso ou erro
+  })();
+
+  */
 
   const checkIsNew = async () => {
     try {
@@ -53,24 +60,28 @@ export default function RootLayout() {
   };
 
   useEffect(() => {
-    // Carregar todos os dados necessários, verificando o cache e atualizando se necessário
-    Promise.all([
-      loadDataIfNeeded("bannerData", getBannerData),
-      loadDataIfNeeded("membersData", getMembers),
-      loadDataIfNeeded("notesData", getUpdateNotes),
-      loadDataIfNeeded("widgetsData", fetchWidgetsData),
-      loadDataIfNeeded("offersData", fetchOffers),
-      loadDataIfNeeded("sponsorsData", fetchSponsors),
-      loadDataIfNeeded("adsbannerData", fetchAdsBanner),
-    ])
-      .then(() => {
-        setTimeout(() => {
-          checkIsNew();
-        }, 2000);
-      })
-      .catch((error) => {
-        console.log("Erro ao carregar dados:", error);
-      });
+    // Função assíncrona encapsulada para melhor controle
+    const loadData = async () => {
+      try {
+        // Carregar todos os dados necessários, verificando o cache e atualizando se necessário
+        await Promise.all([
+          loadDataIfNeeded("bannerData", getBannerData),
+          loadDataIfNeeded("membersData", getMembers),
+          loadDataIfNeeded("notesData", getUpdateNotes),
+          loadDataIfNeeded("widgetsData", fetchWidgetsData),
+          loadDataIfNeeded("offersData", fetchOffers),
+          loadDataIfNeeded("sponsorsData", fetchSponsors),
+          loadDataIfNeeded("adsbannerData", fetchAdsBanner),
+        ]);
+
+        // Após carregar os dados, verifica o status de novo usuário
+        await checkIsNew();
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+      }
+    };
+
+    loadData();
   }, []);
 
   if (!isFontsLoaded) return null;

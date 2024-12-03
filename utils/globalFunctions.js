@@ -36,14 +36,16 @@ export const clearIsNew = async () => {
 
 export const checkIsNewAfterClear = async () => {
   const value = await AsyncStorage.getItem("isnewinApp");
-  return "Valor após remoção:", value; // Deve exibir null
+  return value === null
+    ? "Valor após remoção: null"
+    : `Valor após remoção: ${value}`;
 };
 
 export const clearAsyncStorage = async () => {
   try {
     await AsyncStorage.clear();
-    return "Limpo todo o async storage";
+    return "AsyncStorage limpo com sucesso!";
   } catch (error) {
-    return "Erro ao limpar asyncstorage inteiro':";
+    return `Erro ao limpar AsyncStorage: ${error.message}`;
   }
 };
