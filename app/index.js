@@ -9,9 +9,8 @@ import "react-native-reanimated";
 import NoConnectionScreen from "../components/NoConnectionScreen"; // Importe o componente
 import { useNetworkStatus } from "@/hooks/useNetworkStatus"; // Importe o hook para verificar a conexão
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Stack } from "expo-router";
+import { useLoadFonts } from "@/hooks/useLoadFonts";
 import { StatusBar } from "expo-status-bar";
-import { useFonts } from "expo-font";
 import {
   fetchWidgetsData,
   getBannerData,
@@ -21,7 +20,7 @@ import {
   fetchAdsBanner,
   getUpdateNotes,
 } from "../utils/apiRequests";
-import { loadDataIfNeeded } from "../utils/globalFunctions";
+import { loadDataIfNeeded, clearIsNew } from "../utils/globalFunctions";
 import { LottieLoading } from "../components";
 import { router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -32,16 +31,15 @@ export default function RootLayout() {
   const [isNew, setIsNew] = useState(null); // Estado inicial como null para diferenciar o carregamento
   const [isLoading, setIsLoading] = useState(true); // Controle do carregamento
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-    SFProDisplay_bold: require("../assets/fonts/SFProDisplay_Bold.ttf"),
-    SFProDisplay_regular: require("../assets/fonts/SFProDisplay_Regular.ttf"),
-  });
+  const isFontsLoaded = useLoadFonts();
+  const isConnected = useNetworkStatus(); // Usar o hook de verificação de conexão
+
+  //clearIsNew().then((clean) => console.log(clean)).catch((error) => console.error("Erro:", error));
 
   const checkIsNew = async () => {
-    syncStorage.removeItem("isnewinApp");
     try {
       const value = await AsyncStorage.getItem("isnewinApp");
+      console.log("Valor retornado por AsyncStorage.getItem:", value); // Log do valor retornado
       if (value !== null) {
         setIsNew(false);
         router.replace("/(tabs)");
@@ -50,13 +48,9 @@ export default function RootLayout() {
         router.push("/welcome");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao acessar AsyncStorage:", error); // Log de erro, caso ocorra
     }
   };
-
-  // Usar o hook de verificação de conexão
-  const isConnected = useNetworkStatus(); // Verifica a conexão
-  //console.log("Conection status: " + isConnected);
 
   useEffect(() => {
     // Carregar todos os dados necessários, verificando o cache e atualizando se necessário
@@ -72,29 +66,26 @@ export default function RootLayout() {
       .then(() => {
         setTimeout(() => {
           checkIsNew();
-        }, 5000);
+        }, 2000);
       })
       .catch((error) => {
         console.log("Erro ao carregar dados:", error);
       });
+  }, []);
 
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  // Exibindo o LottieLoading enquanto o carregamento e o estado isNew não estiverem definidos
-  if (isLoading || isNew === null || !loaded) {
-    return <LottieLoading />;
-  }
+  if (!isFontsLoaded) return null;
+  SplashScreen.hideAsync();
 
   if (!isConnected) {
-    return <NoConnectionScreen />; // Exibe a tela de sem conexão
+    return <NoConnectionScreen />;
+  }
+
+  if (isLoading || isNew === null || !isFontsLoaded) {
+    return <LottieLoading />;
   }
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <LottieLoading />
       <StatusBar style="auto" />
     </ThemeProvider>
   );

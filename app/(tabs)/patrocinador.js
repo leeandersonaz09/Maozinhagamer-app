@@ -6,38 +6,36 @@ import {
   FlatList,
   Image,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
-  ActivityIndicator, // Spinner nativo do React Native
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons"; // Importando ícone
-import { Carousel, Badge } from "../../components"; // Reutilizando o Carousel da Home
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Carousel, Badge, Shimmer } from "../../components";
 import { COLORS } from "../../constants/Theme/theme";
 import {
   fetchOffers,
   fetchSponsors,
   fetchAdsBanner,
-} from "../../utils/apiRequests"; // Certifique-se de ter a função de API
+} from "../../utils/apiRequests";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useColorScheme } from "react-native"; // Importando o hook useColorScheme
+import { useColorScheme } from "react-native";
 import { ThemedScrollView } from "@/components/ThemedScrollView";
 
 const Patrocinador = () => {
   const [dataBanner, setDataBanner] = useState([]);
   const [partners, setPartners] = useState([]);
   const [ads, setAds] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showCarousel, setShowCarousel] = useState(true); // Controle de visibilidade do Carousel
+  const [isLoading, setIsLoading] = useState(true);
+  const [showCarousel, setShowCarousel] = useState(true);
   const colorScheme = useColorScheme();
   const cardBackgroundColor =
     colorScheme === "dark" ? "#2C2C2CFF" : COLORS.card;
   const priceColor = colorScheme === "dark" ? "#00CE0EFF" : COLORS.primary;
   const iconColor = colorScheme === "dark" ? "#00CE0EFF" : COLORS.primary;
 
-  const pushData = async () => {
-    setLoading(true);
+  const fetchAllData = async () => {
     try {
+      setIsLoading(true);
       const offersData = await fetchOffers();
       const sponsorsData = await fetchSponsors();
       const adsbannerData = await fetchAdsBanner();
@@ -47,81 +45,70 @@ const Patrocinador = () => {
     } catch (error) {
       console.error("Erro ao atualizar dados:", error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    pushData();
+    fetchAllData();
   }, []);
 
-  if (loading) {
-    return (
-      <ThemedView style={styles.loadingContainer}>
-        <MaterialCommunityIcons
-          name="account-group"
-          size={40}
-          color={iconColor}
-        />
-        <ThemedText style={styles.loadingText}>Carregando...</ThemedText>
-        <ActivityIndicator size="large" color={iconColor} />
-      </ThemedView>
-    );
-  }
-
-  return (
-    <ThemedScrollView
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-    >
-      <View style={styles.headerview}>
-        <View style={styles.header}>
-          <MaterialCommunityIcons
-            name="account-group"
-            size={16}
-            color={COLORS.white}
-          />
-          <Text style={styles.headerTitle}>Parceiros e ofertas</Text>
-        </View>
-
-        <Text style={styles.sectionTitlePartner}>Principais Parceiros</Text>
+  const renderPartners = () => {
+    if (isLoading || partners.length === 0) {
+      return (
         <FlatList
           horizontal
-          data={partners}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity>
-              <View style={styles.partnerCard}>
-                <Image source={{ uri: item.img }} style={styles.partnerImage} />
-                <Text style={styles.partnerName}>{item.title}</Text>
-              </View>
-            </TouchableOpacity>
+          data={[...Array(5)]}
+          renderItem={() => (
+            <View style={{ marginHorizontal: 10 }}>
+              <Shimmer width={50} height={50} borderRadius={25} />
+              <Shimmer width={50} height={15} style={{ marginTop: 5 }} />
+            </View>
           )}
+          keyExtractor={(_, index) => `shimmer-partner-${index}`}
           showsHorizontalScrollIndicator={false}
         />
-      </View>
+      );
+    }
 
-      <View style={styles.badgeContainer}>
-        <Badge
-          label="Mostrar Tudo"
-          active={showCarousel}
-          onPress={() => setShowCarousel(true)} // Agora funciona!
+    return (
+      <FlatList
+        horizontal
+        data={partners}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity>
+            <View style={styles.partnerCard}>
+              <Image source={{ uri: item.img }} style={styles.partnerImage} />
+              <Text style={styles.partnerName}>{item.title}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        showsHorizontalScrollIndicator={false}
+      />
+    );
+  };
+
+  const renderAds = () => {
+    if (isLoading || ads.length === 0) {
+      return (
+        <FlatList
+          horizontal
+          data={[...Array(3)]}
+          renderItem={() => (
+            <Shimmer
+              width={250}
+              height={200}
+              style={{ borderRadius: 8, marginRight: 10 }}
+            />
+          )}
+          keyExtractor={(_, index) => `shimmer-ad-${index}`}
+          showsHorizontalScrollIndicator={false}
         />
-        <Badge
-          label="Mostrar ofertas"
-          active={!showCarousel}
-          onPress={() => setShowCarousel(false)} // Agora funciona!
-        />
-      </View>
+      );
+    }
 
-      {/* Banner com controle de visibilidade */}
-      {showCarousel && (
-        <View style={styles.bannerContainer}>
-          <Carousel data={dataBanner} />
-        </View>
-      )}
-
-      <ThemedText style={styles.sectionTitle}>Ofertas Patrocinadas</ThemedText>
+    return (
       <FlatList
         horizontal
         data={ads}
@@ -147,6 +134,54 @@ const Patrocinador = () => {
         )}
         showsHorizontalScrollIndicator={false}
       />
+    );
+  };
+
+  return (
+    <ThemedScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.headerview}>
+        <View style={styles.header}>
+          <MaterialCommunityIcons
+            name="account-group"
+            size={16}
+            color={COLORS.white}
+          />
+          <Text style={styles.headerTitle}>Parceiros e Ofertas</Text>
+        </View>
+
+        <Text style={styles.sectionTitlePartner}>Principais Parceiros</Text>
+        {renderPartners()}
+      </View>
+
+      <View style={styles.badgeContainer}>
+        <Badge
+          label="Mostrar Tudo"
+          active={showCarousel}
+          onPress={() => setShowCarousel(true)}
+        />
+        <Badge
+          label="Mostrar Ofertas"
+          active={!showCarousel}
+          onPress={() => setShowCarousel(false)}
+        />
+      </View>
+
+      {showCarousel && (
+        <View style={styles.bannerContainer}>
+          {isLoading || dataBanner.length === 0 ? (
+            <Shimmer width="100%" height={150} borderRadius={12} />
+          ) : (
+            <Carousel data={dataBanner} />
+          )}
+        </View>
+      )}
+
+      <ThemedText style={styles.sectionTitle}>Ofertas Patrocinadas</ThemedText>
+      {renderAds()}
+
       <View style={styles.spaceBotton} />
     </ThemedScrollView>
   );
@@ -185,7 +220,7 @@ const styles = StyleSheet.create({
   headerview: {
     flex: 1,
     backgroundColor: COLORS.primary,
-    marginTop: 20,
+    //marginTop: 20, // da uma margem abaixo do status bar
     paddingVertical: 10,
     paddingHorizontal: 15,
   },

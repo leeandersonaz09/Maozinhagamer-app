@@ -12,7 +12,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link, useNavigation } from "expo-router";
 import styles from "../../constants/Theme/styles/HomeStyles";
-import { HomeCard, Carousel } from "../../components";
+import { HomeCard, Carousel, Shimmer } from "../../components";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../constants/Theme/theme";
 import LottieView from "lottie-react-native";
@@ -20,14 +20,9 @@ import {
   getBannerData,
   fetchWidgetsData,
   getUpdateNotes,
-} from "../../utils/apiRequests"; // Importe as funções
+} from "../../utils/apiRequests";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-/*
-Pagina trone liberty 
-Mecanica de boss
-Dicas e builds dos adms
-*/
 
 const Home = () => {
   const navigation = useNavigation();
@@ -36,161 +31,70 @@ const Home = () => {
   const [dataNotes, setDataNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Função para buscar e atualizar todos os dados do app
   const fetchAllData = async () => {
     try {
       setIsLoading(true);
-
-      // Atualizar dados do banner
       const bannerData = await getBannerData();
-      await AsyncStorage.setItem("bannerData", JSON.stringify(bannerData));
-      const cachedBannerData = await AsyncStorage.getItem("bannerData");
-      if (cachedBannerData) {
-        setDataBanner(JSON.parse(cachedBannerData));
-      }
-
-      // Atualizar dados dos widgets
+      setDataBanner(bannerData || []);
       const widgetsData = await fetchWidgetsData();
-      await AsyncStorage.setItem("widgetsData", JSON.stringify(widgetsData));
-      const cachedWidgetsData = await AsyncStorage.getItem("widgetsData");
-      if (cachedWidgetsData) {
-        setData(JSON.parse(cachedWidgetsData));
-      }
-
-      // Atualizar notas de atualização
+      setData(widgetsData || []);
       const notesData = await getUpdateNotes();
-      await AsyncStorage.setItem("notesData", JSON.stringify(notesData));
-      const cachedNotesData = await AsyncStorage.getItem("notesData");
-      if (cachedNotesData) {
-        setDataNotes(JSON.parse(cachedNotesData));
-      }
+      setDataNotes(notesData || []);
     } catch (error) {
-      console.error("Erro ao obter dados do Firestore:", error);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000); // Ajuste o tempo de espera conforme necessário
-    }
-  };
-
-  useEffect(() => {
-    // Recuperar dados do AsyncStorage quando o componente é montado
-    const retrieveData = async () => {
-      await retrieveBannerData();
-      await retrieveUpdateNotes();
-      await retrieveWidgets();
-    };
-    retrieveData();
-  }, []);
-
-  // Função para recuperar dados do banner do AsyncStorage
-  const retrieveBannerData = async () => {
-    try {
-      setIsLoading(true);
-      const getItem = await AsyncStorage.getItem("bannerData");
-      if (getItem) {
-        const parsedItem = JSON.parse(getItem);
-        setDataBanner(parsedItem);
-      }
-    } catch (error) {
-      console.error("Erro ao obter dados do AsyncStorage:", error);
+      console.error("Erro ao obter dados:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Função para recuperar notas de atualização do AsyncStorage
-  const retrieveUpdateNotes = async () => {
-    try {
-      const getItem = await AsyncStorage.getItem("notesData");
-      if (getItem) {
-        const parsedItem = JSON.parse(getItem);
-        setDataNotes(parsedItem);
-      }
-    } catch (error) {
-      console.error("Erro ao obter dados do AsyncStorage:", error);
-    }
-  };
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
-  // Função para recuperar widgets do AsyncStorage
-  const retrieveWidgets = async () => {
-    try {
-      const getItem = await AsyncStorage.getItem("widgetsData");
-      if (getItem) {
-        const parsedItem = JSON.parse(getItem);
-        setData(parsedItem);
-      }
-    } catch (error) {
-      console.error("Erro ao obter dados do AsyncStorage:", error);
-    }
-  };
-
-  // Memoizar dados para melhorar a performance
-  const memoizedData = useMemo(() => data, [data]);
-
-  // Função para renderizar os itens do FlatList JOGOS DA HOME
   const renderItems = () => {
-    return (
-      <View style={styles.WigtesContainer}>
-        <FlatList
-          data={memoizedData}
-          keyExtractor={(item) => `widget-${item.id}`} // Adicione um prefixo para garantir unicidade
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <Link
-              push
-              href={{
-                pathname: `/pages/HomeCard/${item.id}`, // Define o id diretamente no caminho da rota
-                params: {
-                  title: item.title,
-                  subCollection: JSON.stringify(item.subCollection),
-                }, // Passa os dados da sub-coleção
-              }}
-              asChild
-            >
-              <TouchableOpacity style={styles.cardTouchable}>
-                <HomeCard data={item} />
-              </TouchableOpacity>
-            </Link>
-          )}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
-        />
-      </View>
-    );
-  };
-
-  const handlePress = (uri) => {
-    if (uri.startsWith("http")) {
-      Linking.openURL(uri);
-    } else {
-      navigation.navigate(uri);
-    }
-  };
-
-  // Componente para renderizar a lista pequena CANAIS PARCEIROS
-  const SmallList = ({ item }) => {
-    return (
-      <View style={styles.SmallListContainer}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => {
-            handlePress(item.uri);
+    if (isLoading || data.length === 0) {
+      return (
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            gap: 16,
+            justifyContent: "center",
           }}
         >
-          <View style={styles.Sitem}>
-            <Image
-              source={{ uri: item.img }}
-              style={styles.SitemPhoto}
-              resizeMode="cover"
-            />
-            <View style={styles.StextContainer}>
-              <Text style={styles.SitemText}>{item.title}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-      </View>
+          {[...Array(6)].map((_, index) => (
+            <Shimmer key={index} width={180} height={120} borderRadius={8} />
+          ))}
+        </View>
+      );
+    }
+
+    return (
+      <FlatList
+        data={data}
+        keyExtractor={(item) => `widget-${item.id}`}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <Link
+            push
+            href={{
+              pathname: `/pages/HomeCard/${item.id}`,
+              params: {
+                title: item.title,
+                subCollection: JSON.stringify(item.subCollection),
+              },
+            }}
+            asChild
+          >
+            <TouchableOpacity style={styles.cardTouchable}>
+              <HomeCard data={item} />
+            </TouchableOpacity>
+          </Link>
+        )}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
+      />
     );
   };
 
@@ -203,7 +107,7 @@ const Home = () => {
       />
       <FlatList
         data={dataBanner}
-        keyExtractor={(item) => `banner-${item.id}`} // Adicione um prefixo para garantir unicidade
+        keyExtractor={(item) => `banner-${item.id}`}
         ListHeaderComponent={
           <ThemedView style={styles.container}>
             <Image
@@ -214,15 +118,9 @@ const Home = () => {
               <View style={styles.subscribeView}>
                 <View style={styles.loadingView}>
                   {isLoading ? (
-                    <View
-                      style={{
-                        flex: 1,
-                        alignSelf: "center",
-                        alignItems: "center",
-                      }}
-                    >
+                    <View style={{ alignItems: "center" }}>
                       <ThemedText style={{ fontWeight: "bold" }}>
-                        Aguenta ai que estamos no meio da ranked MW3!
+                        Aguenta aí que estamos no meio da ranked MW3!
                       </ThemedText>
                       <ThemedText style={{ fontWeight: "bold" }}>
                         Já iremos atualizar!
@@ -235,26 +133,58 @@ const Home = () => {
                     </View>
                   ) : (
                     <>
-                      <ThemedText style={styles.BannerTittle}>
-                        Novidades
-                      </ThemedText>
-                      <Carousel data={dataBanner} />
+                      {dataBanner.length === 0 ? (
+                        <Shimmer width={300} height={150} borderRadius={12} />
+                      ) : (
+                        <Carousel data={dataBanner} />
+                      )}
                     </>
                   )}
-                  {dataNotes ? (
-                    <>
-                      <ThemedText style={styles.SmallListTittle}>
-                        Canais Parceiros
-                      </ThemedText>
-                      <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                        data={dataNotes}
-                        keyExtractor={(item) => `note-${item.id}`} // Adicione um prefixo para garantir unicidade
-                        renderItem={({ item }) => <SmallList item={item} />}
-                      />
-                    </>
-                  ) : null}
+                  <ThemedText style={styles.SmallListTittle}>
+                    Canais Parceiros
+                  </ThemedText>
+                  {isLoading || dataNotes.length === 0 ? (
+                    <FlatList
+                      horizontal
+                      data={[...Array(3)]}
+                      ItemSeparatorComponent={() => (
+                        <View style={{ width: 16 }} />
+                      )} // Espaçamento horizontal de 16px
+                      renderItem={() => (
+                        <Shimmer width={150} height={80} borderRadius={8} />
+                      )}
+                      keyExtractor={(_, index) => `shimmer-note-${index}`}
+                      showsHorizontalScrollIndicator={false} // Esconde a barra horizontal
+                    />
+                  ) : (
+                    <FlatList
+                      horizontal
+                      data={dataNotes}
+                      keyExtractor={(item) => `note-${item.id}`}
+                      showsHorizontalScrollIndicator={false} // Esconde a barra horizontal
+                      renderItem={({ item }) => (
+                        <View style={styles.SmallListContainer}>
+                          <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => Linking.openURL(item.uri)}
+                          >
+                            <View style={styles.Sitem}>
+                              <Image
+                                source={{ uri: item.img }}
+                                style={styles.SitemPhoto}
+                                resizeMode="cover"
+                              />
+                              <View style={styles.StextContainer}>
+                                <Text style={styles.SitemText}>
+                                  {item.title}
+                                </Text>
+                              </View>
+                            </View>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    />
+                  )}
                   <ThemedText style={styles.WidgetsTittle}>Jogos</ThemedText>
                   {renderItems()}
                 </View>

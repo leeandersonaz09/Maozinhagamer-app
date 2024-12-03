@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Platform, SafeAreaView, TouchableOpacity, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { HapticTab } from "@/components/HapticTab";
@@ -10,6 +10,9 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styles from "../../constants/Theme/styles/TabsStyles";
 import { COLORS, animations } from "../../constants/Theme/theme";
+import { useNetworkStatus } from "@/hooks/useNetworkStatus"; // Importe o hook
+import NoConnectionScreen from "../../components/NoConnectionScreen"; // Importe o componente de desconexão
+
 import {
   AntDesign,
   MaterialIcons,
@@ -91,6 +94,11 @@ const TabButton = (props) => {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const isConnected = useNetworkStatus(); // Verifica a conectividade de rede
+
+  if (!isConnected) {
+    return <NoConnectionScreen />; // Exibe tela de erro de rede se a conexão estiver indisponível
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

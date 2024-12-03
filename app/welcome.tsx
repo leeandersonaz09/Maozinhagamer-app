@@ -1,11 +1,5 @@
 import React, { useRef, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
 import { COLORS } from "../constants/Theme/theme";
@@ -23,7 +17,7 @@ import Animated, {
   interpolateColor,
 } from "react-native-reanimated";
 import LottieView from "lottie-react-native";
-
+import { StatusBar } from "expo-status-bar";
 const { width } = Dimensions.get("window");
 
 // Tipos para as slides
@@ -268,6 +262,7 @@ const Welcome: React.FC = () => {
           </View>
         </View>
       </View>
+      <StatusBar style="light" backgroundColor={COLORS.primary} />
     </GestureHandlerRootView>
   );
 };

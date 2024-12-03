@@ -7,13 +7,22 @@ const styles = StyleSheet.create({
     flex: 1,
     //backgroundColor: COLORS.white,
   },
-
+  itemContainer: {
+    flex: 1,
+    padding: 10,
+    margin: 5,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 8,
+  },
+  listContainer: {
+    padding: 10,
+  },
   // Header Image
   headerImage: {
     width: "100%",
     height: height * 0.25, // Proporcional à tela
     resizeMode: "cover", // Evita distorção,
-    marginTop: 10,
+    //marginTop: 10,
   },
   contentContainer: {
     position: "relative",

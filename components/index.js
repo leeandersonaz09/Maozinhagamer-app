@@ -9,7 +9,7 @@ import Button from "./Button";
 import PopupMenu from "./PopupMenu";
 import Separator from "./Separador";
 import Badge from "./Badge/index";
-
+import Shimmer from "./Shimmer/index";
 export {
   Header,
   Card,
@@ -22,4 +22,5 @@ export {
   PopupMenu,
   Separator,
   Badge,
+  Shimmer,
 };
