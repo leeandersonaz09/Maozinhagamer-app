@@ -10,6 +10,8 @@ import PopupMenu from "./PopupMenu";
 import Separator from "./Separador";
 import Badge from "./Badge/index";
 import Shimmer from "./Shimmer/index";
+import ModuleCard from "./ModuleCard/index";
+
 export {
   Header,
   Card,
@@ -23,4 +25,5 @@ export {
   Separator,
   Badge,
   Shimmer,
+  ModuleCard,
 };

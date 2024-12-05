@@ -99,7 +99,7 @@ const Patrocinador = () => {
             <Shimmer
               width={250}
               height={200}
-              style={{ borderRadius: 8, marginRight: 10 }}
+              style={{ borderRadius: 8, marginRight: 10, gap: 10 }}
             />
           )}
           keyExtractor={(_, index) => `shimmer-ad-${index}`}
@@ -172,7 +172,12 @@ const Patrocinador = () => {
       {showCarousel && (
         <View style={styles.bannerContainer}>
           {isLoading || dataBanner.length === 0 ? (
-            <Shimmer width="100%" height={150} borderRadius={12} />
+            <Shimmer
+              width="100%"
+              height={150}
+              borderRadius={12}
+              style={{ marginLeft: 50 }}
+            />
           ) : (
             <Carousel data={dataBanner} />
           )}

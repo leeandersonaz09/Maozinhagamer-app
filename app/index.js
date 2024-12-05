@@ -33,21 +33,18 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const isFontsLoaded = useLoadFonts();
   const isConnected = useNetworkStatus(); // Usar o hook de verificação de conexão
-
   /*
   //clearIsNew().then((clean) => console.log(clean)).catch((error) => console.error("Erro:", error));
   (async () => {
     const result = await clearAsyncStorage();
     console.log(result); // Mostra a mensagem de sucesso ou erro
   })();
-
-  */
-
+*/
   const checkIsNew = async () => {
     try {
       const value = await AsyncStorage.getItem("isnewinApp");
       console.log("Valor retornado por AsyncStorage.getItem:", value); // Log do valor retornado
-      if (value !== null) {
+      if (value === null) {
         setIsNew(false);
         router.replace("/(tabs)");
       } else {

@@ -29,6 +29,7 @@ const HomeCard = () => {
       Linking.openURL(uri);
     } else {
       // Redirecionamento interno usando o router do expo-router
+      console.log(uri);
       router.push({
         pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
         params: {
