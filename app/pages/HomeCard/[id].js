@@ -31,8 +31,8 @@ const HomeCard = () => {
       // Redirecionamento interno usando o router do expo-router
       console.log(uri);
       router.push({
-        //pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
-        pathname: `/pages/TFDBuilds/${id}`, // Caminho dinâmico
+        pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
+        //pathname: `/pages/TFDBuilds/${id}`, // Caminho dinâmico
         params: {
           title: item.title,
           subCollection: JSON.stringify(item.loadouts),

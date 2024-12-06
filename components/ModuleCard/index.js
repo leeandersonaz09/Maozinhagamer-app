@@ -6,8 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Linking,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import ModuleImgBg from "../../assets/images/Module-bg.png";
 
 const ModuleCard = ({ module }) => {
   const {
@@ -34,27 +36,33 @@ const ModuleCard = ({ module }) => {
   return (
     <View style={styles.cardContainer}>
       <TouchableOpacity
-        style={styles.moduleCard}
+        //style={styles.moduleCard}
         onPress={() => Linking.openURL(moduleLink)} // Abre o link do módulo
       >
-        <View style={styles.cardModuleClass}>
-          <Image source={{ uri: classIcon }} style={styles.classIcon} />
-        </View>
-        <View style={styles.socketBanner}>
-          <Image source={{ uri: socketIcon }} style={styles.socketIcon} />
-          <Text style={styles.socketValue}>{socketValue}</Text>
-        </View>
-        <LinearGradient
-          colors={colors}
-          start={{ x: 0.1, y: 0.1 }}
-          end={{ x: 0.9, y: 0.9 }}
-          style={styles.moduleImg}
+        <ImageBackground
+          source={ModuleImgBg}
+          style={styles.moduleCard}
+          imageStyle={{ borderRadius: 10 }}
         >
-          <Image source={{ uri: moduleImage }} style={styles.moduleImage} />
-        </LinearGradient>
-        <View style={styles.moduleName}>
-          <Text style={styles.moduleText}>{name}</Text>
-        </View>
+          <View style={styles.cardModuleClass}>
+            <Image source={{ uri: classIcon }} style={styles.classIcon} />
+          </View>
+          <View style={styles.socketBanner}>
+            <Image source={{ uri: socketIcon }} style={styles.socketIcon} />
+            <Text style={styles.socketValue}>{socketValue}</Text>
+          </View>
+          <LinearGradient
+            colors={colors}
+            start={{ x: 0.1, y: 0.1 }}
+            end={{ x: 0.9, y: 0.9 }}
+            style={styles.moduleImg}
+          >
+            <Image source={{ uri: moduleImage }} style={styles.moduleImage} />
+          </LinearGradient>
+          <View style={styles.moduleName}>
+            <Text style={styles.moduleText}>{name}</Text>
+          </View>
+        </ImageBackground>
       </TouchableOpacity>
       <View style={styles.moduleType}>
         <Text style={styles.moduleTypeText}>{type}</Text>
@@ -78,8 +86,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     width: 150,
-    minHeight: 160, // Defina uma altura mínima
+    minHeight: 180, // Defina uma altura mínima
     height: "auto", // Permite que a altura se ajuste conforme o conteúdo
+    // overflow: "hidden", // Para evitar que conteúdo transborde
   },
   cardModuleClass: {
     position: "absolute",

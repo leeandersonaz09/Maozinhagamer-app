@@ -1,165 +1,120 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
-  Image,
+  ImageBackground,
+  Text,
   FlatList,
   TouchableOpacity,
+  Linking,
 } from "react-native";
-import ModuleCard from "../../../components/ModuleCard";
-import modulesData from "../../../utils/modules_data.json"; // JSON com os detalhes dos módulos
+import { Header } from "../../../components/index.js";
+import { StatusBar } from "expo-status-bar";
+import { COLORS } from "../../../constants/Theme/theme.js";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import DescendantBuild from "./Descendant.js";
 
-const data = {
-  characters: [
-    {
-      name: "Ultimate Lepic",
-      image:
-        "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_PC/Big/Icon_PC_List_001_U01.png",
-      modules: [
-        "Maximize Electric Resist",
-        "Nimble Fingers",
-        "Fire Specialist",
-        "Technique Manual",
-        "Supercooled Kuiper Round",
-        "Toxic Gunbarrel",
-        "Impact Round Charge Improvement",
-      ],
-    },
-  ],
-  weapons: [
-    {
-      name: "Flame Saber",
-      image:
-        "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1005_A001.png",
-      modules: ["Heat Antibody", "Strong Mentality"],
-    },
-  ],
-};
+const TFDBuilds = () => {
+  const { title, subCollection } = useLocalSearchParams();
+  const router = useRouter(); // Hook para navegação no expo-router
+  console.log(subCollection);
+  // Parse subCollection de volta para objeto
+  const parsedSubCollection = JSON.parse(subCollection);
 
-const TabsExample = () => {
-  const [activeTab, setActiveTab] = useState("Modules");
+  // Função para lidar com o redirecionamento
+  const handlePress = (uri, id, item) => {
+    if (uri.startsWith("http")) {
+      // Redirecionamento para URLs externas
+      Linking.openURL(uri);
+    } else {
+      // Redirecionamento interno usando o router do expo-router
+      console.log(uri);
+      router.push({
+        // pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
+        pathname: `/pages/TFDBuilds/Descendant`, // Caminho dinâmico
+        params: {
+          title: item.title,
+          subCollection: JSON.stringify(item.loadouts),
+        },
+      });
+    }
+  };
 
-  const renderModules = (item) => {
-    const moduleDetails = modulesData.find(
-      (mod) => mod["Module Name"] === item
-    );
-
-    if (!moduleDetails) {
-      return (
-        <View style={styles.moduleCard}>
-          <Text style={styles.moduleName}>Module not found: {item}</Text>
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => handlePress(item.uri, item.id, item)}
+    >
+      <ImageBackground
+        source={{ uri: item.img }}
+        style={styles.backgroundImage}
+        imageStyle={{ borderRadius: 15 }}
+      >
+        <View style={styles.overlay}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.description}>{item.description}</Text>
         </View>
-      );
-    }
-
-    // Utiliza o componente `ModuleCard`
-    return <ModuleCard module={moduleDetails} />;
-  };
-
-  const renderCharactersOrWeapons = (type) => {
-    const dataList = type === "Modules" ? data.characters : data.weapons;
-
-    if (!dataList || dataList.length === 0) {
-      return (
-        <Text style={styles.placeholderText}>No data available for {type}</Text>
-      );
-    }
-
-    return (
-      <FlatList
-        data={dataList}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <View style={styles.characterCard}>
-            <Image source={{ uri: item.image }} style={styles.characterImage} />
-            <Text style={styles.characterName}>{item.name}</Text>
-            <FlatList
-              data={item.modules}
-              keyExtractor={(module, index) => `module-${index}`}
-              renderItem={({ item }) => renderModules(item)}
-              numColumns={2} // Exibe os módulos em duas colunas
-              columnWrapperStyle={styles.row} // Ajusta espaçamento entre colunas
-              contentContainerStyle={styles.listContent} // Padding geral para a lista
-            />
-          </View>
-        )}
-      />
-    );
-  };
-
-  const renderDescendantBuild = () => (
-    <Text style={styles.placeholderText}>
-      Descendant Build content coming soon...
-    </Text>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.tabBar}>
-        {["Modules", "Weapons", "Descendant Build"].map((tab) => (
-          <TouchableOpacity
-            key={tab}
-            onPress={() => setActiveTab(tab)}
-            style={[styles.tab, activeTab === tab && styles.activeTab]}
-          >
-            <Text style={styles.tabText}>{tab}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.content}>
-        {activeTab === "Modules" || activeTab === "Weapons"
-          ? renderCharactersOrWeapons(activeTab)
-          : renderDescendantBuild()}
-      </View>
-    </View>
+    <>
+      <StatusBar backgroundColor={COLORS.primary} style="light" />
+      <Header replace HeaderTittle={title} href={"/(tabs)"} />
+      <ThemedView style={styles.container}>
+        <FlatList
+          data={parsedSubCollection}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.FlatListContainer}
+        />
+      </ThemedView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#030621" },
-  tabBar: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "#1b253d",
-    padding: 10,
+  container: {
+    flex: 1,
   },
-  tab: { padding: 10 },
-  activeTab: { borderBottomWidth: 2, borderBottomColor: "#00dc82" },
-  tabText: { color: "#fff" },
-  content: { flex: 1, padding: 10 },
-  characterCard: {
-    marginBottom: 20, // Espaço inferior
-    alignItems: "center", // Centraliza horizontalmente
-    justifyContent: "center", // Centraliza verticalmente
+  FlatListContainer: {
+    padding: 16,
   },
-  characterImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-    alignSelf: "center", // Garante que a própria imagem se alinhe ao centro
+  card: {
+    marginBottom: 16,
+    borderRadius: 15,
+    overflow: "hidden",
   },
-  characterName: {
-    color: "#fff",
-    fontSize: 16,
-    textAlign: "center",
-    marginVertical: 5,
-  },
-  row: {
-    justifyContent: "space-between", // Espaço entre colunas no FlatList
-  },
-  listContent: {
-    paddingBottom: 20, // Padding inferior para evitar corte
-  },
-  moduleCard: {
-    margin: 5,
+  backgroundImage: {
+    justifyContent: "center",
     alignItems: "center",
-    padding: 10,
-    backgroundColor: "#1b253d",
-    borderRadius: 8,
+    width: "100%",
+    height: 100,
   },
-  moduleName: { color: "#fff", fontSize: 12, textAlign: "center" },
-  placeholderText: { color: "#94a3b8", textAlign: "center", marginTop: 20 },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.3)", // Fundo escuro semi-transparente
+    padding: 20,
+    borderRadius: 15,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+    marginBottom: 5,
+  },
+  description: {
+    fontSize: 14,
+    color: "white",
+    textAlign: "center",
+  },
 });
 
-export default TabsExample;
+export default TFDBuilds;
