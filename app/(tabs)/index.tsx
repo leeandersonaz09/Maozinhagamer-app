@@ -151,7 +151,11 @@ const Home = () => {
                         <View style={{ width: 16 }} />
                       )} // Espaçamento horizontal de 16px
                       renderItem={() => (
+                        <View  style={{
+                          paddingLeft:10
+                        }}>
                         <Shimmer width={150} height={80} borderRadius={8} />
+                        </View>
                       )}
                       keyExtractor={(_, index) => `shimmer-note-${index}`}
                       showsHorizontalScrollIndicator={false} // Esconde a barra horizontal
@@ -186,7 +190,9 @@ const Home = () => {
                     />
                   )}
                   <ThemedText style={styles.WidgetsTittle}>Jogos</ThemedText>
+                  <View style={{marginBottom:50}}> 
                   {renderItems()}
+                  </View>
                 </View>
               </View>
             </ThemedView>

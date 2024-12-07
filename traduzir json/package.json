@@ -1,0 +1,19 @@
+{
+  "name": "translate-json",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.0",
+    "axios": "^1.7.9",
+    "google-translate-api": "^2.3.0",
+    "i18next": "^24.0.5",
+    "i18next-fs-backend": "^2.6.0"
+  }
+}

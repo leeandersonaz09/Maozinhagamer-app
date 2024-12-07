@@ -80,6 +80,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 15,
     overflow: "hidden",
+    backgroundColor:COLORS.primary,
+    borderWidth:1,
+    borderColor:"#ff277c"
   },
   backgroundImage: {
     justifyContent: "center",

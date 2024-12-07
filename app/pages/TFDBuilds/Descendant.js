@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,22 +8,38 @@ import {
   TouchableOpacity,
 } from "react-native";
 import ModuleCard from "../../../components/ModuleCard";
-import modulesData from "../../../utils/modules_data.json"; // JSON com os detalhes dos módulos
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../../constants/Theme/theme.js";
 import { Header, Separator } from "../../../components/index.js";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import * as Localization from "expo-localization";
 
 const DescendantBuild = () => {
-  const [activeTab, setActiveTab] = useState("Modules");
+  const [activeTab, setActiveTab] = useState("Módulos");
+  const [modulesData, setModulesData] = useState([]);
   const { title, subCollection } = useLocalSearchParams();
   const router = useRouter(); // Hook para navegação no expo-router
-  // Parse subCollection de volta para objeto
-  const parsedSubCollection = JSON.parse(subCollection);
+  const locales = Localization.getLocales();
+  const currentLocale = locales[0].languageTag; // O primeiro item geralmente é o idioma preferido
 
-  //console.log(parsedSubCollection);
+  const parsedSubCollection = JSON.parse(subCollection); // Parse subCollection de volta para objeto
+
+  // Definindo os dados com base na localidade
+  useEffect(() => {
+    let data;
+    if (currentLocale.startsWith("en")) {
+      //data = require("../../../utils/locales/en/en_modules_data.json");
+      data = require("../../../utils/locales/pt/pt_modules_data.json");
+    } else if (currentLocale.startsWith("pt")) {
+      data = require("../../../utils/locales/pt/pt_modules_data.json");
+    } else {
+      //data = require("../../../utils/locales/en/en_modules_data.json"); // Default para inglês
+      data = require("../../../utils/locales/pt/pt_modules_data.json");
+    }
+    setModulesData(data); // Atualiza o estado com os dados do módulo correspondente
+  }, [currentLocale]); // Atualiza os dados sempre que a localidade muda
 
   // Preparando os dados para renderização
   const data = {
@@ -61,7 +77,7 @@ const DescendantBuild = () => {
   };
 
   const renderCharactersOrWeapons = (type) => {
-    const dataList = type === "Modules" ? data.characters : data.weapons;
+    const dataList = type === "Módulos" ? data.characters : data.weapons;
 
     if (!dataList || dataList.length === 0) {
       return (
@@ -104,7 +120,7 @@ const DescendantBuild = () => {
       <Header replace HeaderTittle={title} href={"/(tabs)"} />
       <View style={styles.container}>
         <View style={styles.tabBar}>
-          {["Modules", "Weapons", "Descendant Build"].map((tab) => (
+          {["Módulos", "Armas", "Descendant Build"].map((tab) => (
             <TouchableOpacity
               key={tab}
               onPress={() => setActiveTab(tab)}
@@ -115,7 +131,7 @@ const DescendantBuild = () => {
           ))}
         </View>
         <View style={styles.content}>
-          {activeTab === "Modules" || activeTab === "Weapons"
+          {activeTab === "Módulos" || activeTab === "Armas"
             ? renderCharactersOrWeapons(activeTab)
             : renderDescendantBuild()}
         </View>
@@ -147,6 +163,9 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     resizeMode: "contain",
     alignSelf: "center",
+    borderWidth: 1,
+    borderRadius:80,
+    borderColor:"#fff"
   },
   characterName: {
     backgroundColor: COLORS.primary,
