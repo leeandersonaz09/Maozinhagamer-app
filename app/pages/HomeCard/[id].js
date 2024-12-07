@@ -17,6 +17,7 @@ import { ThemedView } from "@/components/ThemedView";
 
 const HomeCard = () => {
   const { title, subCollection } = useLocalSearchParams();
+
   const router = useRouter(); // Hook para navegação no expo-router
 
   // Parse subCollection de volta para objeto

@@ -15,38 +15,33 @@ import { COLORS } from "../../../constants/Theme/theme.js";
 import { Header, Separator } from "../../../components/index.js";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useColorScheme } from "react-native"; // Importando o hook useColorScheme
-
-const data = {
-  characters: [
-    {
-      name: "Ultimate Lepic",
-      image:
-        "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_PC/Big/Icon_PC_List_001_U01.png",
-      modules: [
-        "Maximize Electric Resist",
-        "Nimble Fingers",
-        "Fire Specialist",
-        "Technique Manual",
-        "Supercooled Kuiper Round",
-        "Toxic Gunbarrel",
-        "Impact Round Charge Improvement",
-      ],
-    },
-  ],
-  weapons: [
-    {
-      name: "Flame Saber",
-      image:
-        "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1005_A001.png",
-      modules: ["Heat Antibody", "Strong Mentality"],
-    },
-  ],
-};
 
 const DescendantBuild = () => {
   const [activeTab, setActiveTab] = useState("Modules");
-  const { id, title, subCollection } = useLocalSearchParams();
+  const { title, subCollection } = useLocalSearchParams();
+  const router = useRouter(); // Hook para navegação no expo-router
+  // Parse subCollection de volta para objeto
+  const parsedSubCollection = JSON.parse(subCollection);
+
+  //console.log(parsedSubCollection);
+
+  // Preparando os dados para renderização
+  const data = {
+    characters: [
+      {
+        name: parsedSubCollection.name,
+        image: parsedSubCollection.image,
+        modules: parsedSubCollection.modules,
+      },
+    ],
+    weapons: [
+      {
+        name: parsedSubCollection.weapons.name,
+        image: parsedSubCollection.weapons.image,
+        modules: parsedSubCollection.weapons.modules,
+      },
+    ],
+  };
 
   const renderModules = (item) => {
     const moduleDetails = modulesData.find(
@@ -142,16 +137,16 @@ const styles = StyleSheet.create({
   tabText: { color: "#fff" },
   content: { flex: 1, padding: 10 },
   characterCard: {
-    marginBottom: 20, // Espaço inferior
-    alignItems: "center", // Centraliza horizontalmente
-    justifyContent: "center", // Centraliza verticalmente
+    marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   characterImage: {
     width: "100%",
     height: 100,
     maxWidth: 300,
     resizeMode: "contain",
-    alignSelf: "center", // Garante que a própria imagem se alinhe ao centro
+    alignSelf: "center",
   },
   characterName: {
     backgroundColor: COLORS.primary,
@@ -168,10 +163,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   row: {
-    justifyContent: "space-between", // Espaço entre colunas no FlatList
+    justifyContent: "space-between",
   },
   listContent: {
-    paddingBottom: 20, // Padding inferior para evitar corte
+    paddingBottom: 20,
   },
   moduleCard: {
     margin: 5,

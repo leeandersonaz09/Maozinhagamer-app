@@ -19,27 +19,20 @@ import DescendantBuild from "./Descendant.js";
 const TFDBuilds = () => {
   const { title, subCollection } = useLocalSearchParams();
   const router = useRouter(); // Hook para navegação no expo-router
-  console.log(subCollection);
   // Parse subCollection de volta para objeto
   const parsedSubCollection = JSON.parse(subCollection);
 
   // Função para lidar com o redirecionamento
   const handlePress = (uri, id, item) => {
-    if (uri.startsWith("http")) {
-      // Redirecionamento para URLs externas
-      Linking.openURL(uri);
-    } else {
-      // Redirecionamento interno usando o router do expo-router
-      console.log(uri);
-      router.push({
-        // pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
-        pathname: `/pages/TFDBuilds/Descendant`, // Caminho dinâmico
-        params: {
-          title: item.title,
-          subCollection: JSON.stringify(item.loadouts),
-        },
-      });
-    }
+    //console.log(item.title);
+    router.push({
+      // pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
+      pathname: `/pages/TFDBuilds/Descendant`, // Caminho dinâmico
+      params: {
+        title: item.name,
+        subCollection: JSON.stringify(item),
+      },
+    });
   };
 
   const renderItem = ({ item }) => (
@@ -48,12 +41,12 @@ const TFDBuilds = () => {
       onPress={() => handlePress(item.uri, item.id, item)}
     >
       <ImageBackground
-        source={{ uri: item.img }}
+        source={{ uri: item.image }}
         style={styles.backgroundImage}
         imageStyle={{ borderRadius: 15 }}
       >
         <View style={styles.overlay}>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{item.name}</Text>
           <Text style={styles.description}>{item.description}</Text>
         </View>
       </ImageBackground>
