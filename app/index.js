@@ -44,11 +44,11 @@ export default function RootLayout() {
     try {
       const value = await AsyncStorage.getItem("isnewinApp");
       console.log("Valor retornado por AsyncStorage.getItem:", value); // Log do valor retornado
-      if (value !== null) {
-        setIsNew(false);
+      if (value === null) {
+        //setIsNew(false);
         router.replace("/(tabs)");
       } else {
-        setIsNew(true);
+        //setIsNew(true);
         router.push("/welcome");
       }
     } catch (error) {

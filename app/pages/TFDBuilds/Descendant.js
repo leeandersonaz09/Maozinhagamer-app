@@ -16,6 +16,35 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import * as Localization from "expo-localization";
 
+const descendantBuildData = {
+  character: {
+    name: "Ultimate Lepic",
+    image: "https://example.com/character-image.png", // Substitua pela URL da imagem
+  },
+  reactor: {
+    name: "Reactor",
+    image: "https://example.com/reactor-image.png", // Imagem do reator
+  },
+  externalComponents: [
+    {
+      name: "Slayer Auxiliary Power",
+      image: "https://example.com/component1.png",
+    },
+    {
+      name: "Slayer Sensor",
+      image: "https://example.com/component2.png",
+    },
+    {
+      name: "Slayer Memory",
+      image: "https://example.com/component3.png",
+    },
+    {
+      name: "Slayer Processor",
+      image: "https://example.com/component4.png",
+    },
+  ],
+};
+
 const DescendantBuild = () => {
   const [activeTab, setActiveTab] = useState("Módulos");
   const [modulesData, setModulesData] = useState([]);
@@ -55,6 +84,12 @@ const DescendantBuild = () => {
         name: parsedSubCollection.weapons.name,
         image: parsedSubCollection.weapons.image,
         modules: parsedSubCollection.weapons.modules,
+      },
+    ],
+    components: [
+      {
+        name: parsedSubCollection.components.name,
+        image: parsedSubCollection.components.image,
       },
     ],
   };
@@ -108,11 +143,47 @@ const DescendantBuild = () => {
     );
   };
 
-  const renderDescendantBuild = () => (
-    <Text style={styles.placeholderText}>
-      Descendant Build content coming soon...
-    </Text>
-  );
+  const renderDescendantBuild = () => {
+    const { character, reactor, externalComponents } = descendantBuildData;
+
+    return (
+      <View style={styles.descendantContainer}>
+        {/* Nome e imagem do personagem */}
+        <View style={styles.characterSection}>
+          <Image
+            source={{ uri: character.image }}
+            style={styles.characterImage}
+          />
+          <Text style={styles.characterName}>{character.name}</Text>
+        </View>
+
+        {/* Reator */}
+        <View style={styles.reactorSection}>
+          <Text style={styles.sectionTitle}>Reactor</Text>
+          <Image source={{ uri: reactor.image }} style={styles.reactorImage} />
+        </View>
+
+        {/* Componentes externos */}
+        <View style={styles.componentsSection}>
+          <Text style={styles.sectionTitle}>External Components</Text>
+          <FlatList
+            data={externalComponents}
+            keyExtractor={(item) => item.name}
+            numColumns={2}
+            renderItem={({ item }) => (
+              <View style={styles.componentCard}>
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.componentImage}
+                />
+                <Text style={styles.componentName}>{item.name}</Text>
+              </View>
+            )}
+          />
+        </View>
+      </View>
+    );
+  };
 
   return (
     <>
@@ -164,8 +235,8 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: "center",
     borderWidth: 1,
-    borderRadius:80,
-    borderColor:"#fff"
+    borderRadius: 80,
+    borderColor: "#fff",
   },
   characterName: {
     backgroundColor: COLORS.primary,
@@ -196,6 +267,53 @@ const styles = StyleSheet.create({
   },
   moduleName: { color: "#fff", fontSize: 12, textAlign: "center" },
   placeholderText: { color: "#94a3b8", textAlign: "center", marginTop: 20 },
+  descendantContainer: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
+    backgroundColor: "#030621",
+  },
+  characterSection: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  reactorSection: {
+    marginVertical: 20,
+    alignItems: "center",
+  },
+  componentsSection: {
+    marginVertical: 20,
+  },
+  sectionTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  reactorImage: {
+    width: 120,
+    height: 120,
+    resizeMode: "contain",
+  },
+  componentCard: {
+    flex: 1,
+    alignItems: "center",
+    margin: 10,
+    backgroundColor: "#1b253d",
+    borderRadius: 8,
+    padding: 10,
+  },
+  componentImage: {
+    width: 60,
+    height: 60,
+    resizeMode: "contain",
+    marginBottom: 5,
+  },
+  componentName: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "center",
+  },
 });
 
 export default DescendantBuild;
