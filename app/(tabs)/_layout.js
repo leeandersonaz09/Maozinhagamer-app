@@ -1,11 +1,7 @@
 import { Tabs } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
-import { Platform, SafeAreaView, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styles from "../../constants/Theme/styles/TabsStyles";
@@ -16,7 +12,6 @@ import NoConnectionScreen from "../../components/NoConnectionScreen"; // Importe
 import {
   AntDesign,
   MaterialIcons,
-  MaterialCommunityIcons,
   FontAwesome5,
   Octicons,
 } from "@expo/vector-icons";

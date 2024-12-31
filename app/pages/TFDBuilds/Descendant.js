@@ -6,92 +6,136 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Linking,
 } from "react-native";
-import ModuleCard from "../../../components/ModuleCard";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../../constants/Theme/theme.js";
-import { Header, Separator } from "../../../components/index.js";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import * as Localization from "expo-localization";
-
-const descendantBuildData = {
-  character: {
-    name: "Ultimate Lepic",
-    image: "https://example.com/character-image.png", // Substitua pela URL da imagem
-  },
-  reactor: {
-    name: "Reactor",
-    image: "https://example.com/reactor-image.png", // Imagem do reator
-  },
-  externalComponents: [
-    {
-      name: "Slayer Auxiliary Power",
-      image: "https://example.com/component1.png",
-    },
-    {
-      name: "Slayer Sensor",
-      image: "https://example.com/component2.png",
-    },
-    {
-      name: "Slayer Memory",
-      image: "https://example.com/component3.png",
-    },
-    {
-      name: "Slayer Processor",
-      image: "https://example.com/component4.png",
-    },
-  ],
-};
+import {
+  Header,
+  Separator,
+  CardComponent,
+  ModuleCard,
+  ReactorCard,
+} from "../../../components/index.js";
 
 const DescendantBuild = () => {
   const [activeTab, setActiveTab] = useState("Módulos");
   const [modulesData, setModulesData] = useState([]);
+  const [charactersData, setCharactersData] = useState([]);
+  const [reactorsData, setReactorsData] = useState([]);
+  const [weponsData, setWeponData] = useState([]);
+  const [componentsData, setComponentsData] = useState([]);
   const { title, subCollection } = useLocalSearchParams();
-  const router = useRouter(); // Hook para navegação no expo-router
-  const locales = Localization.getLocales();
-  const currentLocale = locales[0].languageTag; // O primeiro item geralmente é o idioma preferido
+  const router = useRouter();
 
-  const parsedSubCollection = JSON.parse(subCollection); // Parse subCollection de volta para objeto
-
-  // Definindo os dados com base na localidade
+  const parsedSubCollection = JSON.parse(subCollection);
+  // console.log(parsedSubCollection);
   useEffect(() => {
-    let data;
-    if (currentLocale.startsWith("en")) {
-      //data = require("../../../utils/locales/en/en_modules_data.json");
-      data = require("../../../utils/locales/pt/pt_modules_data.json");
-    } else if (currentLocale.startsWith("pt")) {
-      data = require("../../../utils/locales/pt/pt_modules_data.json");
-    } else {
-      //data = require("../../../utils/locales/en/en_modules_data.json"); // Default para inglês
-      data = require("../../../utils/locales/pt/pt_modules_data.json");
-    }
-    setModulesData(data); // Atualiza o estado com os dados do módulo correspondente
-  }, [currentLocale]); // Atualiza os dados sempre que a localidade muda
+    const data = require("../../../utils/locales/pt/pt_modules_data.json");
+    const reactors = require("../../../utils/locales/pt/reactors_data.json");
+    const characters = require("../../../utils/locales/pt/characters_data.json");
+    const components = require("../../../utils/locales/pt/components_data.json");
+    const wepons = require("../../../utils/locales/pt/weapons_data.json");
 
-  // Preparando os dados para renderização
+    if (
+      modulesData.length === 0 &&
+      reactorsData.length === 0 &&
+      weponsData.length === 0 &&
+      componentsData.length === 0
+    ) {
+      setModulesData(data);
+      setReactorsData(reactors);
+      setComponentsData(components);
+      setCharactersData(characters);
+      setWeponData(wepons);
+    }
+  }, []);
+
   const data = {
     characters: [
       {
-        name: parsedSubCollection.name,
-        image: parsedSubCollection.image,
-        modules: parsedSubCollection.modules,
+        name: parsedSubCollection?.name || "Desconhecido",
+        modules: parsedSubCollection?.modules || [],
       },
     ],
     weapons: [
       {
-        name: parsedSubCollection.weapons.name,
-        image: parsedSubCollection.weapons.image,
-        modules: parsedSubCollection.weapons.modules,
+        name: parsedSubCollection?.weapons?.name || "Desconhecido",
+        image: parsedSubCollection?.weapons?.image || "",
+        modules: parsedSubCollection?.weapons?.modules || [],
       },
     ],
-    components: [
+    descendantBuild: [
       {
-        name: parsedSubCollection.components.name,
-        image: parsedSubCollection.components.image,
+        name: parsedSubCollection?.descendantBuild?.name || "Desconhecido",
+        modules: parsedSubCollection?.descendantBuild?.externalComponents || [],
       },
     ],
+  };
+
+  const RenderCharacter = ({ name }) => {
+    const characterDetails = charactersData.find(
+      (char) => char["Character Name"] === name
+    );
+
+    if (!characterDetails) {
+      return (
+        <View style={styles.moduleCard}>
+          <Text style={styles.moduleName}>
+            Personagem não encontrado: {name}
+          </Text>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.characterSection}>
+        <TouchableOpacity
+          onPress={() => Linking.openURL(characterDetails["Character Link"])}
+        >
+          <Image
+            source={{ uri: characterDetails["Character Image"] }}
+            style={styles.characterImage}
+          />
+        </TouchableOpacity>
+        <Text style={styles.characterName}>
+          {characterDetails["Character Name"]}
+        </Text>
+      </View>
+    );
+  };
+
+  const RenderWepons = ({ name }) => {
+    const weponsDetails = weponsData.find(
+      (char) => char["Weapon Name"] === name
+    );
+
+    // Extrair dados
+    const {
+      "Weapon Name": weponName,
+      "Weapon Image": image,
+      Rarity: rarity,
+      "Weapon Link": weponLink,
+    } = weponsDetails;
+    if (!weponsDetails) {
+      return (
+        <View style={styles.moduleCard}>
+          <Text style={styles.moduleName}>
+            Personagem não encontrado: {name}
+          </Text>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.characterSection}>
+        <TouchableOpacity onPress={() => Linking.openURL(weponLink)}>
+          <Image source={{ uri: image }} style={styles.weponImage} />
+        </TouchableOpacity>
+        <Text style={styles.weponName}>{weponName}</Text>
+      </View>
+    );
   };
 
   const renderModules = (item) => {
@@ -106,79 +150,114 @@ const DescendantBuild = () => {
         </View>
       );
     }
-
-    // Utiliza o componente `ModuleCard`
     return <ModuleCard module={moduleDetails} />;
   };
 
-  const renderCharactersOrWeapons = (type) => {
-    const dataList = type === "Módulos" ? data.characters : data.weapons;
+  const ReactorsComponent = ({ name }) => {
+    const reactorsDetails = reactorsData.find(
+      (mod) => mod["Reactor Name"] === name
+    );
 
-    if (!dataList || dataList.length === 0) {
+    if (!reactorsDetails) {
       return (
-        <Text style={styles.placeholderText}>No data available for {type}</Text>
+        <View style={styles.moduleCard}>
+          <Text style={styles.moduleName}>Reator não encontrado: {name}</Text>
+        </View>
+      );
+    }
+
+    const { "Reactor Name": reactorName } = reactorsDetails;
+
+    return (
+      <View style={styles.reactorSection}>
+        <Text style={styles.sectionTitle}>{reactorName || "Desconhecido"}</Text>
+        <ReactorCard reactorsDetails={reactorsDetails} />
+      </View>
+    );
+  };
+
+  const ExternalComponents = ({ name }) => {
+    // Buscar detalhes do componente pelo nome
+    const componentsDetails = componentsData.find(
+      (mod) => mod["Component Name"] === name
+    );
+
+    // Verificar se os detalhes foram encontrados
+    if (!componentsDetails) {
+      return (
+        <View style={styles.moduleCard}>
+          <Text style={styles.moduleName}>Component not found: {name}</Text>
+        </View>
       );
     }
 
     return (
-      <FlatList
-        data={dataList}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <View style={styles.characterCard}>
-            <Image source={{ uri: item.image }} style={styles.characterImage} />
-            <Text style={styles.characterName}>{item.name}</Text>
-            <Separator />
-            <FlatList
-              data={item.modules}
-              keyExtractor={(module, index) => `module-${index}`}
-              renderItem={({ item }) => renderModules(item)}
-              numColumns={2} // Exibe os módulos em duas colunas
-              columnWrapperStyle={styles.row} // Ajusta espaçamento entre colunas
-              contentContainerStyle={styles.listContent} // Padding geral para a lista
-            />
-          </View>
-        )}
-      />
+      <View style={styles.componentCard}>
+        <CardComponent componentsDetails={componentsDetails} />
+      </View>
     );
   };
 
-  const renderDescendantBuild = () => {
-    const { character, reactor, externalComponents } = descendantBuildData;
+  const renderCharacterSection = () => (
+    <FlatList
+      data={data.characters}
+      keyExtractor={(item) => item.name}
+      renderItem={({ item }) => (
+        <View style={styles.characterCard}>
+          <RenderCharacter name={item?.name || "Desconhecido"} />
+          <Separator />
+          <FlatList
+            data={item.modules}
+            keyExtractor={(module, index) => `module-${index}`}
+            renderItem={({ item }) => renderModules(item)}
+            numColumns={2}
+            columnWrapperStyle={styles.row}
+            contentContainerStyle={styles.listContent}
+          />
+        </View>
+      )}
+    />
+  );
 
+  const renderWeaponSection = () => (
+    <FlatList
+      data={data.weapons}
+      keyExtractor={(item) => item.name}
+      renderItem={({ item }) => (
+        <View style={styles.weponCard}>
+          <RenderWepons name={item?.name || "Desconhecido"} />
+          <Separator />
+          <FlatList
+            data={item.modules}
+            keyExtractor={(module, index) => `module-${index}`}
+            renderItem={({ item }) => renderModules(item)}
+            numColumns={2}
+            columnWrapperStyle={styles.row}
+            contentContainerStyle={styles.listContent}
+          />
+        </View>
+      )}
+    />
+  );
+
+  const renderDescendantBuild = () => {
     return (
       <View style={styles.descendantContainer}>
-        {/* Nome e imagem do personagem */}
-        <View style={styles.characterSection}>
-          <Image
-            source={{ uri: character.image }}
-            style={styles.characterImage}
-          />
-          <Text style={styles.characterName}>{character.name}</Text>
-        </View>
+        {/* Seção do personagem */}
+        <RenderCharacter name={parsedSubCollection?.name || "Desconhecido"} />
+        {/* Seção do reator (componente reutilizável) */}
+        <ReactorsComponent
+          name={parsedSubCollection.descendantBuild?.name || "Desconhecido"}
+        />
 
-        {/* Reator */}
-        <View style={styles.reactorSection}>
-          <Text style={styles.sectionTitle}>Reactor</Text>
-          <Image source={{ uri: reactor.image }} style={styles.reactorImage} />
-        </View>
-
-        {/* Componentes externos */}
+        {/* Seção dos componentes */}
         <View style={styles.componentsSection}>
           <Text style={styles.sectionTitle}>External Components</Text>
           <FlatList
-            data={externalComponents}
-            keyExtractor={(item) => item.name}
+            data={parsedSubCollection.descendantBuild.externalComponents}
+            keyExtractor={(item) => item}
             numColumns={2}
-            renderItem={({ item }) => (
-              <View style={styles.componentCard}>
-                <Image
-                  source={{ uri: item.image }}
-                  style={styles.componentImage}
-                />
-                <Text style={styles.componentName}>{item.name}</Text>
-              </View>
-            )}
+            renderItem={({ item }) => <ExternalComponents name={item} />}
           />
         </View>
       </View>
@@ -202,8 +281,10 @@ const DescendantBuild = () => {
           ))}
         </View>
         <View style={styles.content}>
-          {activeTab === "Módulos" || activeTab === "Armas"
-            ? renderCharactersOrWeapons(activeTab)
+          {activeTab === "Módulos"
+            ? renderCharacterSection()
+            : activeTab === "Armas"
+            ? renderWeaponSection()
             : renderDescendantBuild()}
         </View>
       </View>
@@ -229,7 +310,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   characterImage: {
-    width: "100%",
+    width: 100,
     height: 100,
     maxWidth: 300,
     resizeMode: "contain",
@@ -239,6 +320,35 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
   },
   characterName: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: "#fff",
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 10,
+  },
+  weponCard: {
+    marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  weponImage: {
+    width: 500,
+    height: 100,
+    maxWidth: 300,
+    resizeMode: "stretch",
+    alignSelf: "center",
+    borderWidth: 1,
+    borderRadius: 80,
+    borderColor: "#fff",
+  },
+  weponName: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
     borderWidth: 1,
@@ -285,29 +395,26 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   sectionTitle: {
-    color: "#fff",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
+    color: "#fff",
     marginBottom: 10,
   },
   reactorImage: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     resizeMode: "contain",
+    borderRadius: 50,
   },
   componentCard: {
-    flex: 1,
+    margin: 5,
     alignItems: "center",
-    margin: 10,
-    backgroundColor: "#1b253d",
-    borderRadius: 8,
-    padding: 10,
   },
   componentImage: {
     width: 60,
     height: 60,
     resizeMode: "contain",
-    marginBottom: 5,
+    borderRadius: 50,
   },
   componentName: {
     color: "#fff",

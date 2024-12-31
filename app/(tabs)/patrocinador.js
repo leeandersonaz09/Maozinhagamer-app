@@ -6,7 +6,9 @@ import {
   FlatList,
   Image,
   StyleSheet,
+  Button,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Carousel, Badge, Shimmer } from "../../components";
@@ -53,8 +55,45 @@ const Patrocinador = () => {
     fetchAllData();
   }, []);
 
+  if (
+    !isLoading &&
+    partners.length === 0 &&
+    ads.length === 0 &&
+    dataBanner.length === 0
+  ) {
+    return (
+      <ThemedView style={styles.emptyContainer}>
+        <ThemedText style={styles.emptyText}>
+          Nenhum dado disponível no momento.
+        </ThemedText>
+        <ThemedText style={styles.contactText}>
+          Entre em contato para anunciar conosco:
+        </ThemedText>
+        <ThemedText
+          style={styles.contactEmail}
+          onPress={() => Linking.openURL("mailto:contato@contato.com")}
+        >
+          Email: contato@contato.com
+        </ThemedText>
+        <ThemedText
+          style={styles.contactPhone}
+          onPress={() => Linking.openURL("tel:+5571999999999")}
+        >
+          Telefone: (71) 99999-9999
+        </ThemedText>
+        <ThemedView style={styles.refreshButtonContainer}>
+          <Button
+            title="Atualizar"
+            onPress={fetchAllData}
+            color={COLORS.primary}
+          />
+        </ThemedView>
+      </ThemedView>
+    );
+  }
+
   const renderPartners = () => {
-    if (isLoading || partners.length === 0) {
+    if (isLoading) {
       return (
         <FlatList
           horizontal
@@ -90,7 +129,7 @@ const Patrocinador = () => {
   };
 
   const renderAds = () => {
-    if (isLoading || ads.length === 0) {
+    if (isLoading) {
       return (
         <FlatList
           horizontal
@@ -126,9 +165,6 @@ const Patrocinador = () => {
                 {item.price}
               </ThemedText>
               <ThemedText style={styles.adTitle}>{item.title}</ThemedText>
-              {item.badge && (
-                <ThemedText style={styles.badge}>{item.badge}</ThemedText>
-              )}
             </View>
           </ThemedView>
         )}
@@ -155,7 +191,6 @@ const Patrocinador = () => {
         <Text style={styles.sectionTitlePartner}>Principais Parceiros</Text>
         {renderPartners()}
       </View>
-
       <View style={styles.badgeContainer}>
         <Badge
           label="Mostrar Tudo"
@@ -183,7 +218,6 @@ const Patrocinador = () => {
           )}
         </View>
       )}
-
       <ThemedText style={styles.sectionTitle}>Ofertas Patrocinadas</ThemedText>
       {renderAds()}
 
@@ -196,6 +230,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: COLORS.background,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  contactText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  contactEmail: {
+    fontSize: 14,
+    marginBottom: 5,
+    fontWeight: "bold",
+    fontStyle: "italic",
+    textDecorationLine: "underline",
+  },
+  contactPhone: {
+    fontSize: 14,
+    fontWeight: "bold",
+    fontStyle: "italic",
+    textDecorationLine: "underline",
+  },
+  refreshButtonContainer: {
+    margin: 20,
   },
   loadingContainer: {
     flex: 1,

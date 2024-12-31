@@ -1,0 +1,548 @@
+[
+  {
+    "Weapon Name": "Red Wolf",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/red-wolf",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Millennium Frost",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/millennium-frost",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Hungry Hound",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/hungry-hound",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Rose of Aisha",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/rose-of-aisha",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "The Last Dagger",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/the-last-dagger",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "The Final Masterpiece",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/the-final-masterpiece",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "New Beginning",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/new-beginning",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HG_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Assassin's Edge",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/assassins-edge",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Explorer's Path",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/explorers-path",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Burning Hound",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/burning-hound",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Nazeistra's Devotion",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/nazeistras-devotion",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Perforator",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/perforator",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1008_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Immediate Execution",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/immediate-execution",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1009_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Peace Maker",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/peace-maker",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_HC_1010_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "The Last Knight",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/the-last-knight",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "In a Blink",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/in-a-blink",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Gangster",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/gangster",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Fireworks",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/fireworks",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Smithereens",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/smithereens",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Executor",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/executor",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Subconsciousness",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/subconsciousness",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SG_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Devil's Call",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/devils-call",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Blue Blood Bloomer",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/blue-blood-bloomer",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Albinism",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/albinism",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Alter Ego",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/alter-ego",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Thunder Cage",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/thunder-cage",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Python",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/python",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Firefly",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/firefly",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SMG_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Rascal V-51",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/rascal-v-51",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Unfinished Study",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/unfinished-study",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Cygnus",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/cygnus",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Lion of Blue Mane",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/lion-of-blue-mane",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Enduring Legacy",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/enduring-legacy",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Albion Cavalry Gun",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/albion-cavalry-gun",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Tamer",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/tamer",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_MG_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Magnus AA",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/magnus-aa",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Caligo's Horn",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/caligos-horn",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Ominous Hound",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/ominous-hound",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Phantom Pain",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/phantom-pain",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Fallen Hope",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/fallen-hope",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Divine Punishment",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/divine-punishment",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Eternal Willpower",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/eternal-willpower",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "EXCAVA",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/excava",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_AR_1008_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_A.png"
+  },
+  {
+    "Weapon Name": "Young Noble's Ambition",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/young-nobles-ambition",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "The Unwelcomed",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/the-unwelcomed",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Red Eye",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/red-eye",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Viper",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/viper",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Secret Garden",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/secret-garden",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Greg's Reversed Fate",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/gregs-reversed-fate",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Detachment",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/detachment",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_TR_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Hero's Scar",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/heros-scar",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Silly Weeper",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/silly-weeper",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Nightmare Hound",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/nightmare-hound",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "The Age Of Innovation",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/the-age-of-innovation",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Wave of Light",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/wave-of-light",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Blue Beetle",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/blue-beetle",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Sonic Co-op",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/sonic-co-op",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1008_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "FrostWatcher",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/frostwatcher",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SCR_1009_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_C_Color.png"
+  },
+  {
+    "Weapon Name": "Forest Gaze",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/forest-gaze",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Supermoon Z-15",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/supermoon-z-15",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Recipient Unknown",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/recipient-unknown",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Belief",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/belief",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Afterglow Sword",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/afterglow-sword",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Piercing Light",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/piercing-light",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Different Dream",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/different-dream",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_SR_1007_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Death Roar",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/death-roar",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Guardian R4",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/guardian-r4",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1002_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Lightspeed Barrel",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/lightspeed-barrel",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Tamed Beast",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/tamed-beast",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Sigvore's Proof",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/sigvores-proof",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Restored Relic",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/restored-relic",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Vestigial Organ",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/vestigial-organ",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_LNC_1008_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_D_Color.png"
+  },
+  {
+    "Weapon Name": "Dogma 21",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/dogma-21",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_BR_1001_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Moon Fragment",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/moon-fragment",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_BR_1003_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Burning 44",
+    "Rarity": "Rare",
+    "Weapon Link": "https://tfdtools.com/weapons/burning-44",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_BR_1004_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "King's Guard Lance",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/kings-guard-lance",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_BR_1005_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Clairvoyance",
+    "Rarity": "Ultimate",
+    "Weapon Link": "https://tfdtools.com/weapons/clairvoyance",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icon_Weapon/Big/Icon_RW_BR_1006_A001.png",
+    "Class Icon": "https://tfdtools.com/_ipx/q_70&s_48x48/images/Icon_Runes/Icon_RunesClass_Mini_B_Color.png"
+  },
+  {
+    "Weapon Name": "Dogma 21",
+    "Rarity": "Standard",
+    "Weapon Link": "https://tfdtools.com/weapons/dogma-21",
+    "Weapon Image": "https://tfdtools.com/_ipx/q_70&s_560x166/images/Icons/Icon_Radar_EquipDroppedItem_Tier_00.png",
+    "Class Icon": "https://tfdtools.comundefined"
+  }
+]

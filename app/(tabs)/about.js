@@ -23,8 +23,8 @@ const about = () => {
       id: 1,
       title: "Discord",
       icon: <FontAwesome6 size={40} color={COLORS.discord} name="discord" />,
-      uri: "https://discord.gg/k3cyDsyK",
-      text: "discord.gg/k3cyDsyK",
+      uri: "https://discord.gg/jv6mkdcW",
+      text: "discord.gg/jv6mkdcW",
     },
     {
       id: 2,

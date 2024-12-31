@@ -11,6 +11,8 @@ import Separator from "./Separador";
 import Badge from "./Badge/index";
 import Shimmer from "./Shimmer/index";
 import ModuleCard from "./ModuleCard/index";
+import CardComponent from "./CardComponent/index";
+import ReactorCard from "./ReactorCard/index";
 
 export {
   Header,
@@ -26,4 +28,6 @@ export {
   Badge,
   Shimmer,
   ModuleCard,
+  CardComponent,
+  ReactorCard,
 };

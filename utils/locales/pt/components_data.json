@@ -1,0 +1,674 @@
+[
+  {
+    "Component Name": "HP Support Auxiliary Power",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-auxiliary-power-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Auxiliary Power",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-auxiliary-power-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Auxiliary Power",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/def-support-auxiliary-power-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_Def.png"
+  },
+  {
+    "Component Name": "HP Support Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/def-support-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_Def.png"
+  },
+  {
+    "Component Name": "HP Support Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/def-support-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_01_Def.png"
+  },
+  {
+    "Component Name": "HP Support Sensor",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-sensor-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Sensor",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-sensor-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Sensor",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/def-support-sensor-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_Def.png"
+  },
+  {
+    "Component Name": "HP Support Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/def-support-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_Def.png"
+  },
+  {
+    "Component Name": "HP Support Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/def-support-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_02_Def.png"
+  },
+  {
+    "Component Name": "HP Support Memory",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-memory-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Memory",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-memory-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Memory",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/def-support-memory-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_Def.png"
+  },
+  {
+    "Component Name": "HP Support Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/def-support-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_Def.png"
+  },
+  {
+    "Component Name": "HP Support Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/def-support-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_03_Def.png"
+  },
+  {
+    "Component Name": "HP Support Processor",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-processor-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Processor",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-processor-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Processor",
+    "Rarity": "Standard",
+    "Component Link": "https://tfdtools.com/external-components/def-support-processor-1",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_Def.png"
+  },
+  {
+    "Component Name": "HP Support Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/def-support-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_Def.png"
+  },
+  {
+    "Component Name": "HP Support Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hp-support-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_HP.png"
+  },
+  {
+    "Component Name": "Shield Enhancement Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/shield-enhancement-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_Shield.png"
+  },
+  {
+    "Component Name": "DEF Support Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/def-support-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Default_04_Def.png"
+  },
+  {
+    "Component Name": "Tomb Vanguard Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/tomb-vanguard-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gravewalker_T2_01.png"
+  },
+  {
+    "Component Name": "Tomb Vanguard Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/tomb-vanguard-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gravewalker_T2_02.png"
+  },
+  {
+    "Component Name": "Tomb Vanguard Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/tomb-vanguard-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gravewalker_T2_03.png"
+  },
+  {
+    "Component Name": "Tomb Vanguard Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/tomb-vanguard-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gravewalker_T2_04.png"
+  },
+  {
+    "Component Name": "Battle Aesthetics Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/battle-aesthetics-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_StunningBeauty_T2_01.png"
+  },
+  {
+    "Component Name": "Battle Aesthetics Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/battle-aesthetics-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_StunningBeauty_T2_02.png"
+  },
+  {
+    "Component Name": "Battle Aesthetics Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/battle-aesthetics-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_StunningBeauty_T2_03.png"
+  },
+  {
+    "Component Name": "Battle Aesthetics Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/battle-aesthetics-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_StunningBeauty_T2_04.png"
+  },
+  {
+    "Component Name": "Decimator Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/decimator-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T2_01.png"
+  },
+  {
+    "Component Name": "Decimator Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/decimator-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T2_02.png"
+  },
+  {
+    "Component Name": "Decimator Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/decimator-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T2_03.png"
+  },
+  {
+    "Component Name": "Decimator Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/decimator-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T2_04.png"
+  },
+  {
+    "Component Name": "Glacial Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/glacial-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T2_01.png"
+  },
+  {
+    "Component Name": "Glacial Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/glacial-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T2_02.png"
+  },
+  {
+    "Component Name": "Glacial Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/glacial-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T2_03.png"
+  },
+  {
+    "Component Name": "Glacial Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/glacial-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T2_04.png"
+  },
+  {
+    "Component Name": "Predator Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/predator-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T2_01.png"
+  },
+  {
+    "Component Name": "Predator Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/predator-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T2_02.png"
+  },
+  {
+    "Component Name": "Predator Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/predator-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T2_03.png"
+  },
+  {
+    "Component Name": "Predator Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/predator-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T2_04.png"
+  },
+  {
+    "Component Name": "Veteran Marksman Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/veteran-marksman-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T2_01.png"
+  },
+  {
+    "Component Name": "Veteran Marksman Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/veteran-marksman-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T2_02.png"
+  },
+  {
+    "Component Name": "Veteran Marksman Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/veteran-marksman-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T2_03.png"
+  },
+  {
+    "Component Name": "Veteran Marksman Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/veteran-marksman-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T2_04.png"
+  },
+  {
+    "Component Name": "Swamp Recon Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/swamp-recon-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T2_01.png"
+  },
+  {
+    "Component Name": "Swamp Recon Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/swamp-recon-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T2_02.png"
+  },
+  {
+    "Component Name": "Swamp Recon Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/swamp-recon-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T2_03.png"
+  },
+  {
+    "Component Name": "Swamp Recon Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/swamp-recon-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T2_04.png"
+  },
+  {
+    "Component Name": "Acrobat Auxiliary Power",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/acrobat-auxiliary-power-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_HangedMan_T2_01.png"
+  },
+  {
+    "Component Name": "Acrobat Sensor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/acrobat-sensor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_HangedMan_T2_02.png"
+  },
+  {
+    "Component Name": "Acrobat Memory",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/acrobat-memory-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_HangedMan_T2_03.png"
+  },
+  {
+    "Component Name": "Acrobat Processor",
+    "Rarity": "Rare",
+    "Component Link": "https://tfdtools.com/external-components/acrobat-processor-2",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_HangedMan_T2_04.png"
+  },
+  {
+    "Component Name": "Supernova Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/supernova-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T3_01.png"
+  },
+  {
+    "Component Name": "Supernova Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/supernova-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T3_02.png"
+  },
+  {
+    "Component Name": "Supernova Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/supernova-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T3_03.png"
+  },
+  {
+    "Component Name": "Supernova Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/supernova-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Executioner_T3_04.png"
+  },
+  {
+    "Component Name": "Annihilation Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/annihilation-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T3_01.png"
+  },
+  {
+    "Component Name": "Annihilation Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/annihilation-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T3_02.png"
+  },
+  {
+    "Component Name": "Annihilation Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/annihilation-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T3_03.png"
+  },
+  {
+    "Component Name": "Annihilation Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/annihilation-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Devourer_T3_04.png"
+  },
+  {
+    "Component Name": "Slayer Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/slayer-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T3_01.png"
+  },
+  {
+    "Component Name": "Slayer Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/slayer-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T3_02.png"
+  },
+  {
+    "Component Name": "Slayer Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/slayer-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T3_03.png"
+  },
+  {
+    "Component Name": "Slayer Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/slayer-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Pyromaniac_T3_04.png"
+  },
+  {
+    "Component Name": "Polar Night Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/polar-night-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T3_01.png"
+  },
+  {
+    "Component Name": "Polar Night Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/polar-night-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T3_02.png"
+  },
+  {
+    "Component Name": "Polar Night Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/polar-night-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T3_03.png"
+  },
+  {
+    "Component Name": "Polar Night Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/polar-night-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeadBride_T3_04.png"
+  },
+  {
+    "Component Name": "Venom Essence Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/venom-essence-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T3_01.png"
+  },
+  {
+    "Component Name": "Venom Essence Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/venom-essence-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T3_02.png"
+  },
+  {
+    "Component Name": "Venom Essence Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/venom-essence-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T3_03.png"
+  },
+  {
+    "Component Name": "Venom Essence Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/venom-essence-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_SwampWalker_T3_04.png"
+  },
+  {
+    "Component Name": "Bravery Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/bravery-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Obstructer_T3_01.png"
+  },
+  {
+    "Component Name": "Bravery Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/bravery-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Obstructer_T3_02.png"
+  },
+  {
+    "Component Name": "Bravery Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/bravery-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Obstructer_T3_03.png"
+  },
+  {
+    "Component Name": "Bravery Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/bravery-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Obstructer_T3_04.png"
+  },
+  {
+    "Component Name": "Frozen Heart Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/frozen-heart-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_FrostWalker_T3_01.png"
+  },
+  {
+    "Component Name": "Frozen Heart Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/frozen-heart-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_FrostWalker_T3_02.png"
+  },
+  {
+    "Component Name": "Frozen Heart Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/frozen-heart-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_FrostWalker_T3_03.png"
+  },
+  {
+    "Component Name": "Frozen Heart Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/frozen-heart-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_FrostWalker_T3_04.png"
+  },
+  {
+    "Component Name": "Volcanic Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/volcanic-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Moltenfortress_T3_01.png"
+  },
+  {
+    "Component Name": "Volcanic Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/volcanic-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Moltenfortress_T3_02.png"
+  },
+  {
+    "Component Name": "Volcanic Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/volcanic-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Moltenfortress_T3_03.png"
+  },
+  {
+    "Component Name": "Volcanic Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/volcanic-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Moltenfortress_T3_04.png"
+  },
+  {
+    "Component Name": "Hungry Sonic Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hungry-sonic-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gluttony_T3_01.png"
+  },
+  {
+    "Component Name": "Hungry Sonic Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hungry-sonic-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gluttony_T3_02.png"
+  },
+  {
+    "Component Name": "Hungry Sonic Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hungry-sonic-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gluttony_T3_03.png"
+  },
+  {
+    "Component Name": "Hungry Sonic Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/hungry-sonic-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_Gluttony_T3_04.png"
+  },
+  {
+    "Component Name": "Distorted Resolve Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/distorted-resolve-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_A006_T2_01.png"
+  },
+  {
+    "Component Name": "Distorted Resolve Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/distorted-resolve-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_A006_T2_02.png"
+  },
+  {
+    "Component Name": "Distorted Resolve Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/distorted-resolve-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_A006_T2_03.png"
+  },
+  {
+    "Component Name": "Distorted Resolve Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/distorted-resolve-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_A006_T2_04.png"
+  },
+  {
+    "Component Name": "Invader Auxiliary Power",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/invader-auxiliary-power-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeathStalker_T3_01.png"
+  },
+  {
+    "Component Name": "Invader Sensor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/invader-sensor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeathStalker_T3_02.png"
+  },
+  {
+    "Component Name": "Invader Memory",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/invader-memory-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeathStalker_T3_03.png"
+  },
+  {
+    "Component Name": "Invader Processor",
+    "Rarity": "Ultimate",
+    "Component Link": "https://tfdtools.com/external-components/invader-processor-3",
+    "Component Image": "https://tfdtools.com/_ipx/q_70&s_200x200/images/Icon_Acc/Big/Icon_Item_Acc_DeathStalker_T3_04.png"
+  }
+]

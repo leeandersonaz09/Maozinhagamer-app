@@ -14,7 +14,6 @@ import { COLORS } from "../../../constants/Theme/theme.js";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import DescendantBuild from "./Descendant.js";
 
 const TFDBuilds = () => {
   const { title, subCollection } = useLocalSearchParams();
@@ -80,9 +79,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 15,
     overflow: "hidden",
-    backgroundColor:COLORS.primary,
-    borderWidth:1,
-    borderColor:"#ff277c"
+    backgroundColor: COLORS.primary,
+    borderWidth: 1,
+    borderColor: "#ff277c",
   },
   backgroundImage: {
     justifyContent: "center",
