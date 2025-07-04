@@ -1,0 +1,3 @@
+-keep class com.seuapp.** { *; }
+-keep class * extends android.app.Activity
+-keepattributes *Annotation*

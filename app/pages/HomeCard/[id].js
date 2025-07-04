@@ -62,7 +62,6 @@ const HomeCard = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={COLORS.primary} style="light" />
       <Header replace HeaderTittle={title} href={"/(tabs)"} />
       <ThemedView style={styles.container}>
         <FlatList

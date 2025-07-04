@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState, useMemo } from "react";
 import {
   View,
@@ -8,9 +7,10 @@ import {
   RefreshControl,
   FlatList,
   Linking,
+  useColorScheme,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Link, useNavigation } from "expo-router";
+import { Link } from "expo-router";
 import styles from "../../constants/Theme/styles/HomeStyles";
 import { HomeCard, Carousel, Shimmer } from "../../components";
 import { StatusBar } from "expo-status-bar";
@@ -21,25 +21,46 @@ import {
   fetchWidgetsData,
   getUpdateNotes,
 } from "../../utils/apiRequests";
+import { loadDataIfNeeded } from "../../utils/globalFunctions";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
+// Tipos para os dados da API
+type WidgetItem = { id: string; title: string; subCollection: any[] };
+type BannerItem = { id: string; [key: string]: any };
+type NoteItem = { id: string; uri: string; img: string; title: string };
+
+// Tipo para a estrutura de dados da nossa lista unificada
+type ListItem = {
+  type:
+    | "loading_state"
+    | "carousel"
+    | "channels_title"
+    | "channels_list"
+    | "widgets_title"
+    | "widget_row";
+  id: string;
+  data?: any;
+};
+
 const Home = () => {
-  const navigation = useNavigation();
-  const [data, setData] = useState([]);
-  const [dataBanner, setDataBanner] = useState([]);
-  const [dataNotes, setDataNotes] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<WidgetItem[]>([]);
+  const [dataBanner, setDataBanner] = useState<BannerItem[]>([]);
+  const [dataNotes, setDataNotes] = useState<NoteItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const colorScheme = useColorScheme();
 
   const fetchAllData = async () => {
     try {
       setIsLoading(true);
-      const bannerData = await getBannerData();
-      setDataBanner(bannerData || []);
-      const widgetsData = await fetchWidgetsData();
-      setData(widgetsData || []);
-      const notesData = await getUpdateNotes();
-      setDataNotes(notesData || []);
+      const [bannerData, widgetsData, notesData] = await Promise.all([
+        loadDataIfNeeded<BannerItem[]>("bannerData", getBannerData),
+        loadDataIfNeeded<WidgetItem[]>("widgetsData", fetchWidgetsData),
+        loadDataIfNeeded<NoteItem[]>("notesData", getUpdateNotes),
+      ]);
+      setDataBanner(bannerData ?? []);
+      setData(widgetsData ?? []);
+      setDataNotes(notesData ?? []);
     } catch (error) {
       console.error("Erro ao obter dados:", error);
     } finally {
@@ -51,158 +72,197 @@ const Home = () => {
     fetchAllData();
   }, []);
 
-  const renderItems = () => {
-    if (isLoading || data.length === 0) {
-      return (
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: 16,
-            justifyContent: "center",
-          }}
-        >
-          {[...Array(6)].map((_, index) => (
-            <Shimmer key={index} width={180} height={120} borderRadius={8} />
-          ))}
-        </View>
-      );
+  // Estrutura de dados unificada para a FlatList principal
+  const listData: ListItem[] = useMemo(() => {
+    const items: ListItem[] = [];
+
+    if (isLoading) {
+      items.push({ type: "loading_state", id: "loading_state" });
+      items.push({ type: "carousel", id: "carousel_shimmer", data: [] });
+    } else {
+      if (dataBanner.length > 0) {
+        items.push({ type: "carousel", id: "carousel", data: dataBanner });
+      } else {
+        items.push({ type: "carousel", id: "carousel_shimmer", data: [] });
+      }
     }
 
-    return (
-      <FlatList
-        data={data}
-        keyExtractor={(item) => `widget-${item.id}`}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <Link
-            push
-            href={{
-              pathname: `/pages/HomeCard/${item.id}`,
-              params: {
-                title: item.title,
-                subCollection: JSON.stringify(item.subCollection),
-              },
-            }}
-            asChild
-          >
-            <TouchableOpacity style={styles.cardTouchable}>
-              <HomeCard data={item} />
-            </TouchableOpacity>
-          </Link>
-        )}
-        numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
-      />
-    );
+    items.push({ type: "channels_title", id: "channels_title" });
+    items.push({
+      type: "channels_list",
+      id: "channels_list",
+      data: dataNotes,
+    });
+
+    items.push({ type: "widgets_title", id: "widgets_title" });
+
+    // Agrupa os widgets em pares para a grade, mantendo o layout de 2 colunas
+    const itemsToLoop = isLoading ? 6 : data.length;
+    const sourceData = isLoading ? Array(6).fill(null) : data;
+
+    for (let i = 0; i < itemsToLoop; i += 2) {
+      items.push({
+        type: "widget_row",
+        id: `widget-row-${i}`,
+        data: sourceData.slice(i, i + 2),
+      });
+    }
+
+    return items;
+  }, [isLoading, data, dataBanner, dataNotes]);
+
+  const renderItem = ({ item }: { item: ListItem }) => {
+    switch (item.type) {
+      case "loading_state":
+        return (
+          <View style={{ alignItems: "center" }}>
+            <ThemedText style={{ fontWeight: "bold" }}>
+              Aguenta aí que estamos no meio da ranked MW3!
+            </ThemedText>
+            <ThemedText style={{ fontWeight: "bold" }}>
+              Já iremos atualizar!
+            </ThemedText>
+            <LottieView
+              autoPlay
+              style={{ width: 150, height: 150 }}
+              source={require("../../assets/Lotties/hand 2.json")}
+            />
+          </View>
+        );
+      case "carousel":
+        return (
+          // Adicionamos esta View para criar o espaçamento desejado
+          <View style={{ marginTop: 15 }}>
+            {item.data.length > 0 ? (
+              <Carousel data={item.data} />
+            ) : (
+              <View style={{ alignItems: "center" }}>
+                <Shimmer width={300} height={150} borderRadius={12} />
+              </View>
+            )}
+          </View>
+        );
+      case "channels_title":
+        return (
+          <ThemedText style={styles.SmallListTittle}>
+            Canais Parceiros
+          </ThemedText>
+        );
+      case "channels_list":
+        return <PartnerChannelsList isLoading={isLoading} data={item.data} />;
+      case "widgets_title":
+        return <ThemedText style={styles.WidgetsTittle}>Jogos</ThemedText>;
+      case "widget_row":
+        return (
+          <View style={styles.WigtesContainer}>
+            {item.data.map((widget: WidgetItem | null, index: number) =>
+              widget ? (
+                <Link
+                  key={widget.id}
+                  push
+                  href={{
+                    pathname: `/pages/HomeCard/${widget.id}`,
+                    params: {
+                      title: widget.title,
+                      subCollection: JSON.stringify(widget.subCollection),
+                    },
+                  }}
+                  asChild
+                >
+                  <TouchableOpacity style={styles.cardTouchable}>
+                    <HomeCard data={widget} />
+                  </TouchableOpacity>
+                </Link>
+              ) : (
+                <View key={index} style={styles.cardTouchable}>
+                  <Shimmer width="100%" height={120} borderRadius={8} />
+                </View>
+              )
+            )}
+            {/* Adiciona um placeholder se houver apenas um item na linha para manter o alinhamento */}
+            {item.data.length === 1 && <View style={styles.cardTouchable} />}
+          </View>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
     <>
-      <StatusBar
-        backgroundColor={COLORS.primary}
-        style="light"
-        translucent={false}
-      />
-      <FlatList
-        data={dataBanner}
-        keyExtractor={(item) => `banner-${item.id}`}
-        ListHeaderComponent={
-          <ThemedView style={styles.container}>
+      <ThemedView style={styles.container}>
+        <FlatList
+          data={listData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={
             <Image
               style={styles.headerImage}
               source={require("../../assets/images/maozinha-home.jpg")}
             />
-            <ThemedView style={[styles.contentContainer]}>
-              <View style={styles.subscribeView}>
-                <View style={styles.loadingView}>
-                  {isLoading ? (
-                    <View style={{ alignItems: "center" }}>
-                      <ThemedText style={{ fontWeight: "bold" }}>
-                        Aguenta aí que estamos no meio da ranked MW3!
-                      </ThemedText>
-                      <ThemedText style={{ fontWeight: "bold" }}>
-                        Já iremos atualizar!
-                      </ThemedText>
-                      <LottieView
-                        autoPlay
-                        style={{ width: 150, height: 150 }}
-                        source={require("../../assets/Lotties/hand 2.json")}
-                      />
-                    </View>
-                  ) : (
-                    <>
-                      {dataBanner.length === 0 ? (
-                        <Shimmer width={300} height={150} borderRadius={12} />
-                      ) : (
-                        <Carousel data={dataBanner} />
-                      )}
-                    </>
-                  )}
-                  <ThemedText style={styles.SmallListTittle}>
-                    Canais Parceiros
-                  </ThemedText>
-                  {isLoading || dataNotes.length === 0 ? (
-                    <FlatList
-                      horizontal
-                      data={[...Array(3)]}
-                      ItemSeparatorComponent={() => (
-                        <View style={{ width: 16 }} />
-                      )} // Espaçamento horizontal de 16px
-                      renderItem={() => (
-                        <View  style={{
-                          paddingLeft:10
-                        }}>
-                        <Shimmer width={150} height={80} borderRadius={8} />
-                        </View>
-                      )}
-                      keyExtractor={(_, index) => `shimmer-note-${index}`}
-                      showsHorizontalScrollIndicator={false} // Esconde a barra horizontal
-                    />
-                  ) : (
-                    <FlatList
-                      horizontal
-                      data={dataNotes}
-                      keyExtractor={(item) => `note-${item.id}`}
-                      showsHorizontalScrollIndicator={false} // Esconde a barra horizontal
-                      renderItem={({ item }) => (
-                        <View style={styles.SmallListContainer}>
-                          <TouchableOpacity
-                            activeOpacity={0.8}
-                            onPress={() => Linking.openURL(item.uri)}
-                          >
-                            <View style={styles.Sitem}>
-                              <Image
-                                source={{ uri: item.img }}
-                                style={styles.SitemPhoto}
-                                resizeMode="cover"
-                              />
-                              <View style={styles.StextContainer}>
-                                <Text style={styles.SitemText}>
-                                  {item.title}
-                                </Text>
-                              </View>
-                            </View>
-                          </TouchableOpacity>
-                        </View>
-                      )}
-                    />
-                  )}
-                  <ThemedText style={styles.WidgetsTittle}>Jogos</ThemedText>
-                  <View style={{marginBottom:50}}> 
-                  {renderItems()}
-                  </View>
-                </View>
-              </View>
-            </ThemedView>
-          </ThemedView>
-        }
-        refreshing={isLoading}
-        onRefresh={fetchAllData}
-        showsVerticalScrollIndicator={false}
-      />
+          }
+          contentContainerStyle={{ paddingBottom: 100 }}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={fetchAllData} />
+          }
+        />
+      </ThemedView>
     </>
+  );
+};
+
+const PartnerChannelsList = ({
+  isLoading,
+  data,
+}: {
+  isLoading: boolean;
+  data: NoteItem[];
+}) => {
+  if (isLoading) {
+    return (
+      <FlatList
+        horizontal
+        data={[...Array(3)]}
+        ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+        renderItem={() => (
+          <View style={{ paddingLeft: 10 }}>
+            <Shimmer width={200} height={80} borderRadius={15} />
+          </View>
+        )}
+        keyExtractor={(_, index) => `shimmer-note-${index}`}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingRight: 10 }}
+      />
+    );
+  }
+
+  return (
+    <FlatList
+      horizontal
+      data={data}
+      keyExtractor={(item) => `note-${item.id}`}
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }) => (
+        <View style={styles.SmallListContainer}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => Linking.openURL(item.uri)}
+          >
+            <View style={styles.Sitem}>
+              <Image
+                source={{ uri: item.img }}
+                style={styles.SitemPhoto}
+                resizeMode="cover"
+              />
+              <View style={styles.StextContainer}>
+                <Text style={styles.SitemText}>{item.title}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )}
+    />
   );
 };
 

@@ -9,7 +9,6 @@ import "react-native-reanimated";
 import NoConnectionScreen from "../components/NoConnectionScreen";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { useLoadFonts } from "@/hooks/useLoadFonts";
 import { StatusBar } from "expo-status-bar";
 import {
   fetchWidgetsData,
@@ -22,50 +21,18 @@ import {
 } from "../utils/apiRequests";
 import { loadDataIfNeeded } from "../utils/globalFunctions";
 import { LottieLoading } from "../components";
-import { router } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { clearAsyncStorage } from "../utils/globalFunctions";
-
 SplashScreen.preventAutoHideAsync();
 
+// Export a root error boundary to catch errors in the navigation tree
+export { ErrorBoundary } from "expo-router";
+
 export default function RootLayout() {
-  const [isNew, setIsNew] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const colorScheme = useColorScheme();
-  const isFontsLoaded = useLoadFonts();
   const isConnected = useNetworkStatus();
-
-  const checkIsNew = async () => {
-    try {
-      const value = await AsyncStorage.getItem("isnewinApp");
-      setIsNew(value === null);
-    } catch (error) {
-      console.error("Erro ao acessar AsyncStorage:", error);
-    }
-  };
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        await Promise.all([
-          loadDataIfNeeded("bannerData", getBannerData),
-          loadDataIfNeeded("membersData", getMembers),
-          loadDataIfNeeded("notesData", getUpdateNotes),
-          loadDataIfNeeded("widgetsData", fetchWidgetsData),
-          loadDataIfNeeded("offersData", fetchOffers),
-          loadDataIfNeeded("sponsorsData", fetchSponsors),
-          loadDataIfNeeded("adsbannerData", fetchAdsBanner),
-        ]);
-        await checkIsNew();
-      } catch (error) {
-        console.error("Erro ao carregar dados:", error);
-      } finally {
-        setIsLoading(false);
-        await SplashScreen.hideAsync();
-      }
-    };
-    loadData();
-  }, []);
+  const router = useRouter();
 
   useEffect(() => {
     /*
@@ -76,26 +43,42 @@ export default function RootLayout() {
     })();
    */
 
-    if (isNew !== null) {
-      if (isNew) {
-        router.push("/welcome");
-      } else {
+    const prepareAndNavigate = async () => {
+      try {
+        // Pre-load all necessary data in parallel
+        await Promise.all([
+          loadDataIfNeeded("bannerData", getBannerData),
+          loadDataIfNeeded("membersData", getMembers),
+          loadDataIfNeeded("notesData", getUpdateNotes),
+          loadDataIfNeeded("widgetsData", fetchWidgetsData),
+          loadDataIfNeeded("offersData", fetchOffers),
+          loadDataIfNeeded("sponsorsData", fetchSponsors),
+          loadDataIfNeeded("adsbannerData", fetchAdsBanner),
+        ]);
+
+        const isNewUser = await AsyncStorage.getItem("isnewinApp");
+
+        // Se 'isNewUser' for null, o usuário é novo.
+        if (isNewUser === null) {
+          router.replace("/welcome");
+        } else {
+          router.replace("/(tabs)");
+        }
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
         router.replace("/(tabs)");
+      } finally {
+        SplashScreen.hideAsync();
       }
-    }
-  }, [isNew]);
+    };
+    prepareAndNavigate();
+  }, []);
 
-  if (!isConnected) {
-    return <NoConnectionScreen />;
-  }
-
-  if (isLoading || !isFontsLoaded) {
-    return <LottieLoading />;
-  }
+  if (!isConnected) return <NoConnectionScreen />;
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <StatusBar style="auto" />
+      <Stack screenOptions={{ headerShown: false }} />
     </ThemeProvider>
   );
 }

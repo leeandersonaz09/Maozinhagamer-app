@@ -24,10 +24,7 @@ const styles = StyleSheet.create({
     width: metrics.screenWidth,
   },
 
-  Content: {
-    marginHorizontal: 10,
-    marginTop: -40,
-  },
+  Content: {},
 
   CardContent: {
     flexDirection: "row",

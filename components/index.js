@@ -13,6 +13,8 @@ import Shimmer from "./Shimmer/index";
 import ModuleCard from "./ModuleCard/index";
 import CardComponent from "./CardComponent/index";
 import ReactorCard from "./ReactorCard/index";
+import GamertagModal from "./Modal/index";
+import TabButton from "./TabButton/index";
 
 export {
   Header,
@@ -30,4 +32,6 @@ export {
   ModuleCard,
   CardComponent,
   ReactorCard,
+  GamertagModal,
+  TabButton,
 };

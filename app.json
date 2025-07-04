@@ -2,7 +2,7 @@
   "expo": {
     "name": "Maozinha Gamer",
     "slug": "maozinhagamer",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "maozinhagamer",
@@ -15,6 +15,7 @@
       "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#2E0000"
@@ -23,11 +24,7 @@
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan"
     },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#2E0000",
-      "translucent": false
-    },
+  
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -35,6 +32,7 @@
     },
     "plugins": [
       "expo-router",
+      "react-native-edge-to-edge",
       [
         "expo-splash-screen",
         {

@@ -266,7 +266,6 @@ const DescendantBuild = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={COLORS.primary} style="light" />
       <Header replace HeaderTittle={title} href={"/(tabs)"} />
       <View style={styles.container}>
         <View style={styles.tabBar}>

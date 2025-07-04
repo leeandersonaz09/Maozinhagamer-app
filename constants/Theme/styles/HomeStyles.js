@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     margin: 5,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#BD2323FF",
     borderRadius: 8,
   },
   listContainer: {
@@ -22,19 +22,15 @@ const styles = StyleSheet.create({
     width: "100%",
     height: height * 0.25, // Proporcional à tela
     resizeMode: "cover", // Evita distorção,
-    //marginTop: 10,
   },
   contentContainer: {
     position: "relative",
     left: 0,
-    top: -45,
-    borderTopStartRadius: 30,
-    borderTopEndRadius: 30,
+    bottom: 0,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    paddingTop: 10,
     //elevation: 4, // Suporte para sombras no Android
   },
 
@@ -68,11 +64,10 @@ const styles = StyleSheet.create({
   // Container para os widgets
   WigtesContainer: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingTop: 10, // Substitui a margem negativa
-    flexDirection: "column",
-    justifyContent: "space-around",
-    marginBottom: 65,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 8, // Metade do espaçamento do cardTouchable
+    alignItems: "flex-start",
   },
 
   // Estilo para TouchableOpacity ao redor de cada card

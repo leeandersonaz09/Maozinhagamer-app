@@ -36,7 +36,6 @@ const Patrocinadores = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={COLORS.primary} style="light" />
       <Header HeaderTittle={category} href={"/(tabs)"} />
       <ThemedScrollView>
         <View style={styles.patrocinadorContainer}>
@@ -47,17 +46,10 @@ const Patrocinadores = () => {
           <Image source={{ uri: img }} style={styles.image} />
           <ThemedText style={styles.description}>{text}</ThemedText>
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => handlePress(uri)}
-            activeOpacity={0.7} // Opacidade ao tocar no botão
-          >
-            <ThemedText style={styles.buttonText}>
-              {button ? button : "Saiba Mais"}
-            </ThemedText>
-          </TouchableOpacity>
-        </View>
+        <PrimaryButton
+          title={button ? button : "Saiba Mais"}
+          onPress={() => handlePress(uri)}
+        />
       </ThemedScrollView>
     </>
   );
@@ -104,25 +96,31 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginTop: 8,
   },
-  headerTitle: {
-    fontSize: SIZES.header,
-    color: COLORS.white,
-    fontWeight: "bold",
-  },
-  buttonContainer: {
-    alignItems: "center",
-    marginTop: 5,
-    marginBottom: 30,
-  },
+});
+
+const PrimaryButton = ({ title, onPress }) => (
+  <View style={buttonStyles.buttonContainer}>
+    <TouchableOpacity
+      style={buttonStyles.button}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
+      <ThemedText style={buttonStyles.buttonText}>{title}</ThemedText>
+    </TouchableOpacity>
+  </View>
+);
+
+const buttonStyles = StyleSheet.create({
+  buttonContainer: { alignItems: "center", marginTop: 5, marginBottom: 30 },
   button: {
-    backgroundColor: "#2E0000", // Cor de fundo do botão (azul)
-    paddingVertical: 15, // Espaçamento vertical
-    paddingHorizontal: 30, // Espaçamento horizontal
-    borderRadius: 25, // Cantos arredondados
-    elevation: 3, // Sombra no Android
+    backgroundColor: "#2E0000",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+    elevation: 3,
   },
   buttonText: {
-    color: "#ffffff", // Cor do texto (branco)
+    color: "#ffffff",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
