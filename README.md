@@ -14,9 +14,10 @@
   <a href="#-sobre-o-projeto">Sobre</a> •
   <a href="#-funcionalidades">Funcionalidades</a> •
   <a href="#-tecnologias">Tecnologias</a> •
-  <a href="#-como-executar">Como Executar</a> •
+  <a href="./INSTALL.md">Como Executar</a> •
+  <a href="./BUILD.md">Como Gerar Builds</a> •
   <a href="#-prints-de-tela">Prints</a> •
-  <a href="#-informações-técnicas">Info Técnicas</a> •
+  <a href="#-informações-técnicas">Como gerar o apk/bundle</a> •
   <a href="https://play.google.com/store/apps/details?id=com.maozinhagamer.maozinhagamerapp">Download</a>
 </p>
 
