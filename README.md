@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Logo Mãozinha Gamer" title="Mãozinha Gamer" src="assets/imagens/icon.png" width="180px" />
+  <img alt="Logo Mãozinha Gamer" title="Mãozinha Gamer" src="assets/images/icon.png" width="180px" />
 </h1>
 
 <h1 align="center">
