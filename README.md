@@ -67,7 +67,7 @@ O **Mãozinha Gamer** é um app criado para auxiliar jogadores em jogos populare
 
 ```bash
 npm install -g expo-cli
-
+```
 ### Demo 
 If you're interested about MaozinhaGamer App be sure to visit:
 
