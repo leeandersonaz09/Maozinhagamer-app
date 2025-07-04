@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Juazeiro Livre" title="#delicinha" src="assets/icon.png" width="250px" />
+    <img alt="Juazeiro Livre" title="#delicinha" src="assets/images/icon.png" width="250px" />
 </h1>
 
 <h1 align="center">
