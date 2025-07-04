@@ -67,3 +67,10 @@ O **Mãozinha Gamer** é um app criado para auxiliar jogadores em jogos populare
 
 ```bash
 npm install -g expo-cli
+
+### Demo 
+If you're interested about MaozinhaGamer App be sure to visit:
+
+<a href="https://play.google.com/store/apps/details?id=com.maozinhagamer.maozinhagamerapp"><img width="250px" src="https://play.google.com/intl/pt-BR/badges/static/images/badges/pt-br_badge_web_generic.png"></img></a>
+
+
