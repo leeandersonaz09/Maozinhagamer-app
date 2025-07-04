@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Logo Mãozinha Gamer" title="Mãozinha Gamer" src="assets/icon.png" width="180px" />
+  <img alt="Logo Mãozinha Gamer" title="Mãozinha Gamer" src="assets/imagens/icon.png" width="180px" />
 </h1>
 
 <h1 align="center">
@@ -16,6 +16,7 @@
   <a href="#-tecnologias">Tecnologias</a> •
   <a href="#-como-executar">Como Executar</a> •
   <a href="#-prints-de-tela">Prints</a> •
+  <a href="#-informações-técnicas">Info Técnicas</a> •
   <a href="#-download">Download</a>
 </p>
 
@@ -23,7 +24,7 @@
 
 ## 🎯 Sobre o Projeto
 
-O **Mãozinha Gamer** é um app criado para auxiliar jogadores em jogos populares como *Call of Duty Mobile*, *The First Descendant*, e outros títulos competitivos. O foco é fornecer **informações úteis, mapas interativos, loadouts otimizados**, dicas estratégicas e atualizações frequentes, tudo de forma acessível e intuitiva.
+O **Mãozinha Gamer** é um app criado para auxiliar jogadores em jogos populares como *Call of Duty Mobile*, *The First Descendant* e outros títulos competitivos. O foco é fornecer **informações úteis, mapas interativos, loadouts otimizados**, dicas estratégicas e atualizações frequentes — tudo de forma acessível e intuitiva.
 
 📱 Perfeito para quem quer melhorar sua gameplay com praticidade no celular.
 
@@ -33,26 +34,26 @@ O **Mãozinha Gamer** é um app criado para auxiliar jogadores em jogos populare
 
 ## ✨ Funcionalidades
 
-- 📚 **Guias e dicas** para jogos competitivos
-- 🗺️ **Mapas interativos** com marcações e segredos
-- 🔫 **Loadouts prontos** para maximizar seu desempenho
-- 🔎 Busca inteligente por conteúdo no app
-- 🌙 **Modo escuro** para conforto visual
-- 🔥 Atualizações constantes com novos jogos e estratégias
-- ☁️ Integração com **Firebase** para dados dinâmicos
-- 📲 Publicado oficialmente na Play Store
+- 📚 Guias e dicas para jogos competitivos
+- 🗺️ Mapas interativos com marcações e segredos
+- 🔫 Loadouts prontos e otimizados
+- 🔎 Busca inteligente por conteúdo
+- 🌙 Modo escuro
+- 🔥 Atualizações frequentes via Firebase
+- 📲 Publicado na Google Play Store
 
 ---
 
 ## 🛠️ Tecnologias
 
-Este projeto foi desenvolvido com as seguintes tecnologias modernas:
-
-- [React Native](https://reactnative.dev/)
-- [Expo](https://expo.dev/)
-- [Firebase (Firestore + Auth)](https://firebase.google.com/)
-- [React Navigation](https://reactnavigation.org/)
-- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+- **React Native** `0.79.5`
+- **Expo** `^53.0.16`
+- **Expo Router** `~5.1.2`
+- **Firebase (v11)** para dados e autenticação
+- **Lottie** para animações
+- **AsyncStorage**, **NetInfo**, **Vector Icons**
+- Navegação via `@react-navigation`
+- Suporte a vídeo com `react-native-video` e `webview`
 
 ---
 
@@ -60,10 +61,9 @@ Este projeto foi desenvolvido com as seguintes tecnologias modernas:
 
 ### ✅ Pré-requisitos
 
-Certifique-se de ter instalado:
+- Node.js
+- Git
+- Expo CLI
 
-- [Node.js](https://nodejs.org/)
-- [Git](https://git-scm.com/)
-- [Expo CLI](https://docs.expo.dev/workflow/expo-cli/):  
-  ```bash
-  npm install -g expo-cli
+```bash
+npm install -g expo-cli
