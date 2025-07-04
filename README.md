@@ -1,128 +1,69 @@
 <h1 align="center">
-    <img alt="Juazeiro Livre" title="#delicinha" src="assets/images/icon.png" width="250px" />
+  <img alt="Logo Mãozinha Gamer" title="Mãozinha Gamer" src="assets/icon.png" width="180px" />
 </h1>
 
 <h1 align="center">
-  Juazeiro Livre
+  🎮 Mãozinha Gamer
 </h1>
 
 <h4 align="center">
-  ☕ Code and coffee
+  O aplicativo definitivo com mapas, dicas e loadouts para gamers mobile. 🕹️🔥
 </h4>
 
-## Fiscalização e Transparência agora na palma da sua mão.
-
-Nosso projeto se chama JUAZEIRO LIVRE e ele foi criado para defender e fiscalizar a nossa cidade. 
-
-Um aplicativo idealizado pelo Juazeirense, músico, cristão de nascimento, decisão e paixão e professor Cléber Souza de Jesus, para dar acesso a informação com transparência e praticidade sobre a prefeitura do município de Juazeiro. Gastos, quantidades de sessões na câmara municipal e muito mais.
-
-## Visite nosso site!!!
-[https://www.juazeirolivre.com](https://juazeirolivre.com)
-
 <p align="center">
-    <img alt="" src="https://i.imgur.com/5hkfksa.gif" width="250">
-    <img alt="" title="#delicinha" src="Screenshot_1594935494.png" width="250px" />
-    <img alt="" title="#delicinha" src="Screenshot_1594935498.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/Screenshot_1594728907.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/Screenshot_1595623461.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/Screenshot_1595623470.png" width="250px" />
-    <img alt="" title="#delicinha" src="screenshots/IMG-20221003-WA0003.jpg" width="250px" />
-
+  <a href="#-sobre-o-projeto">Sobre</a> •
+  <a href="#-funcionalidades">Funcionalidades</a> •
+  <a href="#-tecnologias">Tecnologias</a> •
+  <a href="#-como-executar">Como Executar</a> •
+  <a href="#-prints-de-tela">Prints</a> •
+  <a href="#-download">Download</a>
 </p>
 
-## Functionality Implementention Sprints
+---
 
-- [x] Screens
-- [x] SearchBar
-- [x] Firebase Integration
-- [x] Generate apk signed
-- [x] Upload PlayStore
-- [x] Tests
-- [x] Dark Theme
+## 🎯 Sobre o Projeto
 
-You'll need to have [Expo](https://expo.io/learn) installed on your machine in order to follow along.
+O **Mãozinha Gamer** é um app criado para auxiliar jogadores em jogos populares como *Call of Duty Mobile*, *The First Descendant*, e outros títulos competitivos. O foco é fornecer **informações úteis, mapas interativos, loadouts otimizados**, dicas estratégicas e atualizações frequentes, tudo de forma acessível e intuitiva.
 
-## Configuration
-Add a `config/firebase.js` file with the following content (make sure to fill in the values from your own firebase account):
+📱 Perfeito para quem quer melhorar sua gameplay com praticidade no celular.
 
-```js
-export default {
-  API_KEY: <API_KEY>,
-  AUTH_DOMAIN: <AUTH_DOMAIN>,
-  DATABASE_URL: <DATABASE_URL>,
-  PROJECT_ID: <PROJECT_ID>,
-  STORAGE_BUCKET: <STORAGE_BUCKET>,
-  MESSAGING_SENDER_ID: <MESSAGING_SENDER_ID>,
-};
-```
+> Projeto mantido por [Mãozinha Gamer no YouTube](https://www.youtube.com/channel/UCqB3_WL9vGS751N6UudXHuw)
 
-## Installation
+---
 
-- `git clone https://github.com/msfcampos05/DescontoFacilApp.git`
-- `yarn install` / `npm install`
+## ✨ Funcionalidades
 
-NPM:
+- 📚 **Guias e dicas** para jogos competitivos
+- 🗺️ **Mapas interativos** com marcações e segredos
+- 🔫 **Loadouts prontos** para maximizar seu desempenho
+- 🔎 Busca inteligente por conteúdo no app
+- 🌙 **Modo escuro** para conforto visual
+- 🔥 Atualizações constantes com novos jogos e estratégias
+- ☁️ Integração com **Firebase** para dados dinâmicos
+- 📲 Publicado oficialmente na Play Store
 
-```sh
-npm install
-```
+---
 
-YARN:
+## 🛠️ Tecnologias
 
-```sh
-yarn install
-```
+Este projeto foi desenvolvido com as seguintes tecnologias modernas:
 
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Firebase (Firestore + Auth)](https://firebase.google.com/)
+- [React Navigation](https://reactnavigation.org/)
+- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
 
-## Running
+---
 
-### Use the `yarn/expo/npm start`, `yarn/npm ios`, or `yarn/npm android` tasks as detailed below.
-NPM && EXPO:
+## 🚀 Como Executar Localmente
 
-```sh
-npm start or expo start
-```
+### ✅ Pré-requisitos
 
-YARN:
+Certifique-se de ter instalado:
 
-```sh
-yarn start
-```
-  ## Available Scripts
-
-  This app was initialized using Yarn and therefore you should use Yarn commands going forward.
-
-Below you'll find information about performing common tasks.
-
-* [Available Scripts](#available-scripts)
-  * [yarn start](#npm-start)
-  * [yarn ios](#npm-run-ios)
-  * [yarn android](#npm-run-android)
-
-  ### `yarn start`
-
-  Runs your app in development mode.
-
-  Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
-
-  Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the `--reset-cache` flag to the start script:
-
-  ```
-  yarn start --reset-cache
-  ```
-
-  #### `yarn ios`
-
-  Like `yarn start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
-
-  #### `yarn android`
-
-  Like `yarn start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
-
-
-### Demo 
-If you're interested about Juazeiro Livre App be sure to visit:
-
-<a href="https://play.google.com/store/apps/details?id=com.juazeirolivre.juazeirolivreapp"><img width="250px" src="https://play.google.com/intl/pt-BR/badges/static/images/badges/pt-br_badge_web_generic.png"></img></a>
-
-# JuazeiroLivreApp
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- [Expo CLI](https://docs.expo.dev/workflow/expo-cli/):  
+  ```bash
+  npm install -g expo-cli
