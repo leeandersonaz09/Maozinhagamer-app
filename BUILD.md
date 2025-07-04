@@ -130,6 +130,11 @@ Exemplo usado neste projeto:
   }
 }
 ```
+# Comando para gerar um APK para testes
+eas build -p android --profile preview-apk
+
+# Comando para gerar um App Bundle (para a loja ou testes)
+eas build -p android --profile preview-bundle
 
 ---
 
