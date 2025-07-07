@@ -22,7 +22,11 @@
       },
       "package": "com.maozinhagamer.maozinhagamerapp",
       "googleServicesFile": "./google-services.json",
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "useNextNotificationsApi": true,
+      "permissions": [
+        "android.permission.POST_NOTIFICATIONS"
+      ]
     },
   
     "web": {
