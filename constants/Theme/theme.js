@@ -24,6 +24,7 @@ export const COLORS = {
   xbox: "#2ca243",
   playstation: "#00246E",
   steam: "#2a475e",
+  success: "#00CE0EFF",
 };
 
 export const SIZES = {

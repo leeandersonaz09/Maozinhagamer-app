@@ -23,8 +23,8 @@ const socialLinks: SocialLink[] = [
     id: 1,
     title: "Discord",
     icon: <FontAwesome6 size={40} color={COLORS.discord} name="discord" />,
-    uri: "https://discord.gg/jv6mkdcW",
-    text: "discord.gg/jv6mkdcW",
+    uri: "https://discord.gg/EBHZu3aw",
+    text: "https://discord.gg/EBHZu3aw",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const socialLinks: SocialLink[] = [
     icon: (
       <FontAwesome6 size={50} color={COLORS.whatsapp} name="square-whatsapp" />
     ),
-    uri: "https://chat.whatsapp.com/ETCJi0tjrmtGdBddUTP6IK",
+    uri: "https://chat.whatsapp.com/LnpW61ReLHOKPMx8ytTXp9",
     text: "Grupo do mãozinha",
   },
   {
@@ -52,10 +52,7 @@ const socialLinks: SocialLink[] = [
   {
     id: 5,
     title: "Política de Privacidade",
-    // 'shield-halved' é um ótimo ícone para privacidade.
-    // Outras opções: 'file-shield', 'user-shield', 'file-contract'
     icon: <FontAwesome6 size={45} color={COLORS.yellow} name="user-shield" />,
-    // TODO: Adicionar o link correto para a política de privacidade
     uri: "https://politicadeprivavidade-maozinhagamer.blogspot.com/p/poliica-de-privacidade.html",
     text: "Leia nossos termos",
   },

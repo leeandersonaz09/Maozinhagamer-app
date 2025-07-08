@@ -97,7 +97,7 @@ export default function RootLayout() {
         console.log("Notificação recebida em primeiro plano:", notification);
       }
     );
-
+    
     // Listener para quando o usuário interage (clica) na notificação
     const responseListener =
       Notifications.addNotificationResponseReceivedListener((response) => {
@@ -107,8 +107,16 @@ export default function RootLayout() {
         );
 
         const data = response.notification.request.content.data;
+
+        // Se a notificação tiver uma tela específica nos dados, navegue para ela.
         if (data && data.screen) {
+          console.log("Navegando para a tela:", data.screen);
           router.push(data.screen as any);
+        } else {
+          // Caso contrário (se não houver 'data.screen' ou se for uma notificação genérica),
+          // navegue para a tela inicial do seu aplicativo.
+          // Assumindo que sua tela inicial é a rota '/(tabs)'.
+          router.push("/(tabs)");
         }
       });
 

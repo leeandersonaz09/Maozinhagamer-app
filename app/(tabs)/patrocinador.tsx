@@ -9,6 +9,7 @@ import {
   Linking,
   RefreshControl,
   useColorScheme,
+  Dimensions, // Importado para obter largura da tela
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter, Link } from "expo-router";
@@ -31,6 +32,11 @@ import { ThemedScrollView } from "@/components/ThemedScrollView";
 // TODO: Substituir pela busca de dados do Contexto global
 import { loadDataIfNeeded } from "../../utils/globalFunctions";
 
+// Obter a largura da tela para estilização responsiva do card
+const { width: screenWidth } = Dimensions.get("window");
+const CARD_WIDTH = screenWidth * 0.7; // Largura do card, 70% da tela
+const CARD_MARGIN = 15; // Margem entre os cards
+
 type PatrocinadorData = {
   dataBanner: AdBanner[];
   partners: Sponsor[];
@@ -39,24 +45,23 @@ type PatrocinadorData = {
 
 const Patrocinador = () => {
   const [data, setData] = useState<PatrocinadorData | null>(null);
-  const insets = useSafeAreaInsets(); // 1. Pega os valores da área segura
+  const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(true);
   const [showCarousel, setShowCarousel] = useState(true);
   const colorScheme = useColorScheme();
   const cardBackgroundColor =
-    colorScheme === "dark" ? "#2C2C2CFF" : COLORS.card;
-  const priceColor = colorScheme === "dark" ? "#00CE0EFF" : COLORS.primary;
-  const iconColor = colorScheme === "dark" ? "#00CE0EFF" : COLORS.primary;
+  colorScheme === "dark" ? "#2C2C2CFF" : COLORS.card;
+  const priceColor = colorScheme === "dark" ? COLORS.success : COLORS.success; // Verde para preço ou cor primária
+  const oldPriceColor = colorScheme === "dark" ? COLORS.white : COLORS.yellow; // Cor para preço antigo
+  const iconColor = colorScheme === "dark" ? COLORS.success : COLORS.primary; // Ícone de link, use uma cor que chame atenção
 
   const fetchAllData = async () => {
     try {
       setIsLoading(true);
-      // Idealmente, estes dados viriam de um Contexto global
-      // que já foi carregado no _layout.tsx
       const [offersData, sponsorsData, adsbannerData] = await Promise.all([
-        loadDataIfNeeded<Offer[]>("offersData", fetchOffers),
-        loadDataIfNeeded<Sponsor[]>("sponsorsData", fetchSponsors),
-        loadDataIfNeeded<AdBanner[]>("adsbannerData", fetchAdsBanner),
+        loadDataIfNeeded("offersData", fetchOffers),
+        loadDataIfNeeded("sponsorsData", fetchSponsors),
+        loadDataIfNeeded("adsbannerData", fetchAdsBanner),
       ]);
 
       setData({
@@ -76,9 +81,9 @@ const Patrocinador = () => {
   }, []);
 
   if (
-    !isLoading && // Se não está carregando
-    (!data || // E não há dados
-      (data.partners.length === 0 && // ou todas as listas estão vazias
+    !isLoading &&
+    (!data ||
+      (data.partners.length === 0 &&
         data.ads.length === 0 &&
         data.dataBanner.length === 0))
   ) {
@@ -121,10 +126,7 @@ const Patrocinador = () => {
         <RefreshControl refreshing={isLoading} onRefresh={fetchAllData} />
       }
     >
-     {/* 2. Aplica o 'paddingTop' dinâmico ao cabeçalho */}
-     <View
-        style={[styles.headerview, { paddingTop: insets.top + 10 }]}
-      >
+      <View style={[styles.headerview, { paddingTop: insets.top + 10 }]}>
         <View style={styles.header}>
           <MaterialCommunityIcons
             name="account-group"
@@ -154,11 +156,7 @@ const Patrocinador = () => {
         <View style={styles.bannerContainer}>
           {isLoading ? (
             <View style={{ alignItems: "center" }}>
-              <Shimmer
-                width="90%" // Usando porcentagem para ser responsivo
-                height={150}
-                borderRadius={12}
-              />
+              <Shimmer width={300} height={150} borderRadius={12} />
             </View>
           ) : (
             data?.dataBanner &&
@@ -172,6 +170,8 @@ const Patrocinador = () => {
         ads={data?.ads ?? []}
         cardBackgroundColor={cardBackgroundColor}
         priceColor={priceColor}
+        oldPriceColor={oldPriceColor} // Passa a cor do preço antigo
+        iconColor={iconColor} // Passa a cor do ícone de link
       />
 
       <View style={styles.spaceBotton} />
@@ -210,14 +210,13 @@ const PartnersList: FC<PartnersListProps> = ({ isLoading, partners }) => {
       data={partners}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => {
-        // Desestruturamos o 'id' para usá-lo diretamente no caminho
         const { id, ...rest } = item;
-        
+
         return (
           <Link
             href={{
-              pathname: rest.uri, // Caminho construído dinamicamente
-              params: rest, // Restante dos dados como parâmetros
+              pathname: rest.uri,
+              params: rest,
             }}
             asChild
           >
@@ -240,6 +239,8 @@ type AdsListProps = {
   ads: Offer[];
   cardBackgroundColor: string;
   priceColor: string;
+  oldPriceColor: string; // Adicionado
+  iconColor: string; // Adicionado
 };
 
 const AdsList: FC<AdsListProps> = ({
@@ -247,6 +248,8 @@ const AdsList: FC<AdsListProps> = ({
   ads,
   cardBackgroundColor,
   priceColor,
+  oldPriceColor, // Recebido
+  iconColor, // Recebido
 }) => {
   if (isLoading) {
     return (
@@ -254,14 +257,17 @@ const AdsList: FC<AdsListProps> = ({
         horizontal
         data={[...Array(3)]}
         renderItem={() => (
-          <Shimmer
-            width={250}
-            height={200}
-            style={{ borderRadius: 8, marginLeft: 15 }}
-          />
+          <View style={{ marginLeft: CARD_MARGIN }}>
+            <Shimmer
+              width={CARD_WIDTH}
+              height={CARD_WIDTH * 0.8} // Ajuste para proporção da imagem
+              borderRadius={8}
+            />
+          </View>
         )}
         keyExtractor={(_, index) => `shimmer-ad-${index}`}
         showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 0 }} // Para remover o marginLeft inicial do primeiro item
       />
     );
   }
@@ -271,25 +277,69 @@ const AdsList: FC<AdsListProps> = ({
       horizontal
       data={ads}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => item.uri && Linking.openURL(item.uri)}>
+      renderItem={({ item, index }) => (
+        <TouchableOpacity
+          onPress={() => item.uri && Linking.openURL(item.uri)}
+          style={{
+            marginLeft: index === 0 ? CARD_MARGIN : CARD_MARGIN / 2,
+            marginRight: CARD_MARGIN / 2,
+          }} // Ajusta a margem para o primeiro card
+        >
           <ThemedView
             style={[styles.adCard, { backgroundColor: cardBackgroundColor }]}
           >
             <Image source={{ uri: item.img }} style={styles.adImage} />
             <View style={styles.adContent}>
-              {item.oldPrice && (
-                <ThemedText style={styles.oldPrice}>{item.oldPrice}</ThemedText>
+              {/* Badge (subtítulo) */}
+              {item.badge && (
+                <View style={styles.badgeOfferContainer}>
+                  <Text style={styles.badgeOfferText}>{item.badge}</Text>
+                </View>
               )}
-              <ThemedText style={[styles.price, { color: priceColor }]}>
-                {item.price}
-              </ThemedText>
+
+              {/* Título da Oferta */}
               <ThemedText style={styles.adTitle}>{item.title}</ThemedText>
+
+              {/* Preços */}
+              <View style={styles.priceContainer}>
+                {item.oldPrice && (
+                  <ThemedText
+                    style={[styles.oldPrice, { color: oldPriceColor }]}
+                  >
+                    R$ {item.oldPrice}
+                  </ThemedText>
+                )}
+                <ThemedText style={[styles.price, { color: priceColor }]}>
+                  R$ {item.price}
+                </ThemedText>
+              </View>
+
+              {/* Descrição */}
+              {item.text && (
+                <ThemedText style={styles.adDescription}>
+                  {item.text}
+                </ThemedText>
+              )}
+
+              {/* Ícone de Link */}
+              {item.uri && (
+                <View style={styles.linkIconContainer}>
+                  <MaterialCommunityIcons
+                    name="link-variant"
+                    size={20}
+                    color={iconColor}
+                  />
+                  <ThemedText style={[styles.linkText, { color: iconColor }]}>
+                    Ver Oferta
+                  </ThemedText>
+                </View>
+              )}
             </View>
           </ThemedView>
         </TouchableOpacity>
       )}
       showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.adsListContainer} // Adiciona estilo ao container da FlatList
     />
   );
 };
@@ -297,7 +347,6 @@ const AdsList: FC<AdsListProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: COLORS.background,
   },
   emptyContainer: {
     flex: 1,
@@ -333,12 +382,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //backgroundColor: COLORS.background,
   },
   loadingText: {
     fontSize: 18,
     fontWeight: "bold",
-    //color: COLORS.primary,
     marginTop: 10,
   },
   header: {
@@ -348,17 +395,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   badgeContainer: {
-    flexDirection: "row", // Coloca os badges na mesma linha
-    alignItems: "center", // Alinha os badges verticalmente ao centro
-    //justifyContent: "space-between", // Espaçamento uniforme (ou use 'flex-start' para alinhá-los à esquerda)
-    paddingHorizontal: 10, // Margem horizontal
-    marginVertical: 10, // Margem vertical para separar do restante
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    gap: 10, // Espaçamento entre os badges
   },
   headerview: {
     flex: 1,
     backgroundColor: COLORS.primary,
-// marginTop: 40, // REMOVIDO: Não usar mais valores fixos
-paddingBottom: 10, // Mantém o padding inferior
+    paddingBottom: 10,
     paddingHorizontal: 15,
   },
   headerTitle: {
@@ -380,7 +426,6 @@ paddingBottom: 10, // Mantém o padding inferior
     fontWeight: "bold",
     paddingLeft: 15,
     paddingBottom: 15,
-    //olor: COLORS.black,
   },
   partnerCard: {
     alignItems: "center",
@@ -396,67 +441,83 @@ paddingBottom: 10, // Mantém o padding inferior
     fontSize: 10,
     color: COLORS.white,
   },
+  // --- Estilos do Card de Oferta Refatorado ---
+  adsListContainer: {
+    paddingRight: CARD_MARGIN, // Adiciona padding no final da lista
+  },
   adCard: {
-    borderRadius: 8,
-    marginLeft: 15,
-    marginRight: 10,
-    width: 250,
+    borderRadius: 12, // Borda mais arredondada
+    width: CARD_WIDTH, // Usando largura responsiva
     overflow: "hidden",
-    elevation: 3,
+    elevation: 4, // Sombra mais proeminente
     marginBottom: 20,
+    shadowColor: "#000", // Sombra para iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   adImage: {
     width: "100%",
-    height: 150,
+    height: CARD_WIDTH * 0.6, // Proporção da imagem (60% da largura do card)
     resizeMode: "cover",
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
   adContent: {
-    padding: 10,
+    padding: 12, // Aumenta o padding interno
   },
-  oldPrice: {
-    fontSize: 12,
-    textDecorationLine: "line-through",
-    //color: COLORS.lightText,
+  badgeOfferContainer: {
+    backgroundColor: COLORS.primary, // Cor de fundo para o badge
+    borderRadius: 5,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    alignSelf: "flex-start", // Alinha o badge à esquerda
+    marginBottom: 8, // Espaço abaixo do badge
   },
-  price: {
-    fontSize: 16,
+  badgeOfferText: {
+    fontSize: 11,
     fontWeight: "bold",
-    //color: COLORS.primary,
-    marginVertical: 5,
+    color: COLORS.white, // Texto do badge branco
+    textTransform: "uppercase", // Texto em maiúsculas
   },
   adTitle: {
-    fontSize: 14,
-    //color: COLORS.text,
-    marginBottom: 5,
-  },
-  badge: {
-    fontSize: 12,
+    fontSize: 16, // Aumenta o tamanho da fonte do título
     fontWeight: "bold",
-    //color: COLORS.success,
-    backgroundColor: COLORS.lightSuccess,
-    paddingVertical: 2,
-    paddingHorizontal: 5,
-    borderRadius: 4,
-    alignSelf: "flex-start",
+    marginBottom: 4, // Espaço abaixo do título
   },
-  moreSponsorsCard: {
-    backgroundColor: COLORS.primary,
-    margin: 15,
-    padding: 20,
-    borderRadius: 8,
+  adDescription: {
+    fontSize: 13,
+    //color: COLORS.lightText, // Cor mais suave para a descrição
+    marginBottom: 10, // Espaço abaixo da descrição
+    lineHeight: 18, // Altura da linha para melhor legibilidade
+  },
+  priceContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    marginBottom: 8, // Espaço abaixo dos preços
   },
-  moreSponsorsTitle: {
-    fontSize: 18,
+  oldPrice: {
+    fontSize: 13, // Tamanho da fonte do preço antigo
+    textDecorationLine: "line-through",
+    marginRight: 8, // Espaço entre preço antigo e novo
+  },
+  price: {
+    fontSize: 18, // Aumenta o tamanho da fonte do preço principal
     fontWeight: "bold",
-    color: COLORS.white,
   },
-  moreSponsorsDate: {
-    fontSize: 14,
-    color: COLORS.white,
-    marginTop: 5,
+  linkIconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 8,
+    justifyContent: "flex-end", // Alinha o ícone e texto do link à direita
   },
+  linkText: {
+    fontSize: 13,
+    fontWeight: "bold",
+    marginLeft: 5,
+  },
+  // --- Fim dos Estilos do Card de Oferta Refatorado ---
+
   spaceBotton: {
     marginBottom: 120,
   },
