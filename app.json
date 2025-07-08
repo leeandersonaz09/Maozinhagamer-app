@@ -2,7 +2,7 @@
   "expo": {
     "name": "Maozinha Gamer",
     "slug": "maozinhagamer",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "maozinhagamer",
@@ -15,7 +15,7 @@
       "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
-      "versionCode": 4,
+      "versionCode": 5,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#2E0000"
@@ -23,12 +23,10 @@
       "package": "com.maozinhagamer.maozinhagamerapp",
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
-      "useNextNotificationsApi": true,
       "permissions": [
         "android.permission.POST_NOTIFICATIONS"
       ]
     },
-  
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -46,7 +44,15 @@
           "backgroundColor": "#2E0000"
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/adaptive-icon-notification.png",
+          "color": "#2E0000",
+          "defaultChannel": "default"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
