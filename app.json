@@ -2,12 +2,11 @@
   "expo": {
     "name": "Maozinha Gamer",
     "slug": "maozinhagamer",
-    "version": "1.0.3",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "maozinhagamer",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/images/icon.png",
@@ -15,7 +14,7 @@
       "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
-      "versionCode": 5,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#2E0000"
@@ -23,9 +22,7 @@
       "package": "com.maozinhagamer.maozinhagamerapp",
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
-      "permissions": [
-        "android.permission.POST_NOTIFICATIONS"
-      ]
+      "permissions": ["android.permission.POST_NOTIFICATIONS"]
     },
     "web": {
       "bundler": "metro",
@@ -34,7 +31,6 @@
     },
     "plugins": [
       "expo-router",
-      "react-native-edge-to-edge",
       [
         "expo-splash-screen",
         {
@@ -51,6 +47,17 @@
           "icon": "./assets/images/adaptive-icon-notification.png",
           "color": "#2E0000",
           "defaultChannel": "default"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "newArchEnabled": true
+          },
+          "ios": {
+            "newArchEnabled": true
+          }
         }
       ]
     ],

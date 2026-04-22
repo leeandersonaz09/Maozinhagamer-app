@@ -1,9 +1,8 @@
-import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
-import { Platform } from 'react-native';
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
+import Constants from "expo-constants";
+import { Platform } from "react-native";
 
-// Configura como as notificações devem se comportar quando o app está em primeiro plano
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -14,40 +13,61 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export async function registerForPushNotificationsAsync(): Promise<string | undefined> {
-  let token;
+export async function registerForPushNotificationsAsync(): Promise<
+  string | undefined
+> {
+  let token: string | undefined;
+  const hasPermission = (
+    settings: Notifications.NotificationPermissionsStatus
+  ) => {
+    const normalized = settings as Notifications.NotificationPermissionsStatus & {
+      granted?: boolean;
+      status?: string;
+    };
 
-  if (Platform.OS === 'android') {
-    // Cria um "canal" para as notificações no Android, é um passo obrigatório.
-    await Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
+    return (
+      normalized.granted === true ||
+      normalized.status === "granted" ||
+      normalized.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL
+    );
+  };
+
+  if (Platform.OS === "android") {
+    await Notifications.setNotificationChannelAsync("default", {
+      name: "default",
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
+      lightColor: "#FF231F7C",
     });
   }
 
   if (Device.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
+    let settings = await Notifications.getPermissionsAsync();
 
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
+    if (!hasPermission(settings)) {
+      settings = await Notifications.requestPermissionsAsync({
+        ios: {
+          allowAlert: true,
+          allowBadge: true,
+          allowSound: true,
+          allowProvisional: true,
+        },
+      });
     }
 
-    if (finalStatus !== 'granted') {
-      alert('Falha ao obter o token de push para notificação!');
-      return;
+    if (!hasPermission(settings)) {
+      alert("Falha ao obter o token de push para notificacao!");
+      return undefined;
     }
 
-    // Obtém o token de push da Expo
-    token = (await Notifications.getExpoPushTokenAsync({
-      projectId: Constants.expoConfig?.extra?.eas.projectId,
-    })).data;
-    console.log('Expo Push Token:', token);
+    token = (
+      await Notifications.getExpoPushTokenAsync({
+        projectId: Constants.expoConfig?.extra?.eas.projectId,
+      })
+    ).data;
+    console.log("Expo Push Token:", token);
   } else {
-    alert('É necessário usar um dispositivo físico para receber notificações push.');
+    alert("E necessario usar um dispositivo fisico para receber notificacoes push.");
   }
 
   return token;

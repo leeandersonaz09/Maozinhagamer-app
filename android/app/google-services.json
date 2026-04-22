@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "198860100597",
+    "project_id": "maozinhagamerapp-2f0c7",
+    "storage_bucket": "maozinhagamerapp-2f0c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198860100597:android:da98fb99cfd5945a9106bc",
+        "android_client_info": {
+          "package_name": "com.maozinhagamer.maozinhagamerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198860100597-hmtb153cuhmvgog9i1tqktn06hknkuma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maozinhagamer.maozinhagamerapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "198860100597-crfrkndblhvaribq8qsuij68jogib678.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2OLBr8vBcWDWrsfQNnAntosORYZ4hj7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198860100597-crfrkndblhvaribq8qsuij68jogib678.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "198860100597-3r7iuj55tp7mc6gnqsgb5ec24353uop8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maozinhagamer.maozinhagamerapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

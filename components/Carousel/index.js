@@ -11,7 +11,7 @@ import {
 import { Link } from "expo-router";
 import Swiper from "react-native-swiper";
 import { ThemedView } from "@/components/ThemedView";
-var { height, width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 export default function Banner({ data }) {
   const dataBanner = data;

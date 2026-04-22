@@ -4,9 +4,6 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
-  LayoutChangeEvent,
-  Text,
 } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, {
@@ -15,27 +12,20 @@ import Animated, {
   withSpring,
   interpolate,
 } from "react-native-reanimated";
-import { Svg, Path } from "react-native-svg";
+import Svg, { Path } from "react-native-svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 
 // --- 1. CONFIGURAÇÃO (Ícones e Cores) ---
 
 const COLORS = {
-  // Fundo da TabBar: um cinza-carvão quase preto.
   background: "#1A1A1A",
-  // Cor do conteúdo (ícones, texto).
   content: "#EFEFEF",
-  // A cor de destaque: o 'vermelho vinho' / 'vermelho sangue'.
   accent: "#C62828",
-  // O tom mais escuro do vermelho para o gradiente.
-
   accentDark: "#8E0000",
-  // Sombra para o brilho da borda.
   shadow: "#C62828",
 };
 
-// Ícones como componentes SVG para melhor controle
 const ICONS = {
   home: (p: { color: string }) => (
     <Svg width={24} height={24} viewBox="0 0 24 24">
@@ -61,6 +51,14 @@ const ICONS = {
       />
     </Svg>
   ),
+  news: (p: { color: string }) => (
+    <Svg width={24} height={24} viewBox="0 0 24 24">
+      <Path
+        fill={p.color}
+        d="M20 5H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-1 14H5V7h14v12zm-2-7H7v2h10v-2zm-4 4H7v2h6v-2z"
+      />
+    </Svg>
+  ),
   about: (p: { color: string }) => (
     <Svg width={24} height={24} viewBox="0 0 24 24">
       <Path
@@ -71,13 +69,69 @@ const ICONS = {
   ),
 };
 
-// Mapa para associar rotas com nossos ícones e labels
 const ROUTE_CONFIG = {
   index: { label: "Início", icon: ICONS.home },
+  news: { label: "Radar", icon: ICONS.news },
   patrocinador: { label: "Parceiros", icon: ICONS.handshake },
   members: { label: "Membros", icon: ICONS.people },
   about: { label: "Sobre", icon: ICONS.about },
 };
+
+// ─── TabItem extraído para corrigir react-hooks/rules-of-hooks ──────────────
+// useSharedValue, useEffect e useAnimatedStyle NÃO podem ser chamados dentro
+// de um .map(). Cada Item de aba é agora seu próprio Componente React.
+type TabItemProps = {
+  route: { key: string; name: string; params?: object };
+  isFocused: boolean;
+  options: any;
+  onPress: () => void;
+  onLayout: (event: any) => void;
+};
+
+function TabItem({ route, isFocused, options, onPress, onLayout }: TabItemProps) {
+  const config = ROUTE_CONFIG[route.name as keyof typeof ROUTE_CONFIG] ?? {};
+  const progress = useSharedValue(isFocused ? 1 : 0);
+
+  React.useEffect(() => {
+    progress.value = withSpring(isFocused ? 1 : 0, {
+      damping: 15,
+      stiffness: 120,
+    });
+  }, [isFocused, progress]);
+
+  const animatedIconStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: interpolate(progress.value, [0, 1], [0, -12]) },
+    ],
+  }));
+
+  const animatedLabelStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(progress.value, [0, 1], [0, 1]),
+    transform: [
+      { translateY: interpolate(progress.value, [0, 1], [10, 0]) },
+    ],
+  }));
+
+  return (
+    <TouchableOpacity
+      key={route.key}
+      accessibilityRole="button"
+      accessibilityState={isFocused ? { selected: true } : {}}
+      accessibilityLabel={options.tabBarAccessibilityLabel}
+      testID={options.tabBarTestID}
+      onPress={onPress}
+      onLayout={onLayout}
+      style={styles.tabButton}
+    >
+      <Animated.View style={animatedIconStyle}>
+        {config.icon ? config.icon({ color: COLORS.content }) : null}
+      </Animated.View>
+      <Animated.Text style={[styles.tabLabel, animatedLabelStyle]}>
+        {config.label}
+      </Animated.Text>
+    </TouchableOpacity>
+  );
+}
 
 // --- 2. NOSSA TABBAR CUSTOMIZADA ---
 
@@ -96,7 +150,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
       indicatorPosition.value = withSpring(targetLayout.x, springConfig);
       indicatorWidth.value = withSpring(targetLayout.width, springConfig);
     }
-  }, [state.index, layouts]);
+  }, [state.index, layouts, indicatorPosition, indicatorWidth]);
 
   const animatedIndicatorStyle = useAnimatedStyle(() => ({
     width: indicatorWidth.value,
@@ -122,8 +176,6 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
-          const config =
-            ROUTE_CONFIG[route.name as keyof typeof ROUTE_CONFIG] ?? {};
           const isFocused = state.index === index;
 
           const onPress = () => {
@@ -133,51 +185,22 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
               canPreventDefault: true,
             });
             if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name, route.params);
+              navigation.navigate(route.name as never);
             }
           };
 
-          const progress = useSharedValue(isFocused ? 1 : 0);
-          React.useEffect(() => {
-            progress.value = withSpring(isFocused ? 1 : 0, {
-              damping: 15,
-              stiffness: 120,
-            });
-          }, [isFocused]);
-
-          const animatedIconStyle = useAnimatedStyle(() => ({
-            transform: [
-              { translateY: interpolate(progress.value, [0, 1], [0, -12]) },
-            ],
-          }));
-          const animatedLabelStyle = useAnimatedStyle(() => ({
-            opacity: interpolate(progress.value, [0, 1], [0, 1]),
-            transform: [
-              { translateY: interpolate(progress.value, [0, 1], [10, 0]) },
-            ],
-          }));
-
           return (
-            <TouchableOpacity
+            <TabItem
               key={route.key}
-              accessibilityRole="button"
-              accessibilityState={isFocused ? { selected: true } : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarTestID}
+              route={route}
+              isFocused={isFocused}
+              options={options}
               onPress={onPress}
               onLayout={(event) => {
                 const { x, width } = event.nativeEvent.layout;
                 setLayouts((prev) => ({ ...prev, [index]: { x, width } }));
               }}
-              style={styles.tabButton}
-            >
-              <Animated.View style={animatedIconStyle}>
-                {config.icon ? config.icon({ color: COLORS.content }) : null}
-              </Animated.View>
-              <Animated.Text style={[styles.tabLabel, animatedLabelStyle]}>
-                {config.label}
-              </Animated.Text>
-            </TouchableOpacity>
+            />
           );
         })}
       </View>
@@ -195,6 +218,7 @@ export default function TabLayout() {
         tabBar={(props) => <CustomTabBar {...props} />}
       >
         <Tabs.Screen name="index" />
+        <Tabs.Screen name="news" />
         <Tabs.Screen name="patrocinador" />
         <Tabs.Screen name="members" />
         <Tabs.Screen name="about" />

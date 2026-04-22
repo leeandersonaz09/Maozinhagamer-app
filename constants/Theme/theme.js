@@ -25,6 +25,7 @@ export const COLORS = {
   playstation: "#00246E",
   steam: "#2a475e",
   success: "#00CE0EFF",
+  error: "#EF4444",
 };
 
 export const SIZES = {
@@ -50,6 +51,7 @@ export const SIZES = {
   small: 11,
   tiny: 10,
   headerTitle: 18,
+  headerTittle: 18,
   header: 20,
   big: 38,
 

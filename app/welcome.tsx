@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { View, StyleSheet, Dimensions, ScrollView } from "react-native";
+import React, { useRef } from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
 import { COLORS } from "../constants/Theme/theme";
@@ -15,9 +15,11 @@ import Animated, {
   interpolate,
   Extrapolation,
   interpolateColor,
+  type SharedValue,
 } from "react-native-reanimated";
 import LottieView from "lottie-react-native";
 import { StatusBar } from "expo-status-bar";
+
 const { width } = Dimensions.get("window");
 
 // Tipos para as slides
@@ -26,7 +28,7 @@ type SlideType = {
   subtitle: string;
   description: string;
   picture: {
-    src: any; // Como é um require() para assets, o tipo `any` é utilizado
+    src: any;
     width: number;
     height: number;
   };
@@ -129,8 +131,43 @@ const slides: SlideType[] = [
   },
 ];
 
-const Welcome: React.FC = () => {
-  const scroll = useRef<ScrollView>(null);
+// ─── Componente extraído para corrigir violação de react-hooks/rules-of-hooks ─
+// useAnimatedStyle NÃO pode ser chamado dentro de um .map() — deve viver no
+// corpo raiz de um componente React. Extraindo o bloco em SlideVisualizer
+// garante que cada hook seja instanciado em nível de raiz de componente.
+type SlideVisualizerProps = {
+  picture: SlideType["picture"];
+  index: number;
+  x: SharedValue<number>;
+};
+
+function SlideVisualizer({ picture, index, x }: SlideVisualizerProps) {
+  const style = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      x.value,
+      [(index - 0.5) * width, index * width, (index + 0.5) * width],
+      [0, 1, 0],
+      Extrapolation.CLAMP
+    ),
+  }));
+
+  return (
+    <Animated.View style={[styles.underlay, style]}>
+      <LottieView
+        autoPlay
+        style={{
+          width: width - BORDER_RADIUS,
+          height:
+            ((width - BORDER_RADIUS) * picture.height) / picture.width,
+        }}
+        source={picture.src}
+      />
+    </Animated.View>
+  );
+}
+
+export default function Welcome() {
+  const scroll = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
 
   const onScroll = useAnimatedScrollHandler({
@@ -161,13 +198,9 @@ const Welcome: React.FC = () => {
     transform: [{ translateX: -x.value }],
   }));
 
-  const [bar, setBar] = useState(true);
-
   const submit = async () => {
-    await AsyncStorage.setItem("isnewinApp", JSON.stringify(true)).then(() => {
-      setBar(false);
-      router.replace("/");
-    });
+    await AsyncStorage.setItem("isnewinApp", JSON.stringify(true));
+    router.replace("/");
   };
 
   return (
@@ -175,31 +208,9 @@ const Welcome: React.FC = () => {
       <View style={styles.container}>
         <StatusBar animated={true} />
         <Animated.View style={[styles.slider, slider]}>
-          {slides.map(({ picture }, index) => {
-            const style = useAnimatedStyle(() => ({
-              opacity: interpolate(
-                x.value,
-                [(index - 0.5) * width, index * width, (index + 0.5) * width],
-                [0, 1, 0],
-                Extrapolation.CLAMP
-              ),
-            }));
-
-            return (
-              <Animated.View style={[styles.underlay, style]} key={index}>
-                <LottieView
-                  autoPlay
-                  style={{
-                    width: width - BORDER_RADIUS,
-                    height:
-                      ((width - BORDER_RADIUS) * picture.height) /
-                      picture.width,
-                  }}
-                  source={picture.src}
-                />
-              </Animated.View>
-            );
-          })}
+          {slides.map(({ picture }, index) => (
+            <SlideVisualizer key={index} {...{ picture, index, x }} />
+          ))}
 
           <Animated.ScrollView
             ref={scroll}
@@ -262,9 +273,7 @@ const Welcome: React.FC = () => {
           </View>
         </View>
       </View>
-      <StatusBar style="light" backgroundColor={COLORS.primary} />
+      <StatusBar style="light" />
     </GestureHandlerRootView>
   );
-};
-
-export default Welcome;
+}

@@ -1,18 +1,27 @@
-// src/hooks/useNetworkStatus.js
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 
 export const useNetworkStatus = () => {
-  const [isConnected, setIsConnected] = useState<boolean>(false); // Definir como true por padrão, assumindo que o usuário está conectado
+  const [isConnected, setIsConnected] = useState<boolean>(true);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      setIsConnected(!!state.isConnected); // Atualiza o estado com o status da conexão
+    let isMounted = true;
+
+    NetInfo.fetch().then((state) => {
+      if (isMounted) {
+        setIsConnected(Boolean(state.isConnected));
+      }
     });
 
-    return () => unsubscribe(); // Limpar o listener ao desmontar o componente
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(Boolean(state.isConnected));
+    });
+
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
   }, []);
 
-  return isConnected; // Retorna o estado da conexão
+  return isConnected;
 };

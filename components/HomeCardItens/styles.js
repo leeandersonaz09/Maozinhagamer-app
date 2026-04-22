@@ -1,6 +1,7 @@
-import { StyleSheet, Dimensions } from "react-native";
-const { width } = Dimensions.get("window");
 import { COLORS } from "../../constants/Theme/theme.js";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -72,7 +73,6 @@ const styles = StyleSheet.create({
   },
   priceOff: {
     textAlign: "center",
-    color: "#333",
     fontWeight: "bold",
     fontSize: 16,
     color: "#ff5b77",

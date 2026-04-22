@@ -1,117 +1,136 @@
 import React from "react";
-import { View, TouchableOpacity, Image, FlatList } from "react-native";
-import { FontAwesome, FontAwesome6 } from "@expo/vector-icons";
-import * as Linking from "expo-linking";
-import { Card } from "../../components/index.js";
-import styles from "../../constants/Theme/styles/AboutStyles.js";
-import { COLORS } from "../../constants/Theme/theme.js";
-import { StatusBar } from "expo-status-bar";
+import { View, TouchableOpacity, Image, ScrollView, Linking, Text } from "react-native";
+import { FontAwesome, FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
 type SocialLink = {
   id: number;
   title: string;
-  icon: React.ReactNode;
+  iconName: string;
+  iconType: "fa" | "fa6" | "mci";
+  color: string;
   uri: string;
-  text: string;
+  subtitle: string;
 };
 
-// Dados dos links sociais, definidos como uma constante fora do componente
 const socialLinks: SocialLink[] = [
   {
     id: 1,
     title: "Discord",
-    icon: <FontAwesome6 size={40} color={COLORS.discord} name="discord" />,
+    subtitle: "Comunidade Oficial",
+    iconName: "discord",
+    iconType: "fa6",
+    color: "#5865F2",
     uri: "https://discord.gg/EBHZu3aw",
-    text: "https://discord.gg/EBHZu3aw",
   },
   {
     id: 2,
     title: "Youtube",
-    icon: <FontAwesome size={50} color={COLORS.youtube} name="youtube" />,
+    subtitle: "@maozinhagamer_diih",
+    iconName: "youtube",
+    iconType: "fa",
+    color: "#FF0000",
     uri: "https://www.youtube.com/@maozinhagamer_diih",
-    text: "@maozinhagamer_diih",
   },
   {
     id: 3,
-    title: "Grupo do Whatsapp",
-    icon: (
-      <FontAwesome6 size={50} color={COLORS.whatsapp} name="square-whatsapp" />
-    ),
+    title: "WhatsApp",
+    subtitle: "Grupo do Mãozinha",
+    iconName: "square-whatsapp",
+    iconType: "fa6",
+    color: "#25D366",
     uri: "https://chat.whatsapp.com/LnpW61ReLHOKPMx8ytTXp9",
-    text: "Grupo do mãozinha",
   },
   {
     id: 4,
-    title: "Ajude nossas plataformas",
-    icon: <FontAwesome6 size={50} color={COLORS.pix} name="pix" />,
+    title: "Apoie o Canal",
+    subtitle: "Contribua via LivePix",
+    iconName: "pix",
+    iconType: "fa6",
+    color: "#32BCAD",
     uri: "https://livepix.gg/diih145807",
-    text: "livepix.gg/diih145807",
   },
   {
     id: 5,
-    title: "Política de Privacidade",
-    icon: <FontAwesome6 size={45} color={COLORS.yellow} name="user-shield" />,
+    title: "Privacidade",
+    subtitle: "Termos e Condições",
+    iconName: "shield-check",
+    iconType: "mci",
+    color: "#FFB300",
     uri: "https://politicadeprivavidade-maozinhagamer.blogspot.com/p/poliica-de-privacidade.html",
-    text: "Leia nossos termos",
   },
 ];
 
-// Componente para renderizar cada card de link social
-const SocialLinkCard: React.FC<{ item: SocialLink }> = ({ item }) => {
+const AboutScreen = () => {
+  const renderIcon = (link: SocialLink) => {
+    const size = 28;
+    if (link.iconType === "fa") return <FontAwesome name={link.iconName as any} size={size} color="white" />;
+    if (link.iconType === "fa6") return <FontAwesome6 name={link.iconName as any} size={size} color="white" />;
+    return <MaterialCommunityIcons name={link.iconName as any} size={size} color="white" />;
+  };
+
   return (
-    <Card>
-      <TouchableOpacity
-        onPress={() => Linking.openURL(item.uri)}
-        accessibilityLabel={`Abrir link para ${item.title}`}
-      >
-        <View style={styles.CardContent}>
-          {item.icon}
-          <View style={styles.TextContent}>
-            <ThemedText style={styles.title}>{item.title}</ThemedText>
-            <ThemedText style={styles.text}>{item.text}</ThemedText>
+    <ThemedView className="flex-1 bg-white dark:bg-[#0D0D0D]">
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* Header Hero Section */}
+        <View className="bg-[#7A0000] pt-16 pb-12 px-6 rounded-b-[50px] shadow-2xl items-center">
+          <View className="w-32 h-32 rounded-full border-4 border-white/20 p-1 mb-6 shadow-xl">
+            <Image
+              style={{ width: '100%', height: '100%', borderRadius: 60 }}
+              source={require("../../assets/images/logo-rouded.png")}
+            />
+          </View>
+          <Text className="text-white text-3xl font-black uppercase tracking-tighter mb-2">Mãozinha Gamer</Text>
+          <View className="bg-white/10 px-4 py-1 rounded-full">
+            <Text className="text-white/80 text-[10px] font-black uppercase tracking-widest">Est. 2024 • Gaming Community</Text>
           </View>
         </View>
-      </TouchableOpacity>
-    </Card>
+
+        {/* Bio Section */}
+        <View className="px-8 mt-10 mb-8">
+          <Text className="text-[#7A0000] dark:text-[#FFFB00] text-xs font-black uppercase tracking-[4px] mb-4">Sobre Nós</Text>
+          <ThemedText className="text-lg font-bold leading-7 opacity-70">
+            O canal focado em gameplays emocionantes, builds meta e momentos épicos. 
+            Nossa missão é trazer o melhor conteúdo de Call of Duty e FPS para a comunidade brasileira.
+          </ThemedText>
+        </View>
+
+        {/* Social Grid */}
+        <View className="px-6 flex-row flex-wrap justify-between">
+          <View className="w-full mb-4">
+            <Text className="text-black/30 dark:text-white/30 text-[10px] font-black uppercase tracking-[3px] ml-2">Links Oficiais</Text>
+          </View>
+          
+          {socialLinks.map((link) => (
+            <TouchableOpacity
+              key={link.id}
+              onPress={() => Linking.openURL(link.uri)}
+              activeOpacity={0.9}
+              className="w-[48%] mb-4"
+            >
+              <View className="bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-[30px] p-5 items-center">
+                <View 
+                  style={{ backgroundColor: link.color }}
+                  className="w-14 h-14 rounded-2xl items-center justify-center mb-4 shadow-lg"
+                >
+                  {renderIcon(link)}
+                </View>
+                <ThemedText className="font-black text-sm uppercase tracking-tight text-center">{link.title}</ThemedText>
+                <ThemedText className="text-[9px] font-bold opacity-40 uppercase mt-1 text-center">{link.subtitle}</ThemedText>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Version Footer */}
+        <View className="mt-12 items-center opacity-20">
+          <MaterialCommunityIcons name="star-four-points" size={20} color="gray" />
+          <Text className="text-[10px] font-black uppercase mt-2 tracking-[5px]">Versão 1.0.3</Text>
+        </View>
+      </ScrollView>
+    </ThemedView>
   );
 };
 
-// Componente principal da tela "Sobre"
-const AboutScreen = () => {
-  return (
-    <>
-      <ThemedView style={styles.Container}>
-        <View style={styles.HeaderBackGround} />
-        <FlatList
-          ListHeaderComponent={
-            <View style={styles.Content}>
-              <Card>
-                <View style={styles.CardContainer}>
-                  <Image
-                    style={styles.Image}
-                    source={require("../../assets/images/logo-rouded.png")}
-                  />
-                  <View style={styles.TextContent}>
-                    <ThemedText style={styles.title}>Mãozinha Gamer</ThemedText>
-                    <ThemedText style={styles.text}>
-                      “Mãozinha Gamer” é um canal de jogos destacando-se por
-                      gameplay emocionante e momentos épicos em jogos.
-                    </ThemedText>
-                  </View>
-                </View>
-              </Card>
-            </View>
-          }
-          data={socialLinks}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <SocialLinkCard item={item} />}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 20 }}
-        />
-      </ThemedView>
-    </>
-  );
-};
 export default AboutScreen;

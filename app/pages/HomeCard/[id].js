@@ -18,13 +18,28 @@ import { ThemedView } from "@/components/ThemedView";
 const HomeCard = () => {
   const { title, subCollection } = useLocalSearchParams();
 
-  const router = useRouter(); // Hook para navegação no expo-router
+  const router = useRouter(); // Hook para navegaÃ§Ã£o no expo-router
 
   // Parse subCollection de volta para objeto
-  const parsedSubCollection = JSON.parse(subCollection);
+  const parsedSubCollection = React.useMemo(() => {
+    try {
+      const rawValue = Array.isArray(subCollection)
+        ? subCollection[0]
+        : subCollection;
+      const parsed = rawValue ? JSON.parse(rawValue) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.warn("SubCollection invalida no HomeCard:", error);
+      return [];
+    }
+  }, [subCollection]);
 
-  // Função para lidar com o redirecionamento
+  // FunÃ§Ã£o para lidar com o redirecionamento
   const handlePress = (uri, id, item) => {
+    if (!uri) {
+      return;
+    }
+
     if (uri.startsWith("http")) {
       // Redirecionamento para URLs externas
       Linking.openURL(uri);
@@ -32,9 +47,10 @@ const HomeCard = () => {
       // Redirecionamento interno usando o router do expo-router
       console.log(uri);
       router.push({
-        pathname: `/pages/${uri}/${id}`, // Caminho dinâmico
-        //pathname: `/pages/TFDBuilds/${id}`, // Caminho dinâmico
+        pathname: `/pages/${uri}/[id]`,
+        //pathname: `/pages/TFDBuilds/${id}`, // Caminho dinÃ¢mico
         params: {
+          id: String(id),
           title: item.title,
           subCollection: JSON.stringify(item.loadouts),
         },
@@ -69,6 +85,14 @@ const HomeCard = () => {
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.FlatListContainer}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyTitle}>Nada encontrado por aqui.</Text>
+              <Text style={styles.emptyDescription}>
+                Puxe para atualizar a Home ou tente novamente em instantes.
+              </Text>
+            </View>
+          }
         />
       </ThemedView>
     </>
@@ -114,6 +138,23 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
+  emptyContainer: {
+    padding: 24,
+    alignItems: "center",
+  },
+  emptyTitle: {
+    color: COLORS.primary,
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  emptyDescription: {
+    color: "#777",
+    fontSize: 13,
+    textAlign: "center",
+    marginTop: 8,
+  },
 });
 
 export default HomeCard;
+

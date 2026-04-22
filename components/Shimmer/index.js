@@ -1,19 +1,23 @@
 import React, { useEffect, useRef } from "react";
 import { View, Animated, StyleSheet, Easing } from "react-native";
 
+/**
+ * @param {{ width?: number | string, height?: number, borderRadius?: number }} props
+ */
 const Shimmer = ({ width = 200, height = 20, borderRadius = 5 }) => {
-  const translateX = useRef(new Animated.Value(-width)).current;
+  const travelDistance = typeof width === "number" ? width : 240;
+  const translateX = useRef(new Animated.Value(-travelDistance)).current;
 
   useEffect(() => {
     Animated.loop(
       Animated.timing(translateX, {
-        toValue: width,
+        toValue: travelDistance,
         duration: 1500,
         easing: Easing.linear,
         useNativeDriver: true,
       })
     ).start();
-  }, [width]);
+  }, [travelDistance, translateX]);
 
   return (
     <View style={[styles.container, { width, height, borderRadius }]}>
@@ -22,7 +26,7 @@ const Shimmer = ({ width = 200, height = 20, borderRadius = 5 }) => {
           styles.shimmer,
           {
             transform: [{ translateX }],
-            width: width * 2, // O shimmer tem o dobro do tamanho para criar o efeito de movimento
+            width: typeof width === "number" ? width * 2 : "200%",
           },
         ]}
       />

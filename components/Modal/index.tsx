@@ -6,16 +6,19 @@ import { COLORS } from "../../constants/Theme/theme";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 
+export type MemberModalData = {
+  name: string;
+  image: string;
+  platform: "xbox" | "playstation" | "pc" | "error";
+  gamertag: string;
+  isValid: boolean;
+};
+
 type ModalProps = {
   visible: boolean;
   onClose: () => void;
-  memberData: {
-    name: string;
-    image: string;
-    platform: "xbox" | "playstation" | "pc" | "error";
-    gamertag: string;
-    isValid: boolean;
-  } | null;
+  memberData: MemberModalData | null;
+  onAddToSquad?: (memberData: MemberModalData) => void | Promise<void>;
 };
 
 const platformDetails = {
@@ -29,6 +32,7 @@ export const GamertagModal: React.FC<ModalProps> = ({
   visible,
   onClose,
   memberData,
+  onAddToSquad,
 }) => {
   const [copyText, setCopyText] = useState("Copiar");
 
@@ -46,6 +50,11 @@ export const GamertagModal: React.FC<ModalProps> = ({
   const handleClose = () => {
     setCopyText("Copiar"); // Reseta o texto do botão ao fechar
     onClose();
+  };
+
+  const handleAddToSquad = async () => {
+    if (!memberData.isValid || !onAddToSquad) return;
+    await onAddToSquad(memberData);
   };
 
   return (
@@ -85,6 +94,21 @@ export const GamertagModal: React.FC<ModalProps> = ({
           </ThemedView>
 
           <ThemedView style={styles.buttonRow}>
+            {memberData.isValid && onAddToSquad && (
+              <TouchableOpacity onPress={handleAddToSquad}>
+                <ThemedView
+                  style={styles.button}
+                  lightColor={COLORS.primary}
+                  darkColor={COLORS.primary}
+                >
+                  <ThemedText
+                    style={[styles.buttonText, styles.primaryButtonText]}
+                  >
+                    Squad
+                  </ThemedText>
+                </ThemedView>
+              </TouchableOpacity>
+            )}
             {memberData.isValid && (
               <TouchableOpacity onPress={handleCopy}>
                 <ThemedView

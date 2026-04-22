@@ -1,41 +1,32 @@
-import {
-  collection,
-  doc,
-  setDoc,
-  serverTimestamp,
-  query,
-  where,
-  getDoc,
-} from "firebase/firestore";
-import { FIREBASE_DB } from "./firebaseConfig"; // Usando sua configuração existente!
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { FIREBASE_DB } from "./firebaseConfig";
 
 /**
- * Salva um token de notificação push no Firestore, evitando duplicatas.
- * @param {string} token O ExpoPushToken a ser salvo.
+ * Salva um token de notificacao push no Firestore, evitando duplicatas e
+ * persistindo as preferencias de segmentacao do usuario.
+ * @param {string} token
+ * @param {object} preferences
  */
-export const saveTokenToFirestore = async (token) => {
+export const saveTokenToFirestore = async (token, preferences = null) => {
   if (!token) {
-    console.log("Token de push inválido, não será salvo.");
+    console.log("Token de push invalido, nao sera salvo.");
     return;
   }
 
   try {
-    // Usamos o próprio token como ID do documento para garantir unicidade.
     const tokenDocRef = doc(FIREBASE_DB, "PushNotificationTokens", token);
-
-    // Verificamos se o documento já existe para evitar uma escrita desnecessária.
-    // A regra de segurança é a garantia final, mas isso economiza operações de escrita.
     const docSnap = await getDoc(tokenDocRef);
 
-    if (!docSnap.exists()) {
-      // Se não existe, cria o documento. A regra de segurança impedirá a sobre-escrita.
-      await setDoc(tokenDocRef, {
-        createdAt: serverTimestamp(),
-      });
-      console.log("Token de Push salvo no Firestore com sucesso!");
-    } else {
-      console.log("Token de Push já existe no Firestore.");
-    }
+    const payload = {
+      token,
+      preferences,
+      platform: token.startsWith("ExponentPushToken") ? "expo" : "unknown",
+      updatedAt: serverTimestamp(),
+      ...(docSnap.exists() ? {} : { createdAt: serverTimestamp() }),
+    };
+
+    await setDoc(tokenDocRef, payload, { merge: true });
+    console.log("Token de Push salvo no Firestore com sucesso!");
   } catch (error) {
     console.error("Erro ao salvar o token no Firestore:", error);
   }
