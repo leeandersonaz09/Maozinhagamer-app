@@ -1,7 +1,6 @@
 import React from "react";
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -19,7 +18,6 @@ const ReactorCard = ({ reactorsDetails }) => {
   };
   // Extrair dados
   const {
-    "Reactor Name": ReactorName,
     "Reactor Image": image,
     Rarity: rarity,
     "Reactor Link": ReactorLink,

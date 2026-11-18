@@ -67,6 +67,14 @@ const ICONS = {
       />
     </Svg>
   ),
+  chat: (p: { color: string }) => (
+    <Svg width={24} height={24} viewBox="0 0 24 24">
+      <Path
+        fill={p.color}
+        d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h10v2H7V9zm0-3h10v2H7V6zm0 6h7v2H7v-2z"
+      />
+    </Svg>
+  ),
 };
 
 const ROUTE_CONFIG = {
@@ -74,6 +82,7 @@ const ROUTE_CONFIG = {
   news: { label: "Radar", icon: ICONS.news },
   patrocinador: { label: "Parceiros", icon: ICONS.handshake },
   members: { label: "Membros", icon: ICONS.people },
+  chat: { label: "Chat", icon: ICONS.chat },
   about: { label: "Sobre", icon: ICONS.about },
 };
 
@@ -126,7 +135,10 @@ function TabItem({ route, isFocused, options, onPress, onLayout }: TabItemProps)
       <Animated.View style={animatedIconStyle}>
         {config.icon ? config.icon({ color: COLORS.content }) : null}
       </Animated.View>
-      <Animated.Text style={[styles.tabLabel, animatedLabelStyle]}>
+      <Animated.Text
+        numberOfLines={1}
+        style={[styles.tabLabel, animatedLabelStyle]}
+      >
         {config.label}
       </Animated.Text>
     </TouchableOpacity>
@@ -221,6 +233,7 @@ export default function TabLayout() {
         <Tabs.Screen name="news" />
         <Tabs.Screen name="patrocinador" />
         <Tabs.Screen name="members" />
+        <Tabs.Screen name="chat" />
         <Tabs.Screen name="about" />
       </Tabs>
     </GestureHandlerRootView>
@@ -251,7 +264,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
     borderRadius: 35.5,
     alignItems: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: 6,
     overflow: "hidden",
   },
   tabButton: {
@@ -264,7 +277,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 8,
     color: COLORS.content,
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "bold",
   },
   slidingIndicator: {

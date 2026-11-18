@@ -4,7 +4,6 @@ import LottieView from "lottie-react-native";
 import dataloading from "../../assets/Lotties/13255-loader.json";
 import mario from "../../assets/Lotties/mario.json";
 import { COLORS } from "../../constants/Theme/theme.js";
-import { StatusBar } from "expo-status-bar";
 
 const LottieLoading: React.FC = () => {
   return (

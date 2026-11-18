@@ -23,6 +23,7 @@ import {
   getYouTubeLiveStatus,
   YouTubeLiveStatus,
 } from "../../src/services/youtube/liveStatus";
+import { checkAndNotifyLiveAndMeta } from "../../src/services/backgroundTasks";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -71,7 +72,7 @@ const Home = () => {
         await Promise.all([
           loadDataIfNeeded("bannerData", getBannerData, { forceRefresh }),
           loadDataIfNeeded("widgetsData", fetchWidgetsData, { forceRefresh }),
-          loadDataIfNeeded("featuredLoadout", fetchFeaturedLoadout, {
+          loadDataIfNeeded("featuredLoadout_v3", fetchFeaturedLoadout, {
             forceRefresh,
             maxAgeMs: 1000 * 60 * 15,
           }),
@@ -95,6 +96,9 @@ const Home = () => {
     const liveMonitor = setInterval(async () => {
       const liveStatus = await getYouTubeLiveStatus();
       setYoutubeLiveStatus(liveStatus);
+      if (liveStatus.isLive) {
+        checkAndNotifyLiveAndMeta().catch(() => {});
+      }
     }, 1000 * 60);
 
     return () => clearInterval(liveMonitor);

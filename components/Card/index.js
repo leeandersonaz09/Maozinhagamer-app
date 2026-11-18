@@ -1,6 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { useColorScheme } from "react-native"; // Importando o hook useColorScheme
+import { View, StyleSheet, useColorScheme } from "react-native"; // Importando o hook useColorScheme
 import { COLORS } from "../../constants/Theme/theme";
 import metrics from "../../constants/Theme/metrics";
 

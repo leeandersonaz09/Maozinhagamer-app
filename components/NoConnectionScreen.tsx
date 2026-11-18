@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
-  View,
   StyleSheet,
-  Text,
   Button,
   Alert,
   SafeAreaView,
+  useColorScheme,
 } from "react-native";
 import LottieView from "lottie-react-native";
 import NetInfo from "@react-native-community/netinfo";
@@ -13,7 +12,6 @@ import { useRouter } from "expo-router";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { StatusBar } from "expo-status-bar";
-import { useColorScheme } from "react-native";
 
 const NoConnectionScreen = () => {
   const colorScheme = useColorScheme(); // 'light' ou 'dark'

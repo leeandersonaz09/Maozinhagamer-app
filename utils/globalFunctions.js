@@ -26,7 +26,7 @@ const normalizeEnvelope = (storedValue) => {
       data: parsed,
       updatedAt: 0,
     };
-  } catch (error) {
+  } catch {
     return null;
   }
 };
@@ -77,7 +77,7 @@ export const loadDataIfNeeded = async (
     }
 
     return cachedEnvelope?.data ?? null;
-  } catch (error) {
+  } catch {
     return cachedEnvelope?.data ?? null;
   }
 };
@@ -86,7 +86,7 @@ export const clearIsNew = async () => {
   try {
     await AsyncStorage.removeItem("isnewinApp");
     return "Chave 'isnewinApp' foi removida do AsyncStorage.";
-  } catch (error) {
+  } catch {
     return "Erro ao limpar a chave 'isnewinApp'.";
   }
 };

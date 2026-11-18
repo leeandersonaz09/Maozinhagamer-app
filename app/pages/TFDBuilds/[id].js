@@ -6,13 +6,10 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
-  Linking,
 } from "react-native";
 import { Header } from "../../../components/index.js";
-import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../../constants/Theme/theme.js";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
 const TFDBuilds = () => {

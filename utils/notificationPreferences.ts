@@ -41,7 +41,7 @@ export const getNotificationPreferences = async (): Promise<NotificationPreferen
         ...(parsed?.games ?? {}),
       },
     };
-  } catch (error) {
+  } catch {
     return DEFAULT_NOTIFICATION_PREFERENCES;
   }
 };

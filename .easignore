@@ -2,9 +2,15 @@
 node_modules/
 build/
 android/.gradle/
+android/.kotlin/
+android/build/
+android/app/build/
+android/app/.cxx/
+android/local.properties
 ios/Pods/
+.agent/
+.claude/
 *.log
-*.lock
 
 # Ignorar arquivos temporários
 *.tmp
@@ -15,6 +21,7 @@ ios/Pods/
 
 # Evitar arquivos sensíveis
 *.keystore
+!android/app/debug.keystore
 *.jks
 
 # Outros arquivos que não afetam o build

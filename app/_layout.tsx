@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Linking } from "react-native";
 import { registerForPushNotificationsAsync } from "../src/services/pushNotifications";
+import {
+  checkAndNotifyLiveAndMeta,
+  registerBackgroundTasks,
+} from "../src/services/backgroundTasks";
 import { saveTokenToFirestore } from "../utils/firestoreService";
 import * as Notifications from "expo-notifications";
 import {
@@ -85,6 +90,8 @@ export default function RootLayout() {
                 if (token) {
                   saveTokenToFirestore(token).catch(() => {});
                 }
+                registerBackgroundTasks().catch(() => {});
+                checkAndNotifyLiveAndMeta().catch(() => {});
               })
               .catch((err) => console.log("[DEBUG] Erro push notifications:", err)),
             loadDataIfNeeded("bannerData", getBannerData).catch(() => null),
@@ -128,8 +135,22 @@ export default function RootLayout() {
 
     const responseListener = Notifications.addNotificationResponseReceivedListener(
       (response) => {
-        const data = response?.notification?.request?.content?.data;
-        if (data?.screen) {
+        const data = response?.notification?.request?.content?.data as
+          | Record<string, unknown>
+          | undefined;
+
+        if (data?.type === "live" && data?.url) {
+          Linking.openURL(String(data.url)).catch(() => {});
+        } else if (data?.type === "meta" || data?.focus) {
+          router.push({
+            pathname: "/pages/Builds/[id]",
+            params: {
+              id: "featured",
+              title: "Meta do Dia",
+              focus: String(data?.focus || ""),
+            },
+          });
+        } else if (data?.screen) {
           router.push(data.screen as any);
         } else {
           router.push("/(tabs)");

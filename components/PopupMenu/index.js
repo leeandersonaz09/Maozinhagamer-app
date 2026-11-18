@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
-  Text,
   Modal,
   SafeAreaView,
   TouchableOpacity,
   StyleSheet,
   Animated,
   Easing,
+  useColorScheme,
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
-import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import Separator from "../Separador";
 import { COLORS, SIZES } from "../../constants/Theme/theme";
 import { ThemedText } from "@/components/ThemedText";
-import { useColorScheme } from "react-native"; // Importando o hook useColorScheme
 //import styles from "./styles";
 
 const PopupMenu = (props) => {

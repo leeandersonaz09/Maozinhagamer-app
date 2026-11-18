@@ -27,8 +27,11 @@ import { Feather } from "@expo/vector-icons";
 import { Header } from "../../../components";
 import {
   fetchLoadoutsFromApi,
+  filterLoadoutItems,
   getLoadoutsCacheKey,
+  mapMaozinhaDocToLoadoutItem,
   type ApiLoadoutItem,
+  type FirestoreMaozinhaDoc,
 } from "../../../src/services/loadouts/api";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import { loadDataIfNeeded } from "../../../utils/globalFunctions";
@@ -46,6 +49,7 @@ const TACTICAL = {
 };
 
 const DEFAULT_CATEGORIES = [
+  "Exclusivo Mãozinha",
   "Meta Absoluta",
   "Meta",
   "Aceitavel",
@@ -58,11 +62,20 @@ const getSafeImageUrl = (url?: string | null) => {
     return null;
   }
 
-  if (url.startsWith("http")) {
-    return url;
+  const trimmed = url.trim();
+  if (!trimmed) {
+    return null;
   }
 
-  return `https://wzhub.gg${url.startsWith("/") ? "" : "/"}${url}`;
+  if (trimmed.startsWith("//")) {
+    return `https:${trimmed}`;
+  }
+
+  if (trimmed.startsWith("http")) {
+    return trimmed;
+  }
+
+  return `https://wzhub.gg${trimmed.startsWith("/") ? "" : "/"}${trimmed}`;
 };
 
 const buildDeepLink = ({
@@ -102,6 +115,13 @@ const buildLoadoutText = ({
     .filter(Boolean)
     .join("\n");
 };
+
+const extractSortedWeaponTypes = (list: ApiLoadoutItem[]): string[] =>
+  Array.from(
+    new Set(
+      list.map((item) => String(item.weapon_type || "").trim()).filter(Boolean)
+    )
+  ).sort((a, b) => a.localeCompare(b));
 
 const FilterTab = React.memo(function FilterTab({
   label,
@@ -199,7 +219,9 @@ const LoadoutCard = React.memo(function LoadoutCard({
   }));
 
   const safeCategory = String(item.category || "");
-  const isMeta = safeCategory.toLowerCase().includes("meta");
+  const lowerCategory = safeCategory.toLowerCase();
+  const isMeta =
+    lowerCategory.includes("meta") || lowerCategory.includes("exclusivo");
   const secureImage = getSafeImageUrl(item.detail_image_url || item.thumbnail_url);
   const safeAttachments = Array.isArray(item.attachments)
     ? item.attachments
@@ -283,30 +305,34 @@ const LoadoutCard = React.memo(function LoadoutCard({
         {expanded && (
           <Animated.View style={styles.expandedContent}>
             {/* Calculadora de Impacto via IA com fallback automatico */}
-            <View style={styles.calculatorSection}>
-              <View style={styles.calcHeader}>
-                <Feather name="activity" size={14} color={TACTICAL.primary} />
-                <Text style={styles.calcTitle}>[ANALISE_DE_IMPACTO_AI]</Text>
+            {safeAttachments.length > 0 && (
+              <View style={styles.calculatorSection}>
+                <View style={styles.calcHeader}>
+                  <Feather name="activity" size={14} color={TACTICAL.primary} />
+                  <Text style={styles.calcTitle}>[ANALISE_DE_IMPACTO_AI]</Text>
+                </View>
+
+                {loadingStats ? (
+                  <View style={{ paddingVertical: 10, alignItems: "center" }}>
+                    <ActivityIndicator size="small" color={TACTICAL.primary} />
+                    <Text style={[styles.calcDisclaimer, { marginTop: 8 }]}>
+                      Calculando influência dos acessórios...
+                    </Text>
+                  </View>
+                ) : stats ? (
+                  <View style={styles.statsGrid}>
+                    <StatBar label="RECUO (ESTABILIDADE)" value={stats.recoil} color="#4CAF50" />
+                    <StatBar label="VELOCIDADE ADS" value={stats.ads} color="#2196F3" />
+                    <StatBar label="MOBILIDADE" value={stats.mobility} color="#FF9800" />
+                    <StatBar label="ALCANCE DE DANO" value={stats.range} color="#F44336" />
+                  </View>
+                ) : null}
+
+                <Text style={styles.calcDisclaimer}>
+                  * Valores estimados via IA com base na Meta Absoluta 2026.
+                </Text>
               </View>
-              
-              {loadingStats ? (
-                <View style={{ paddingVertical: 10, alignItems: "center" }}>
-                  <ActivityIndicator size="small" color={TACTICAL.primary} />
-                  <Text style={[styles.calcDisclaimer, { marginTop: 8 }]}>Calculando influência dos acessórios...</Text>
-                </View>
-              ) : stats ? (
-                <View style={styles.statsGrid}>
-                  <StatBar label="RECUO (ESTABILIDADE)" value={stats.recoil} color="#4CAF50" />
-                  <StatBar label="VELOCIDADE ADS" value={stats.ads} color="#2196F3" />
-                  <StatBar label="MOBILIDADE" value={stats.mobility} color="#FF9800" />
-                  <StatBar label="ALCANCE DE DANO" value={stats.range} color="#F44336" />
-                </View>
-              ) : null}
-              
-              <Text style={styles.calcDisclaimer}>
-                * Valores estimados via IA com base na Meta Absoluta 2026.
-              </Text>
-            </View>
+            )}
 
             {!!item.loadout_code && (
               <View style={styles.codeBlock}>
@@ -370,12 +396,63 @@ const LoadoutCard = React.memo(function LoadoutCard({
 });
 
 export default function BuildDetail() {
-  const { title, focus, id } = useLocalSearchParams<{
+  const { title, focus, id, subCollection } = useLocalSearchParams<{
     title?: string;
     focus?: string;
     id?: string;
+    subCollection?: string | string[];
   }>();
   const isConnected = useNetworkStatus();
+
+  const normalizedTitle = Array.isArray(title) ? title[0] : title;
+  const routeId = String((Array.isArray(id) ? id[0] : id) ?? "featured");
+  const focusSlug =
+    typeof focus === "string"
+      ? focus
+      : Array.isArray(focus)
+        ? focus[0] ?? null
+        : null;
+
+  const maozinhaRouteItems = useMemo(() => {
+    const rawValue = Array.isArray(subCollection)
+      ? subCollection[0]
+      : subCollection;
+    if (!rawValue || typeof rawValue !== "string") {
+      return [];
+    }
+
+    try {
+      const parsed = JSON.parse(rawValue);
+      if (!Array.isArray(parsed)) {
+        return [];
+      }
+
+      return [...parsed]
+        .sort((a, b) => {
+          const orderA =
+            typeof (a as FirestoreMaozinhaDoc)?.order === "number"
+              ? ((a as FirestoreMaozinhaDoc).order as number)
+              : Number.MAX_SAFE_INTEGER;
+          const orderB =
+            typeof (b as FirestoreMaozinhaDoc)?.order === "number"
+              ? ((b as FirestoreMaozinhaDoc).order as number)
+              : Number.MAX_SAFE_INTEGER;
+          return orderA - orderB;
+        })
+        .map((doc, idx) =>
+          mapMaozinhaDocToLoadoutItem(doc as FirestoreMaozinhaDoc, idx)
+        )
+        .filter((item): item is ApiLoadoutItem => item !== null);
+    } catch (parseError) {
+      console.warn("SubCollection invalida em Builds:", parseError);
+      return [];
+    }
+  }, [subCollection]);
+
+  const isMaozinhaScreen =
+    routeId === "8WIiU6sFEOXePatrsTM1" ||
+    String(normalizedTitle ?? "").toLowerCase().includes("exclusivo") ||
+    maozinhaRouteItems.length > 0;
 
   const [items, setItems] = useState<ApiLoadoutItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -384,11 +461,26 @@ export default function BuildDetail() {
 
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(() =>
+    isMaozinhaScreen ? "Exclusivo Mãozinha" : null
+  );
   const [selectedWeaponType, setSelectedWeaponType] = useState<string | null>(
     null
   );
+  const [knownWeaponTypes, setKnownWeaponTypes] = useState<string[]>([]);
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedCategory(isMaozinhaScreen ? "Exclusivo Mãozinha" : null);
+    setSelectedWeaponType(null);
+    setKnownWeaponTypes([]);
+  }, [routeId, isMaozinhaScreen]);
+
+  const handleSelectCategory = useCallback((nextCategory: string | null) => {
+    setSelectedCategory(nextCategory);
+    setSelectedWeaponType(null);
+    setKnownWeaponTypes([]);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -400,6 +492,12 @@ export default function BuildDetail() {
 
   const fetchLoadouts = useCallback(
     async (forceRefresh = false) => {
+      const filteredFallbackMaozinha = filterLoadoutItems(maozinhaRouteItems, {
+        search: debouncedSearch,
+        category: selectedCategory,
+        weaponType: selectedWeaponType,
+      });
+
       try {
         setError(null);
         if (forceRefresh) {
@@ -429,22 +527,49 @@ export default function BuildDetail() {
           }
         );
 
-        const normalizedItems = Array.isArray(response?.items)
+        const apiItems: ApiLoadoutItem[] = Array.isArray(response?.items)
           ? response.items
           : [];
-        setItems(normalizedItems);
-      } catch (fetchError) {
-        setError(
-          fetchError instanceof Error
-            ? fetchError.message
-            : "CONNECTION TIMEOUT."
+
+        const existingSlugs = new Set(apiItems.map((item) => item.slug));
+        const missingFallbackItems = filteredFallbackMaozinha.filter(
+          (item) => !existingSlugs.has(item.slug)
         );
+
+        const mergedItems =
+          missingFallbackItems.length > 0
+            ? [...missingFallbackItems, ...apiItems]
+            : apiItems;
+
+        if (!response && mergedItems.length === 0) {
+          setItems([]);
+          setError("SEM CONEXAO // NAO FOI POSSIVEL CARREGAR AS BUILDS.");
+          return;
+        }
+
+        setItems(mergedItems);
+        if (!selectedWeaponType && !debouncedSearch.trim()) {
+          setKnownWeaponTypes(extractSortedWeaponTypes(mergedItems));
+        }
+      } catch (fetchError) {
+        if (filteredFallbackMaozinha.length > 0) {
+          setItems(filteredFallbackMaozinha);
+          if (!selectedWeaponType && !debouncedSearch.trim()) {
+            setKnownWeaponTypes(extractSortedWeaponTypes(filteredFallbackMaozinha));
+          }
+        } else {
+          setError(
+            fetchError instanceof Error
+              ? fetchError.message
+              : "CONNECTION TIMEOUT."
+          );
+        }
       } finally {
         setLoading(false);
         setRefreshing(false);
       }
     },
-    [debouncedSearch, selectedCategory, selectedWeaponType]
+    [debouncedSearch, maozinhaRouteItems, selectedCategory, selectedWeaponType]
   );
 
   useEffect(() => {
@@ -452,20 +577,33 @@ export default function BuildDetail() {
   }, [fetchLoadouts]);
 
   const weaponTypes = useMemo(() => {
-    const values = Array.from(
-      new Set(
-        items
-          .map((item) => String(item.weapon_type || "").trim())
-          .filter(Boolean)
-      )
-    );
+    if (knownWeaponTypes.length > 0) {
+      return knownWeaponTypes;
+    }
 
-    return values.sort((a, b) => a.localeCompare(b));
-  }, [items]);
+    return extractSortedWeaponTypes(items);
+  }, [items, knownWeaponTypes]);
 
-  const headerTitle = title ? String(title).toUpperCase() : "DATABASE // METAS";
-  const routeId = String(id ?? "featured");
-  const focusSlug = typeof focus === "string" ? focus : null;
+  const displayedItems = useMemo(() => {
+    if (!focusSlug) {
+      return items;
+    }
+
+    const focusedIndex = items.findIndex((item) => item.slug === focusSlug);
+    if (focusedIndex <= 0) {
+      return items;
+    }
+
+    return [
+      items[focusedIndex],
+      ...items.slice(0, focusedIndex),
+      ...items.slice(focusedIndex + 1),
+    ];
+  }, [focusSlug, items]);
+
+  const headerTitle = normalizedTitle
+    ? String(normalizedTitle).toUpperCase()
+    : "DATABASE // METAS";
 
   const handleCopyLoadout = async (item: ApiLoadoutItem) => {
     const deepLink = buildDeepLink({
@@ -538,14 +676,14 @@ export default function BuildDetail() {
             <FilterTab
               label="TODOS"
               active={!selectedCategory}
-              onPress={() => setSelectedCategory(null)}
+              onPress={() => handleSelectCategory(null)}
             />
             {DEFAULT_CATEGORIES.map((cat) => (
               <FilterTab
                 key={cat}
                 label={cat}
                 active={selectedCategory === cat}
-                onPress={() => setSelectedCategory(cat)}
+                onPress={() => handleSelectCategory(cat)}
               />
             ))}
           </ScrollView>
@@ -601,8 +739,8 @@ export default function BuildDetail() {
             </View>
           ) : (
             <Animated.FlatList
-              data={items}
-              keyExtractor={(item, index) => `${item.slug || "item"}-${index}`}
+              data={displayedItems}
+              keyExtractor={(item, index) => item.slug || `item-${index}`}
               renderItem={({ item, index }) => (
                 <LoadoutCard
                   item={item}

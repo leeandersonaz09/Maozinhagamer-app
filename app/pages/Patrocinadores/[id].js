@@ -1,24 +1,20 @@
 import React from "react";
 import {
   View,
-  Text,
   Image,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
   Linking,
+  useColorScheme,
 } from "react-native";
-import { Button, Header } from "../../../components/index.js";
-import { StatusBar } from "expo-status-bar";
-import { SIZES, COLORS } from "../../../constants/Theme/theme.js";
+import { Header } from "../../../components/index.js";
+import { COLORS } from "../../../constants/Theme/theme.js";
 import { useLocalSearchParams } from "expo-router";
 import { ThemedText } from "@/components/ThemedText";
-import { useColorScheme } from "react-native"; // Importando o hook useColorScheme
-import { ThemedView } from "@/components/ThemedView";
 import { ThemedScrollView } from "@/components/ThemedScrollView";
 
 const Patrocinadores = () => {
-  const { id, title, img, text, category, uri, button } =
+  const { title, img, text, category, uri, button } =
     useLocalSearchParams();
   const colorScheme = useColorScheme(); // Obtém o tema atual (light ou dark)
 

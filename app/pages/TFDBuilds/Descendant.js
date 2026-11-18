@@ -8,8 +8,7 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { useLocalSearchParams } from "expo-router";
 import { COLORS } from "../../../constants/Theme/theme.js";
 import {
   Header,
@@ -27,7 +26,6 @@ const DescendantBuild = () => {
   const [weponsData, setWeponData] = useState([]);
   const [componentsData, setComponentsData] = useState([]);
   const { title, subCollection } = useLocalSearchParams();
-  const router = useRouter();
 
   const parsedSubCollection = JSON.parse(subCollection);
   // console.log(parsedSubCollection);
@@ -115,7 +113,6 @@ const DescendantBuild = () => {
     const {
       "Weapon Name": weponName,
       "Weapon Image": image,
-      Rarity: rarity,
       "Weapon Link": weponLink,
     } = weponsDetails;
     if (!weponsDetails) {

@@ -1,142 +1,24 @@
-import { LoadoutsQueryParams, LoadoutsResponse, LoadoutItem, LoadoutSection } from "./types";
+import {
+  fetchWzhubHtml,
+  parseWzhubV2Html,
+} from "../../src/services/loadouts/api";
+import {
+  LoadoutItem,
+  LoadoutRange,
+  LoadoutSection,
+  LoadoutsQueryParams,
+  LoadoutsResponse,
+} from "./types";
 
-const BASE_URL = "https://wzhub.gg";
+const WZHUB_PT_LOADOUTS_URL = "https://wzhub.gg/pt/loadouts";
 
-function normalizeTier(raw: string): string {
-  const value = raw.trim().toLowerCase();
-
-  if (value.includes("absolute meta")) return "absolute_meta";
-  if (value === "meta") return "meta";
-  if (value === "new") return "new";
-  if (value === "acceptable") return "acceptable";
-  if (value === "unrated") return "unrated";
-
-  return "meta";
-}
-
-function safeText(value?: string | null) {
-  return (value ?? "")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function extractUpdatedLabel(html: string): string | null {
-  const match = html.match(
-    /<div class="loadouts__updated"[^>]*>[\s\S]*?:\s*([^<]+)</i
-  );
-
-  return match ? safeText(match[1]) : null;
-}
-
-function extractRanges(html: string) {
-  const ranges: { label: string; shortName: string; ids: number[]; value: string }[] = [];
-
-  const regex =
-    /<label[^>]*class="range-radio"[\s\S]*?<input[^>]*value="([^"]*)"[\s\S]*?<span class="radio-group__label">([\s\S]*?)<\/span>/gi;
-
-  let match: RegExpExecArray | null;
-
-  while ((match = regex.exec(html)) !== null) {
-    const value = safeText(match[1]);
-    const label = safeText(match[2]);
-    const ids = value
-      .split(",")
-      .map((v) => Number(v.trim()))
-      .filter((v) => !Number.isNaN(v));
-
-    ranges.push({
-      label,
-      shortName: label,
-      ids,
-      value,
-    });
-  }
-
-  return ranges;
-}
-
-function extractSections(html: string): LoadoutSection[] {
-  const sections: LoadoutSection[] = [];
-
-  const sectionRegex =
-    /<div>\s*<h2>([\s\S]*?)<\/h2>\s*<div class="loadouts-list__group">([\s\S]*?)<\/div>\s*<\/div>/gi;
-
-  let sectionMatch: RegExpExecArray | null;
-
-  while ((sectionMatch = sectionRegex.exec(html)) !== null) {
-    const sectionTitle = safeText(sectionMatch[1]);
-    const sectionHtml = sectionMatch[2];
-
-    const items: LoadoutItem[] = [];
-    const cardRegex =
-      /<div class="wrap-card expand-card loadout-card"[\s\S]*?<a href="\/loadouts\/([^"]+)"[\s\S]*?<div class="gun-badge__text">([\s\S]*?)<\/div>[\s\S]*?<div class="expand-card__el loadout-card__type">([\s\S]*?)<div class="loadout-card__separate"><\/div>([\s\S]*?)<\/div>[\s\S]*?<div class="expand-card__el loadout-card__category[^"]*">([\s\S]*?)<\/div>[\s\S]*?<span class="upper">Updated:\s*([\s\S]*?)<\/span>[\s\S]*?<div class="loadout-card__thumbnail">[\s\S]*?<img(?: src="([^"]*)")?[^>]*>[\s\S]*?<div class="loadout-card-code__content">([\s\S]*?)<\/div>/gi;
-
-    let cardMatch: RegExpExecArray | null;
-
-    while ((cardMatch = cardRegex.exec(sectionHtml)) !== null) {
-      const slug = safeText(cardMatch[1]);
-      const title = safeText(cardMatch[2]);
-      const weaponType = safeText(cardMatch[3]);
-      const mode = safeText(cardMatch[4]);
-      const tierLabel = safeText(cardMatch[5]);
-      const updatedAtLabel = safeText(cardMatch[6]);
-      const thumbnailUrl = safeText(cardMatch[7]) || null;
-      const code = safeText(cardMatch[8]) || null;
-
-      const fullCardHtml = cardMatch[0];
-
-      const attachments: { name: string; slot: string }[] = [];
-      const attachmentRegex =
-        /<div class="attachment-card-content__name">\s*<div>([\s\S]*?)<\/div>[\s\S]*?<span>([\s\S]*?)<\/span>/gi;
-
-      let attachmentMatch: RegExpExecArray | null;
-
-      while ((attachmentMatch = attachmentRegex.exec(fullCardHtml)) !== null) {
-        attachments.push({
-          name: safeText(attachmentMatch[1]),
-          slot: safeText(attachmentMatch[2]),
-        });
-      }
-
-      const gunImageMatch = fullCardHtml.match(
-        /<div class="loadout-content__gun-image">[\s\S]*?<img[^>]*?(?:data-srcset|src)="([^"]+)"/i
-      );
-
-      const gunImageUrl = gunImageMatch ? safeText(gunImageMatch[1]) : null;
-
-      items.push({
-        id: slug,
-        slug,
-        title,
-        game: slug.startsWith("bo7-") ? "bo7" : slug.startsWith("bo6-") ? "bo6" : "wz",
-        weaponType,
-        mode,
-        tier: normalizeTier(tierLabel),
-        tierLabel,
-        updatedAtLabel,
-        author: "WZHUB",
-        code,
-        thumbnailUrl,
-        gunImageUrl,
-        detailUrl: `${BASE_URL}/loadouts/${slug}`,
-        attachments,
-      });
-    }
-
-    if (items.length) {
-      sections.push({
-        key: normalizeTier(sectionTitle),
-        title: sectionTitle,
-        items,
-      });
-    }
-  }
-
-  return sections;
-}
+const SECTION_ORDER: readonly { tier: string; title: string }[] = [
+  { tier: "absolute_meta", title: "Meta Absoluta" },
+  { tier: "meta", title: "Meta" },
+  { tier: "acceptable", title: "Aceitavel" },
+  { tier: "new", title: "Novo" },
+  { tier: "unrated", title: "Sem classificacao" },
+];
 
 function applyFilters(
   response: LoadoutsResponse,
@@ -147,7 +29,8 @@ function applyFilters(
   const gunName = params.gun_name?.toLowerCase().trim();
   const gunTypes = new Set((params.gun_type ?? []).map((v) => v.toLowerCase()));
   const tiers = new Set((params.tier ?? []).map((v) => v.toLowerCase()));
-  const game = params.game?.toLowerCase();
+  const ranges = new Set((params.range ?? []).map((v) => v.toLowerCase()));
+  const game = params.game?.toLowerCase().trim();
 
   const filteredSections = response.sections
     .map((section) => ({
@@ -165,7 +48,21 @@ function applyFilters(
         const matchesGame =
           !game || item.game.toLowerCase() === game;
 
-        return matchesName && matchesType && matchesTier && matchesGame;
+        const matchesRange =
+          ranges.size === 0 ||
+          Array.from(ranges).some(
+            (r) =>
+              (item.mode ?? "").toLowerCase().includes(r) ||
+              item.slug.toLowerCase().includes(r)
+          );
+
+        return (
+          matchesName &&
+          matchesType &&
+          matchesTier &&
+          matchesGame &&
+          matchesRange
+        );
       }),
     }))
     .filter((section) => section.items.length > 0);
@@ -179,40 +76,105 @@ function applyFilters(
 export async function fetchLoadouts(
   params?: LoadoutsQueryParams
 ): Promise<LoadoutsResponse> {
-  const response = await fetch(`${BASE_URL}/loadouts`, {
-    method: "GET",
-    headers: {
-      Accept: "text/html",
-    },
-  });
+  const html = await fetchWzhubHtml(WZHUB_PT_LOADOUTS_URL);
+  const parsed = parseWzhubV2Html(html, WZHUB_PT_LOADOUTS_URL);
 
-  if (!response.ok) {
-    throw new Error(`Falha ao buscar HTML do WZHUB: ${response.status}`);
+  const itemsByTier = new Map<string, LoadoutItem[]>();
+  const labelByTier = new Map<string, string>();
+  const gameLabelById = new Map<string, string>();
+
+  for (const apiItem of parsed.items) {
+    const extra = parsed.extraMetaBySlug[apiItem.slug];
+    const tier = apiItem.tier || "meta";
+    const game = extra?.game || "wz";
+
+    if (extra?.gameFullName) {
+      gameLabelById.set(game, extra.gameFullName);
+    }
+
+    const mappedItem: LoadoutItem = {
+      id: extra?.id || apiItem.slug,
+      slug: apiItem.slug,
+      title: apiItem.weapon,
+      game,
+      gameLabel: extra?.gameFullName ?? null,
+      weaponType: apiItem.weapon_type,
+      mode: apiItem.game_mode,
+      tier,
+      tierLabel: apiItem.category,
+      updatedAtLabel: apiItem.updated_at,
+      updatedAtUnix: extra?.updatedAtUnix ?? null,
+      author: apiItem.author,
+      code: apiItem.loadout_code,
+      thumbnailUrl: apiItem.thumbnail_url,
+      gunImageUrl: apiItem.detail_image_url,
+      detailUrl: apiItem.url,
+      attachments: apiItem.attachments,
+    };
+
+    const existing = itemsByTier.get(tier) ?? [];
+    existing.push(mappedItem);
+    itemsByTier.set(tier, existing);
+    labelByTier.set(tier, apiItem.category);
   }
 
-  const html = await response.text();
+  const sections: LoadoutSection[] = [];
+  const addedTiers = new Set<string>();
 
-  const ranges = extractRanges(html);
-  const sections = extractSections(html);
+  for (const entry of SECTION_ORDER) {
+    const tierItems = itemsByTier.get(entry.tier);
+    if (tierItems && tierItems.length > 0) {
+      sections.push({
+        key: entry.tier,
+        title: labelByTier.get(entry.tier) ?? entry.title,
+        items: tierItems,
+      });
+      addedTiers.add(entry.tier);
+    }
+  }
 
-  const gunTypes = Array.from(
-    new Set(
-      sections.flatMap((section) => section.items.map((item) => item.weaponType))
-    )
-  ).sort();
+  for (const [tier, tierItems] of itemsByTier.entries()) {
+    if (!addedTiers.has(tier) && tierItems.length > 0) {
+      sections.push({
+        key: tier,
+        title: labelByTier.get(tier) ?? tier,
+        items: tierItems,
+      });
+    }
+  }
 
-  const games = Array.from(
-    new Set(sections.flatMap((section) => section.items.map((item) => item.game)))
-  ).map((id) => ({
-    id,
-    title: id.toUpperCase(),
-  }));
+  const allItems = sections.flatMap((section) => section.items);
 
-  const parsed: LoadoutsResponse = {
-    source: "wzhub-html-fallback",
-    fetchedAt: new Date().toISOString(),
-    snapshotVersion: new Date().toISOString(),
-    updatedLabel: extractUpdatedLabel(html),
+  const gunTypes =
+    parsed.selects.gunTypes.length > 0
+      ? parsed.selects.gunTypes
+      : Array.from(new Set(allItems.map((item) => item.weaponType))).sort();
+
+  const ranges: LoadoutRange[] = parsed.selects.ranges.map((r) => {
+    const ids = Array.isArray(r.id) ? r.id : [];
+    const label = String(r.name || r.short_name || "").trim();
+    return {
+      label,
+      shortName: String(r.short_name || label),
+      ids,
+      value: ids.join(","),
+    };
+  });
+
+  const games = Array.from(new Set(allItems.map((item) => item.game))).map(
+    (id) => ({
+      id,
+      title: gameLabelById.get(id) ?? id.toUpperCase(),
+    })
+  );
+
+  const nowIso = new Date().toISOString();
+
+  const response: LoadoutsResponse = {
+    source: parsed.usedFallback ? "wzhub-html-fallback" : "wzhub-api",
+    fetchedAt: nowIso,
+    snapshotVersion: nowIso,
+    updatedLabel: parsed.pageUpdated,
     stale: false,
     filters: {
       gunTypes,
@@ -222,5 +184,5 @@ export async function fetchLoadouts(
     sections,
   };
 
-  return applyFilters(parsed, params);
+  return applyFilters(response, params);
 }

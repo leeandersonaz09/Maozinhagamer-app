@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { COLORS, SIZES } from "../theme";
-import metrics from "../metrics";
 
 const styles = StyleSheet.create({
   safeArea: {
